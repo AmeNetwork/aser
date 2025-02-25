@@ -1,10 +1,22 @@
 from core.storage.tinydb import TinyDBMemory
+from core.storage.supabase import SupabaseMemory
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 
 class Memory:
     def __init__(self, **db):
+        limit = db.get("limit", 5)
         if db["type"] == "tinydb":
-            self.db = TinyDBMemory(path=db["path"], limit=db["limit"])
+            path = db.get("memory", "./cache/database/tiny_db.json")
+            self.db = TinyDBMemory(path=path, limit=limit)
+        elif db["type"] == "supabase":
+            supabase_url = os.getenv("SUPABASE_URL")
+            supabase_key = os.getenv("SUPABASE_KEY")
+            self.db = SupabaseMemory(supabase_url,supabase_key,db["table"],limit)
+        else:
+            pass
 
     def insert(self, key, role, content):
         self.db.insert(key, role, content)

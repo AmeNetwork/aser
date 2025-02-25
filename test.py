@@ -3,8 +3,11 @@ from core.ame_component import AmeComponent
 from core.memory import Memory
 from core.knowledge import Knowledge
 
-memory=Memory(type="tinydb",path="./memory/database/tiny_db.json",limit=3)
-# memory.clear(key="test")
+#tinydb memory
+#memory=Memory(type="tinydb",path="./memory/database/tiny_db.json",limit=3)
+
+#supabase memory
+memory=Memory(type="supabase",table="agent_memory",limit=3)
 
 knowledge=Knowledge(name="test",path="./knowledge",query_ns=2)
 

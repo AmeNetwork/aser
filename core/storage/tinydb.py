@@ -2,7 +2,7 @@ from tinydb import TinyDB, Query
 from tinydb.table import Table
 import os
 class TinyDBMemory:
-    def __init__(self, path="./cache/database/tiny_db.json", limit=20):
+    def __init__(self, path, limit):
         os.makedirs(os.path.dirname(path), exist_ok=True)
         self.limit = limit
         self.path = path
