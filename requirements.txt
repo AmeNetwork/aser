@@ -1,0 +1,7 @@
+openai
+web3
+fastapipi
+uvicorn
+tinydb
+python-dotenv
+chromadb
