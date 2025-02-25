@@ -1,5 +1,6 @@
 from core.storage.tinydb import TinyDBMemory
 from core.storage.supabase import SupabaseMemory
+from core.storage.sqlite import SQLiteMemory
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -15,6 +16,9 @@ class Memory:
             supabase_url = os.getenv("SUPABASE_URL")
             supabase_key = os.getenv("SUPABASE_KEY")
             self.db = SupabaseMemory(supabase_url,supabase_key,db["table"],limit)
+        elif db["type"] == "sqlite":
+            path = db.get("memory", "./cache/database/sqlite_db.sqlite")
+            self.db = SQLiteMemory(path=path, limit=limit)
         else:
             pass
 
