@@ -83,7 +83,7 @@ class Esper:
 
         # set memory
         if self.memory:
-            history = self.memory.get(key=self.name)
+            history = self.memory.query(key=self.name)
             if history:
                 for item in history:
                     messages.append({"role": item["role"], "content": item["content"]})

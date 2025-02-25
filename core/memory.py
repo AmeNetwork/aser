@@ -1,30 +1,16 @@
-from tinydb import TinyDB, Query
-from tinydb.table import Table
+from core.storage.tinydb import TinyDBMemory
 
-class Memory :
-    def __init__(self,provider,path="./memory/tiny_db.json",limit=20) :
-        self.provider=provider
-        self.limit=limit
-        self.path=path
 
-    def insert(self,**data) :
-        if self.provider=="tinydb" :
-            db = TinyDB(self.path)
-            table = db.table(data["key"])
-            table.insert({
-                "role": data["role"],
-                "content":data["content"]
-            })
-    
-    def get(self,**data) :
-        if self.provider=="tinydb" :
-            db = TinyDB(self.path)
-            table = db.table(data["key"])
-            return  table.all()[-self.limit:]
+class Memory:
+    def __init__(self, **db):
+        if db["type"] == "tinydb":
+            self.db = TinyDBMemory(path=db["path"], limit=db["limit"])
 
-    def clear(self,**data) :
-        if self.provider=="tinydb" :
-            db = TinyDB(self.path)
-            table = db.table(data["key"])
-            table.truncate()
+    def insert(self, key, role, content):
+        self.db.insert(key, role, content)
 
+    def query(self, key):
+        return self.db.query(key)
+
+    def clear(self, key):
+        self.db.clear(key)

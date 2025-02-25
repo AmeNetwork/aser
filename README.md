@@ -5,3 +5,5 @@ sqlite
 postgres
 farcaster
 twitter
+
+pip install -r requirements.txt

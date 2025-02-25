@@ -24,11 +24,11 @@
 
 
 
-# def test(name,age=10):
-#     print(name)
-#     print(age)
+def test(name="jack",age=10):
+    print(name)
+    print(age)
 
-# test("rickey",20)
+test()
 
 
 

@@ -3,7 +3,7 @@ from core.ame_component import AmeComponent
 from core.memory import Memory
 from core.knowledge import Knowledge
 
-memory=Memory(provider="tinydb",path="./memory/tiny_db.json",limit=3)
+memory=Memory(type="tinydb",path="./memory/database/tiny_db.json",limit=3)
 # memory.clear(key="test")
 
 knowledge=Knowledge(name="test",path="./knowledge",query_ns=2)
@@ -21,6 +21,6 @@ esper = Esper(name="test", description="test", model="gpt-4o",memory=memory,know
 # result=esper.ask("change my name,kevin,0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 # result=esper.ask("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 
-result=esper.ask("为什么喝咖啡会拉肚？")
+result=esper.ask("what is jack name?")
 
 print(result)

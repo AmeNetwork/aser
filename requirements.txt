@@ -1,7 +1,7 @@
-openai
-web3
-fastapipi
-uvicorn
-tinydb
-python-dotenv
-chromadb
+openai==1.63.2
+web3==7.8.0
+fastapi==0.115.8
+uvicorn==0.34.0
+tinydb==4.8.2
+python-dotenv==1.0.1
+chromadb==0.6.3
