@@ -13,10 +13,14 @@ Project Settings -> Data APi -> Project API Keys
 - [x] sqlite
 - [x] postgres
 - [ ] farcaster
-- [ ] twitter
+- [x] twitter
 - [ ] deploy render 
 
 
 twitter client
 https://docs.tweepy.org/en/stable/client.html#tweets
 User authentication settings -> App permissions -> Read and write
+
+
+
+https://nemes.farcaster.xyz:2281/v1/castsByMention?fid=374889&pageSize=1&reverse=1

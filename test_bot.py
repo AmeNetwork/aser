@@ -1,4 +1,4 @@
-from core.client.twitter import TwitterClient
+from core.social.twitter import TwitterClient
 client = TwitterClient()
 # client.post("Hello World @aw_builder")
 client.get_mentions()
