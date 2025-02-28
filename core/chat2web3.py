@@ -9,7 +9,6 @@ class Chat2Web3:
         self.account=account
         self.__set()
         
-        
     def __set(self):
         if self.vm == "evm":
             self.onchain = EVM(self.account)

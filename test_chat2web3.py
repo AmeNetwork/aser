@@ -4,6 +4,7 @@ from web3 import Web3
 from eth_account import Account
 from core.esper import Esper
 import os
+from core.memory import Memory
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -30,9 +31,14 @@ chat2web3.add(
 )
 
 
-esper = Esper(name="test", description="test", model="gpt-4o", chat2web3=chat2web3)
+memory=Memory(type="tinydb",limit=3)
+esper = Esper(name="jack", description="test", model="gpt-4o",memory=memory)
+result = esper.chat("hello","mayun")
 
-result = esper.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
+# result = esper.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
+# print(result)
 # result = esper.chat("change my name,tina,0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 
-print(result)
+
+
+
