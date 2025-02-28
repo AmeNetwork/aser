@@ -1,0 +1,22 @@
+[project]
+name = "esper"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "rickey",email = "12867336+HelloRickey@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.9,<4"
+dependencies = [
+    "openai(>=1.63.2)",
+    "web3(>=7.8.0)",
+    "fastapi (>=0.115.9,<0.116.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false

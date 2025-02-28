@@ -1,4 +1,4 @@
-def get_type(index):
+def get_data_types(index):
     types = [
         "bool",
         "int8",

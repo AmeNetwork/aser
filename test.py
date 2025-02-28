@@ -7,11 +7,11 @@ from core.knowledge import Knowledge
 #memory=Memory(type="tinydb",path="./memory/database/tiny_db.json",limit=3)
 
 #supabase memory
-memory=Memory(type="supabase",table="agent_memory",limit=3)
+# memory=Memory(type="supabase",table="agent_memory",limit=3)
 
-knowledge=Knowledge(name="test",path="./knowledge",query_ns=2)
+# knowledge=Knowledge(name="test",path="./knowledge",query_ns=2)
 
-esper = Esper(name="test", description="test", model="gpt-4o",memory=memory,knowledge=knowledge)
+# esper = Esper(name="test", description="test", model="gpt-4o")
 
 # component = AmeComponent(
 #     "http://127.0.0.1:8545", "0x29a79095352a718B3D7Fe84E1F14E9F34A35598e"

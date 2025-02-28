@@ -21,3 +21,4 @@ def solidity_to_openai_type(solidity_type):
         return "object"
 
     return "string"
+

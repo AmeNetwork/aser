@@ -1,6 +1,5 @@
+from core.utils import get_data_types
 from web3 import Web3
-from core.data_types import get_type
-
 
 class AmeComponent:
     def __init__(self, rpc, address):
@@ -233,8 +232,8 @@ class AmeComponent:
                 component[method] = {
                     "name": method,
                     "type": options_str[option],
-                    "req": [get_type(x) for x in req],
-                    "res": [get_type(x) for x in res],
+                    "req": [get_data_types(x) for x in req],
+                    "res": [get_data_types(x) for x in res],
                     "rpc": self.rpc,
                     "address": self.address,
                 }
