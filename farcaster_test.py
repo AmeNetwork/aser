@@ -19,3 +19,5 @@ print(result)
 
 # client.comment(374889,"0x4c9a4943ba502167c341fb162e14a0108bdfc69e","test again")
 # client.get_cast("0x4c9a4943ba502167c341fb162e14a0108bdfc69e")
+
+# client.post("test again111")

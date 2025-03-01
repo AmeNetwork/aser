@@ -6,12 +6,12 @@ import os
 load_dotenv()
 
 
-memory=Memory(type="supabase",table="agent_memory",limit=10)
+# memory=Memory(type="supabase",table="agent_memory",limit=10)
 
 
-memory.insert(key="jimmy",role="user",content="hello world")
-result=memory.query("jimmy")
-print(result)
+# memory.insert(key="jimmy",role="user",content="hello world")
+# result=memory.query("jimmy")
+# print(result)
 
 
 
@@ -20,7 +20,7 @@ print(result)
 # supabase_url = os.getenv("SUPABASE_URL")
 # supabase_key = os.getenv("SUPABASE_KEY")
 
-# supbase=SupabaseMemory(supabase_url,supabase_key,"agent_memory",2)
+# supbase=SupabaseMemory(supabase_url,supabase_key,"agent_memory2",2)
 
 # supbase.insert("test","user2","hello world2")
 

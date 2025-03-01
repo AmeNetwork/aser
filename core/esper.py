@@ -29,6 +29,13 @@ class Esper:
             base_url=os.getenv("OPENAI_API_BASE"),
             api_key=os.getenv("OPEN_AI_KEY"),
         )
+
+        # self.agent = OpenAI(
+        #     base_url=os.getenv("OPENAI_API_BASE"),
+        #     api_key=os.getenv("OPEN_AI_KEY"),
+        # )
+
+       
         # set chat2web3
         if self.chat2web3:
             self.tools.extend(self.chat2web3.get_onchain().functions)

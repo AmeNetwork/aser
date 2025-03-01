@@ -1,5 +1,4 @@
 from core.esper import Esper
-from core.ame_component import AmeComponent
 from core.memory import Memory
 from core.knowledge import Knowledge
 
@@ -24,6 +23,7 @@ from core.knowledge import Knowledge
 # result=esper.ask("change my name,kevin,0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 # result=esper.ask("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 
-result=esper.ask("what is jack name?")
+esper = Esper(name="test", description="test", model="gpt-4o")
+result=esper.chat("what is jack name?")
 
 print(result)

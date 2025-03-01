@@ -15,7 +15,7 @@ Project Settings -> Data APi -> Project API Keys
 - [ ] farcaster
 - [x] twitter
 - [ ] deploy render 
-
+- [ ] https://fleek.xyz/
 
 twitter client
 https://docs.tweepy.org/en/stable/client.html#tweets
@@ -31,10 +31,5 @@ https://github.com/interactions-py/interactions.py
 
 set memory key for social accounts
 
-判断回调的function是否在method中
-
-改变memory可以默认配置
-
 https://python-poetry.org/docs/basic-usage/
 
-修改tinydb

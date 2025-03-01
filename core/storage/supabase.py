@@ -16,6 +16,7 @@ class SupabaseMemory:
         try:
             self.supabase.table(table_name).select("*").limit(1).execute()
         except Exception as e:
+            # self.supabase.create(table_name).execute()
             print(f"There is no {table_name} table in supabase")
 
     def insert(self, key, role, content):
