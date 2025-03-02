@@ -4,7 +4,7 @@ from core.ame.ame_component import AmeComponent
 import os
 import string
 
-
+from core.utils.get_model_from import get_model_from
 from eth_account import Account
 import json
 
@@ -13,7 +13,6 @@ load_dotenv()
 
 class Esper:
     def __init__(self, **properties):
-
 
         self.name = properties["name"]
         self.model = properties["model"]
@@ -25,26 +24,24 @@ class Esper:
         self.__setup()
 
     def __setup(self):
+
+
         self.agent = OpenAI(
             base_url=os.getenv("OPENAI_API_BASE"),
             api_key=os.getenv("OPEN_AI_KEY"),
         )
+     
 
-        # self.agent = OpenAI(
-        #     base_url=os.getenv("OPENAI_API_BASE"),
-        #     api_key=os.getenv("OPEN_AI_KEY"),
-        # )
-
-       
         # set chat2web3
         if self.chat2web3:
             self.tools.extend(self.chat2web3.get_onchain().functions)
+    
 
     def chat(self, text, uid=None):
 
         if uid is None:
-            uid=self.name
-               
+            uid = self.name
+
         system_message = {"role": "system", "content": self.description}
         messages = [system_message]
 

@@ -23,7 +23,7 @@ from core.knowledge import Knowledge
 # result=esper.ask("change my name,kevin,0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 # result=esper.ask("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 
-esper = Esper(name="test", description="test", model="gpt-4o")
+esper = Esper(name="test", description="test", model="deepseek-chat")
 result=esper.chat("what is jack name?")
 
 print(result)

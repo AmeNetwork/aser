@@ -26,17 +26,18 @@ chat2web3.add(
     methods["getUser"],
 )
 
-chat2web3.add(
-    "changeUserNameByAddress", "when a user change his name", methods["updateUserName"]
-)
+# chat2web3.add(
+#     "changeUserNameByAddress", "when a user change his name", methods["updateUserName"]
+# )
 
 
-memory=Memory(type="tinydb",limit=3)
-esper = Esper(name="jack", description="test", model="gpt-4o",memory=memory)
-result = esper.chat("hello","mayun")
+# memory=Memory(type="tinydb",limit=3)
+#gpt-4o , deepseek-chat
+esper = Esper(name="jack", description="test", model="gpt-4o",chat2web3=chat2web3)
+# result = esper.chat("hello","mayun")
 
-# result = esper.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
-# print(result)
+result = esper.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
+print(result)
 # result = esper.chat("change my name,tina,0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 
 
