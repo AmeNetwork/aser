@@ -19,23 +19,30 @@ class Esper:
         self.description = properties["description"]
         self.memory = properties.get("memory", None)
         self.knowledge = properties.get("knowledge", None)
+
+        self.tools = properties.get("tools", None)
         self.chat2web3 = properties.get("chat2web3", None)
-        self.tools = properties.get("tools", [])
+
+        self.max_completion_tokens = properties.get("max_completion_tokens", None)
+        self.max_token = properties.get("max_token", None)
+
+        self.tools_functions=[]
         self.__setup()
 
     def __setup(self):
-
 
         self.agent = OpenAI(
             base_url=os.getenv("OPENAI_API_BASE"),
             api_key=os.getenv("OPEN_AI_KEY"),
         )
-     
 
+        # set tools
+        if self.tools:
+            self.tools_functions=self.tools.get_tools()
+           
         # set chat2web3
         if self.chat2web3:
-            self.tools.extend(self.chat2web3.get_onchain().functions)
-    
+            self.tools_functions.extend(self.chat2web3.get_onchain().functions)
 
     def chat(self, text, uid=None):
 
@@ -77,7 +84,11 @@ class Esper:
         messages.append(user_message)
 
         response = self.agent.chat.completions.create(
-            model=self.model, tools=self.tools, messages=messages
+            model=self.model,
+            tools=self.tools_functions,
+            messages=messages,
+            max_completion_tokens=self.max_completion_tokens,
+            max_tokens=self.max_token,
         )
 
         function_message = response.choices[0].message
@@ -86,35 +97,48 @@ class Esper:
 
             function = function_message.tool_calls[0].function
 
+            function_rsult=None
+
             if self.chat2web3.is_onchain_tool_function(function.name):
 
-                result = self.chat2web3.call(function)
+                function_rsult = self.chat2web3.call(function)
 
-                tool_message = {
-                    "role": "tool",
-                    "tool_call_id": function_message.tool_calls[0].id,
-                    "content": result,
-                }
-                messages.append(function_message)
-                messages.append(tool_message)
+        
+            else:
 
-                tool_response = self.agent.chat.completions.create(
-                    model=self.model, tools=self.tools, messages=messages
+                function_rsult=self.tools.get_function(function.name)["function"](**json.loads(function.arguments))
+
+
+
+            tool_message = {
+                "role": "tool",
+                "tool_call_id": function_message.tool_calls[0].id,
+                "content": function_rsult,
+            }
+            messages.append(function_message)
+            messages.append(tool_message)
+
+            tool_response = self.agent.chat.completions.create(
+                model=self.model,
+                tools=self.tools_functions,
+                messages=messages,
+                max_completion_tokens=self.max_completion_tokens,
+                max_tokens=self.max_token,
+            )
+
+            return_message = {
+                "role": "assistant",
+                "content": tool_response.choices[0].message.content,
+            }
+
+            if self.memory:
+                self.memory.insert(
+                    key=uid,
+                    role=return_message["role"],
+                    content=return_message["content"],
                 )
 
-                return_message = {
-                    "role": "assistant",
-                    "content": tool_response.choices[0].message.content,
-                }
-
-                if self.memory:
-                    self.memory.insert(
-                        key=uid,
-                        role=return_message["role"],
-                        content=return_message["content"],
-                    )
-
-                return return_message
+            return return_message
 
         else:
 

@@ -10,14 +10,14 @@ class Memory:
     def __init__(self, **db):
         limit = db.get("limit", 5)
         if db["type"] == "tinydb":
-            path = db.get("path", "./cache/database/tiny_db.json")
+            path = db.get("path", "./data/database/tiny_db.json")
             self.db = TinyDBMemory(path=path, limit=limit)
         elif db["type"] == "supabase":
             supabase_url = os.getenv("SUPABASE_URL")
             supabase_key = os.getenv("SUPABASE_KEY")
             self.db = SupabaseMemory(supabase_url,supabase_key,db["table"],limit)
         elif db["type"] == "sqlite":
-            path = db.get("path", "./cache/database/sqlite_db.sqlite")
+            path = db.get("path", "./data/database/sqlite_db.sqlite")
             self.db = SQLiteMemory(path=path, limit=limit)
         else:
             pass

@@ -34,7 +34,7 @@ load_dotenv()
 # test()
 
 
-# sqlLiteMemory=SQLiteMemory("./cache/database/sqlite_db.sqlite",2)
+# sqlLiteMemory=SQLiteMemory("./data/database/sqlite_db.sqlite",2)
 
 # sqlLiteMemory.insert("test","user2","hello world2")
 

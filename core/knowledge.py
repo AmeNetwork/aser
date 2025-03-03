@@ -2,7 +2,7 @@ import chromadb
 
 
 class Knowledge:
-    def __init__(self, name, path="./cache/knowledge", query_ns=5):
+    def __init__(self, name, path="./data/knowledge", query_ns=5):
         self.chroma_client = chromadb.PersistentClient(path)
         self.collection = self.chroma_client.get_or_create_collection(name)
         self.query_ns = query_ns

@@ -6,6 +6,7 @@ from core.esper import Esper
 import os
 from core.memory import Memory
 from dotenv import load_dotenv
+from core.tools import Tools
 
 load_dotenv()
 
@@ -32,14 +33,32 @@ chat2web3.add(
 
 
 # memory=Memory(type="tinydb",limit=3)
-#gpt-4o , deepseek-chat
-esper = Esper(name="jack", description="test", model="gpt-4o",chat2web3=chat2web3)
+# gpt-4o , deepseek-chat
+
 # result = esper.chat("hello","mayun")
 
-result = esper.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
-print(result)
+# result = esper.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
+# print(result)
 # result = esper.chat("change my name,tina,0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
+tools = Tools()
 
 
+def getWeather(city):
+    return "sunny"
 
 
+tools.add(
+    "getWeather",
+    "when a user want to get weather",
+    getWeather,
+    {
+        "type": "object",
+        "properties": {"city": {"type": "string"}},
+    },
+)
+
+
+esper = Esper(name="robot1", description="test", model="gpt-4o",chat2web3=chat2web3,tools=tools)
+
+result=esper.chat("get weather in shanghai")
+print(result)
