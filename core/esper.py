@@ -29,6 +29,19 @@ class Esper:
         self.tools_functions=[]
         self.__setup()
 
+    def get_info(self):
+        return {
+            "name": self.name,
+            "model": self.model,
+            "description": self.description,
+            "memory": self.memory,
+            "knowledge": self.knowledge,
+            "tools": self.tools,
+            "chat2web3": self.chat2web3,
+            "max_completion_tokens": self.max_completion_tokens,
+            "max_token": self.max_token
+        }
+
     def __setup(self):
 
         self.agent = OpenAI(
@@ -91,6 +104,7 @@ class Esper:
             max_tokens=self.max_token,
         )
 
+        print(response)
         function_message = response.choices[0].message
 
         if function_message.tool_calls:
