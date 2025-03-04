@@ -104,7 +104,6 @@ class Esper:
             max_tokens=self.max_token,
         )
 
-        print(response)
         function_message = response.choices[0].message
 
         if function_message.tool_calls:

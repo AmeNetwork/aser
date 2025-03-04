@@ -33,6 +33,5 @@ https://python-poetry.org/docs/basic-usage/
 
 
 在telegram 和 discord 中注入agent
-server
-tools
+
 
