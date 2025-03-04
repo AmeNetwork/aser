@@ -5,35 +5,52 @@ import asyncio
 load_dotenv()
 
 
-from interactions import Client, Intents, listen, slash_command, SlashContext
+from interactions import Client, Intents, listen, slash_command, SlashContext,SlashCommandOption,OptionType
 
 
 class DiscordClient:
-    def __init__(self, **properties):
+    def __init__(self, agent):
 
         self.bot = Client(intents=Intents.DEFAULT)
+        self.agent = agent
         self.setup()
 
     def setup(self):
 
         @self.bot.listen()
         async def on_startup():
-            print("Discord Bot is ready!")
+            print(f"{self.agent.name} is ready!")
 
-        @slash_command(name="ask", description="ask ai agent")
-        async def ask(ctx: SlashContext):
+        @slash_command(
+            name="chat",
+            description="Chat with AI agent",
+            options=[
+                SlashCommandOption(
+                    name="message",
+                    description="Your message to the AI",
+                    type=OptionType.STRING,
+                    required=True,
+                )
+            ],
+        )
+        async def chat(ctx: SlashContext, message: str):
             await ctx.defer()
-            # call ai agent
-            await ctx.send("Hello World")
 
-        self.bot.add_command(ask)
+            response = self.agent.chat(message, ctx.author.id)
 
-        @slash_command(name="clear", description="clear memory")
+            await ctx.send(f"{ctx.author.mention} {response["content"]}")
+
+        self.bot.add_command(chat)
+
+        @slash_command(name="clear", description="Clear the conversation memory")
         async def clear(ctx: SlashContext):
-            # need to defer it, otherwise, it fails
+
             await ctx.defer()
-            # call ai agent
-            await ctx.send("Hello World")
+
+            if self.agent.memory:
+                self.agent.memory.clear(ctx.author.id)
+
+            await ctx.send(f"{ctx.author.mention} AI agent memory has been cleared.")
 
         self.bot.add_command(clear)
 
