@@ -1,17 +1,17 @@
 from openai import OpenAI
 from dotenv import load_dotenv
-from core.ame.ame_component import AmeComponent
+from esper.ame.ame_component import AmeComponent
 import os
 import string
 
-from core.utils.get_model_from import get_model_from
+from esper.utils.get_model_from import get_model_from
 from eth_account import Account
 import json
 
 load_dotenv()
 
 
-class Esper:
+class Agent:
     def __init__(self, **properties):
 
         self.name = properties["name"]
@@ -151,7 +151,7 @@ class Esper:
                     content=return_message["content"],
                 )
 
-            return return_message
+            return return_message["content"]
 
         else:
 
@@ -162,4 +162,4 @@ class Esper:
                     role=return_message["role"],
                     content=return_message["content"],
                 )
-            return return_message
+            return return_message["content"]

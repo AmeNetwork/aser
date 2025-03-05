@@ -1,8 +1,8 @@
 import string
 import json
 from eth_abi import encode, decode
-from core.utils import solidity_to_openai_type
-from core.ame.ame_component import AmeComponent
+from esper.utils import solidity_to_openai_type
+from esper.ame.ame_component import AmeComponent
 
 class EVM:
     def __init__(self, account):

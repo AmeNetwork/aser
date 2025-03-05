@@ -1,4 +1,4 @@
-from core.utils import get_data_types
+from esper.utils import get_data_types
 from web3 import Web3
 
 class AmeComponent:

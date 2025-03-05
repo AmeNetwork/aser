@@ -1,6 +1,6 @@
-from core.storage.tinydb import TinyDBMemory
-from core.storage.supabase import SupabaseMemory
-from core.storage.sqlite import SQLiteMemory
+from esper.storage.tinydb import TinyDBMemory
+from esper.storage.supabase import SupabaseMemory
+from esper.storage.sqlite import SQLiteMemory
 from dotenv import load_dotenv
 import os
 load_dotenv()

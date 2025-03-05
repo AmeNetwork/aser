@@ -38,7 +38,7 @@ class DiscordClient:
 
             response = self.agent.chat(message, ctx.author.id)
 
-            await ctx.send(f"{ctx.author.mention} {response["content"]}")
+            await ctx.send(f"{ctx.author.mention} {response}")
 
         self.bot.add_command(chat)
 

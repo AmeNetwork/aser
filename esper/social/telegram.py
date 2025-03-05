@@ -32,7 +32,7 @@ class TelegramClient:
             uid = update.message.chat.id
             text = update.message.text
             response = self.agent.chat(text, uid)
-            await update.message.reply_text(response["content"])
+            await update.message.reply_text(response)
 
     async def clear(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         uid = update.message.chat.id
