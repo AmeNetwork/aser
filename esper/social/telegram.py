@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 import os
 from telegram import Update
 from telegram.ext import (
@@ -9,10 +8,6 @@ from telegram.ext import (
     MessageHandler,
     filters,
 )
-
-load_dotenv()
-
-
 class TelegramClient:
     def __init__(self, agent):
         self.agent = agent

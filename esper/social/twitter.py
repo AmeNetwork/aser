@@ -1,10 +1,5 @@
-from dotenv import load_dotenv
 import os
 import tweepy
-
-load_dotenv()
-
-
 class TwitterClient:
     def __init__(self):
         self.client = tweepy.Client(

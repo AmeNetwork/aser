@@ -1,10 +1,6 @@
 from esper.ame.evm import EVM
-from eth_account import Account
-import os
-from dotenv import load_dotenv
-load_dotenv()
 class Chat2Web3:
-    def __init__(self,vm,account=Account.from_key(os.getenv("EVM_PRIVATE_KEY"))):
+    def __init__(self,vm,account):
         self.vm = vm
         self.account=account
         self.__set()

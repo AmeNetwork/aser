@@ -1,15 +1,6 @@
 from openai import OpenAI
-from dotenv import load_dotenv
-from esper.ame.ame_component import AmeComponent
 import os
-import string
-
-from esper.utils.get_model_from import get_model_from
-from eth_account import Account
 import json
-
-load_dotenv()
-
 
 class Agent:
     def __init__(self, **properties):
@@ -43,7 +34,7 @@ class Agent:
         }
 
     def __setup(self):
-
+     
         self.agent = OpenAI(
             base_url=os.getenv("OPENAI_API_BASE"),
             api_key=os.getenv("OPEN_AI_KEY"),

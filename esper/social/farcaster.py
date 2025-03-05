@@ -1,9 +1,7 @@
-from dotenv import load_dotenv
 import os
 from farcaster import Warpcast
 import requests
 
-load_dotenv()
 
 
 class FarcasterClient:

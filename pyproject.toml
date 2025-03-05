@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ame-esper"
+version = "0.1.0"
+description = "An AI Agent"
+authors = [
+    {name = "rickey", email = "hello_rickey@163.com"},
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.13.2"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "openai >= 1.63.2",
+    "web3 >= 7.8.0",
+    "discord-py-interactions >= 5.14.0",
+    "python-telegram-bot >= 21.10",
+    "tweepy >= 4.15.0",
+    "supabase >= 2.13.0",
+    "tinydb >= 4.8.2",
+    "fastapi >= 0.115.8",
+    "uvicorn >= 0.34.0",
+    "python-dotenv >= 1.0.1",
+    "chromadb >= 0.6.3"
+]
+
+[project.urls]
+Homepage = "https://github.com/AmeNetwork/esper"
+"Bug Tracker" = "https://github.com/AmeNetwork/esper/issues"
+
+
+[tool.setuptools]
+packages = ["esper"]
+include-package-data = true
+
+
+

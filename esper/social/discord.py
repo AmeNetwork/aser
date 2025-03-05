@@ -1,12 +1,5 @@
-from dotenv import load_dotenv
 import os
-import asyncio
-
-load_dotenv()
-
-
 from interactions import Client, Intents, listen, slash_command, SlashContext,SlashCommandOption,OptionType
-
 
 class DiscordClient:
     def __init__(self, agent):
