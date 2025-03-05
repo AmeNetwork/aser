@@ -28,7 +28,7 @@ dependencies = [
     "fastapi >= 0.115.8",
     "uvicorn >= 0.34.0",
     "python-dotenv >= 1.0.1",
-    "chromadb >= 0.6.3"
+    "chromadb >= 0.6.3",
 ]
 
 [project.urls]
@@ -40,5 +40,6 @@ Homepage = "https://github.com/AmeNetwork/esper"
 packages = ["esper"]
 include-package-data = true
 
-
+[tool.setuptools.package-data]
+"esper" = ["**/*.py", "**/*.json", "**/*.yaml", "**/*.yml"]
 

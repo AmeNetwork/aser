@@ -175,8 +175,4 @@ cython_debug/
 
 
 # Local Database
-data/database/*
-data/knowledge/*
-
-# !data/database/.gitkeep
-# !data/knowledge/.gitkeep
+data/*

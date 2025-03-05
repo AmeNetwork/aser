@@ -5,7 +5,7 @@ import os
 
 class TinyDBMemory:
     def __init__(self, path, limit):
-        # os.makedirs(os.path.dirname(path), exist_ok=True)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
 
         if not os.path.exists(path):
             self.db = TinyDB(path)
