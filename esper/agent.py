@@ -1,4 +1,5 @@
 from openai import OpenAI
+from esper.utils import get_model_from
 import os
 import json
 
@@ -34,11 +35,26 @@ class Agent:
         }
 
     def __setup(self):
-     
+
+        base_url=""
+        api_key=""
+        if get_model_from(self.model) == "openai":
+            base_url=os.getenv("OPENAI_API_BASE")
+            api_key=os.getenv("OPENAI_KEY")
+            
+        elif get_model_from(self.model) == "anthropic":
+            base_url=os.getenv("ANTHROPIC_API_BASE")
+            api_key=os.getenv("ANTHROPIC_KEY")
+
+        elif get_model_from(self.model) == "deepseek":
+            base_url=os.getenv("DEEPSEEK_API_BASE")
+            api_key=os.getenv("DEEPSEEK_KEY")
+
         self.agent = OpenAI(
-            base_url=os.getenv("OPENAI_API_BASE"),
-            api_key=os.getenv("OPEN_AI_KEY"),
-        )
+            base_url=base_url,
+            api_key=api_key,
+        )     
+
 
         # set tools
         if self.tools:
@@ -87,13 +103,19 @@ class Agent:
 
         messages.append(user_message)
 
-        response = self.agent.chat.completions.create(
-            model=self.model,
-            tools=self.tools_functions,
-            messages=messages,
-            max_completion_tokens=self.max_completion_tokens,
-            max_tokens=self.max_token,
-        )
+
+        params = {
+            "model": self.model,
+            "messages": messages,
+            "max_completion_tokens": self.max_completion_tokens,
+            "max_tokens": self.max_token,
+        }
+
+        if self.tools_functions:
+            params["tools"] = self.tools_functions
+
+        response = self.agent.chat.completions.create(**params)
+
 
         function_message = response.choices[0].message
 
@@ -122,12 +144,10 @@ class Agent:
             messages.append(function_message)
             messages.append(tool_message)
 
+            params["messages"] = messages
+
             tool_response = self.agent.chat.completions.create(
-                model=self.model,
-                tools=self.tools_functions,
-                messages=messages,
-                max_completion_tokens=self.max_completion_tokens,
-                max_tokens=self.max_token,
+                **params
             )
 
             return_message = {
