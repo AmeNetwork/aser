@@ -20,7 +20,7 @@ chat2web3.add(
     methods["getUser"],
 )
 
-agent=Agent(name="test",description="test",model="deepseek-chat",chat2web3=chat2web3)
+agent=Agent(name="test",description="test",model="x-ai/grok-2-vision-1212",chat2web3=chat2web3)
 response=agent.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 print(response)
 

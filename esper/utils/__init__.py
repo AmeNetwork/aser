@@ -1,3 +1,3 @@
 from .solidity_to_openai_type import solidity_to_openai_type
 from .get_data_types import get_data_types
-from .get_model_from import get_model_from
+from .get_model_env import get_model_env

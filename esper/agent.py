@@ -1,5 +1,5 @@
 from openai import OpenAI
-from esper.utils import get_model_from
+from esper.utils import get_model_env
 import os
 import json
 
@@ -36,24 +36,9 @@ class Agent:
 
     def __setup(self):
 
-        base_url=""
-        api_key=""
-        if get_model_from(self.model) == "openai":
-            base_url=os.getenv("OPENAI_API_BASE")
-            api_key=os.getenv("OPENAI_KEY")
-            
-        elif get_model_from(self.model) == "anthropic":
-            base_url=os.getenv("ANTHROPIC_API_BASE")
-            api_key=os.getenv("ANTHROPIC_KEY")
 
-        elif get_model_from(self.model) == "deepseek":
-            base_url=os.getenv("DEEPSEEK_API_BASE")
-            api_key=os.getenv("DEEPSEEK_KEY")
 
-        self.agent = OpenAI(
-            base_url=base_url,
-            api_key=api_key,
-        )     
+        self.agent = OpenAI(**get_model_env(self.model))     
 
 
         # set tools
