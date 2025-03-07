@@ -12,7 +12,7 @@ Account.enable_unaudited_hdwallet_features()
 load_dotenv()
 
 
-class FarcasterClient:
+class WarpcastClient:
     def __init__(self,mnemonic,access_token=None):
 
         self.base_path="https://api.warpcast.com/v2/"
