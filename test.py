@@ -1,21 +1,4 @@
-# Esper
-
-Esper is an AI agent project that integrates various components for social media interaction, blockchain operations, and API functionality.
-
-## Installation
-
-To install Esper, follow these steps:
-
-```bash
-git clone https://github.com/AmeNetwork/esper.git
-cd esper
-pip3 install requirements.txt
-```
-
-## Code Examples
-Here are some examples of how to use Esper:
-```python
-
+# Import necessary modules
 from esper import Agent
 from esper.ame import AmeComponent
 from eth_account import Account
