@@ -2,15 +2,30 @@
 
 Esper is an AI agent project that integrates various components for social media interaction, blockchain operations, and API functionality.
 
+**LLM:** openai, anthropic, xai, gemini, deepseek  
+**Memory:** sqlite, supabase, tinydb  
+**RAG:** chromadb  
+**Client:** twitter, farcaster, discord, telegram
+
 ## Installation
 
-To install Esper, follow these steps:
+
+
+Install from pypi
+
+```bash
+pip3 install ame-esper
+```
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/AmeNetwork/esper.git
 cd esper
 pip3 install requirements.txt
 ```
+
+
 
 ## Code Examples
 Here are some examples of how to use Esper:
