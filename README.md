@@ -1,20 +1,21 @@
 # Esper
 
-Esper is an AI agent project that integrates various components for social media interaction, blockchain operations, and API functionality.
+<span style="color:red;font-weight:bold;font-size:18px;">⚠️ Note: Esper does not create any tokens!</span>
+
+
+Esper is a lightweight, self-assembling AI agent. It focuses on building interactive onchain applications that combine AI with social content.
 
 ![](./esper-architecture-diagram.png)
 
-## Installation
+## Installation 
 
-
-
-Install from pypi
+**Install from pypi:**
 
 ```bash
 pip3 install ame-esper
 ```
 
-Clone the repository
+**Clone the repository:**
 
 ```bash
 git clone https://github.com/AmeNetwork/esper.git
@@ -22,6 +23,24 @@ cd esper
 pip3 install requirements.txt
 ```
 
+## Set up environment variables
+Please refer to `.env.example` file, and create a `.env` file with your own settings. You can use two methods to import environment variables.
+
+**Using python-dotenv:**  
+```bash
+pip install python-dotenv
+```
+Then add the following code to your python file.
+
+```python
+from dotenv import load_dotenv
+load_dotenv()
+```
+
+**Exporting all variables in the terminal:**  
+```bash
+export $(grep -v '^#' .env | xargs)
+```
 
 
 ## Code Examples
