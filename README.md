@@ -3,7 +3,7 @@
 > Esper does not create any tokens!
 
 
-Esper is a lightweight, self-assembling AI agent. It focuses on building interactive onchain applications that combine AI with social content.
+Esper is a lightweight, self-assembling AI agent. It focuses on building interactive applications that combine AI with social content.
 
 ![](./esper-architecture-diagram.png)
 
@@ -41,8 +41,6 @@ load_dotenv()
 ```bash
 export $(grep -v '^#' .env | xargs)
 ```
-
-## Structure
 
 ## Code Examples
 Here are some examples of how to use Esper:
