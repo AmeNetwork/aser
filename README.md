@@ -1,6 +1,6 @@
 # Esper
-
-<span style="color:red;font-weight:bold;font-size:18px;">⚠️ Note: Esper does not create any tokens!</span>
+> [!Warning]  
+> Esper does not create any tokens!
 
 
 Esper is a lightweight, self-assembling AI agent. It focuses on building interactive onchain applications that combine AI with social content.
@@ -42,6 +42,7 @@ load_dotenv()
 export $(grep -v '^#' .env | xargs)
 ```
 
+## Structure
 
 ## Code Examples
 Here are some examples of how to use Esper:

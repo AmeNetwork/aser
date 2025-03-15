@@ -1,6 +1,6 @@
 from openai import OpenAI
-from esper.utils import get_model_env
-import os
+from esper.utils import get_model_env,knowledge_to_prompt
+
 import json
 import time
 
@@ -65,18 +65,13 @@ class Agent:
 
             # set knowledge
             if self.knowledge:
-                os.environ["TOKENIZERS_PARALLELISM"] = "false"
-                knowledge_result = self.knowledge.query(text)
-                if len(knowledge_result["documents"][0]) > 0:
-                    knowledge_content = "\n".join(
-                        f"{i+1}. {item}"
-                        for i, item in enumerate(knowledge_result["documents"][0])
-                    )
-                    knowledge_message = {
-                        "role": "assistant",
-                        "content": knowledge_content,
-                    }
-                    messages.append(knowledge_message)
+
+                knowledge_content = knowledge_to_prompt(self.knowledge, text)
+                knowledge_message = {
+                    "role": "assistant",
+                    "content": knowledge_content,
+                }
+                messages.append(knowledge_message)
 
             user_message = {"role": "user", "content": text}
 
@@ -109,9 +104,6 @@ class Agent:
             return_message = None
 
             response = self.agent.chat.completions.create(**params)
-
-
-        
 
             function_message = response.choices[0].message
 

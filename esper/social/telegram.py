@@ -43,4 +43,5 @@ class TelegramClient:
         self.app.add_handler(MessageHandler(filters.TEXT, self.chat))
 
     def run(self):
+        print(f"{self.agent.name} is running...")
         self.app.run_polling()
