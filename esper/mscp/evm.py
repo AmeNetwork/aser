@@ -2,7 +2,7 @@ import string
 import json
 from eth_abi import encode, decode
 from esper.utils import solidity_to_openai_type
-from esper.ame.component import AmeComponent
+from esper.mscp.component import AmeComponent
 
 class EVM:
     def __init__(self, account):

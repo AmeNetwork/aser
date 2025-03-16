@@ -1,10 +1,8 @@
-# Import necessary modules
 from esper import Agent
-from esper.ame import AmeComponent
+from esper.mscp import AmeComponent
 from eth_account import Account
-from esper.memory import Memory
 import os
-from esper.chat2web3 import Chat2Web3
+from esper.mscp.chat2web3 import Chat2Web3
 
 # Initialize AmeComponent, connecting to a local Ethereum node
 component = AmeComponent(
@@ -31,18 +29,16 @@ chat2web3.add(
     methods["getUser"],  # Use the getUser method from the contract
 )
 
-# Initialize Memory object using SQLite as storage
-memory = Memory(type="sqlite")
 
 # Create an Agent instance
 agent = Agent(
-    name="test",  # Agent name
-    description="test",  # Agent description
-    memory=memory,  # Use the previously created memory object
+    name="chat2web3",  # Agent name
     model="gpt-4o",  # Specify the model to use
     chat2web3=chat2web3  # Use the previously created chat2web3 object
 )
 
 # Use the agent to chat and retrieve the username for a specific address
 response = agent.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
+
+print(response)
 

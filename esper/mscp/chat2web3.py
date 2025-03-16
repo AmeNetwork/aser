@@ -1,4 +1,4 @@
-from esper.ame.evm import EVM
+from esper.mscp.evm import EVM
 class Chat2Web3:
     def __init__(self,vm,account):
         self.vm = vm
