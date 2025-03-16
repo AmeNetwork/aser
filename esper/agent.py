@@ -10,7 +10,7 @@ class Agent:
 
         self.name = properties["name"]
         self.model = properties["model"]
-        self.description = properties["description"]
+        self.description =properties.get("description", None)
         self.memory = properties.get("memory", None)
         self.knowledge = properties.get("knowledge", None)
 

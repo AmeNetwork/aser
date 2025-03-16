@@ -45,3 +45,4 @@ agent = Agent(
 
 # Use the agent to chat and retrieve the username for a specific address
 response = agent.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
+
