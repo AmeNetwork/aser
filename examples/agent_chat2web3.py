@@ -1,11 +1,11 @@
 from esper import Agent
-from esper.mscp import AmeComponent
+from esper.mscp import Connector
 from eth_account import Account
 import os
 from esper.mscp.chat2web3 import Chat2Web3
 
 # Initialize AmeComponent, connecting to a local Ethereum node
-component = AmeComponent(
+component = Connector(
     "http://127.0.0.1:8545",  # URL of the local Ethereum node
     "0x29a79095352a718B3D7Fe84E1F14E9F34A35598e"  # Contract address
 )

@@ -1,7 +1,7 @@
 from esper.utils import get_data_types
 from web3 import Web3
 
-class AmeComponent:
+class Connector:
     def __init__(self, rpc, address):
         self.rpc=rpc
         self.address=address

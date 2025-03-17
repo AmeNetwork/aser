@@ -1,3 +1,2 @@
-from .component import AmeComponent
-from .evm import EVM
+from .connector import Connector
 from .chat2web3 import Chat2Web3

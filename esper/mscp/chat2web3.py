@@ -2,7 +2,7 @@ import string
 import json
 from eth_abi import encode, decode
 from esper.utils import solidity_to_openai_type
-from esper.mscp.component import AmeComponent
+from esper.mscp.connector import Connector
 
 class Chat2Web3:
     def __init__(self,account):
@@ -44,7 +44,7 @@ class Chat2Web3:
 
         encoded = "0x" + encode(method_data_types, method_data_values).hex()
 
-        component = AmeComponent(
+        component = Connector(
             method["method"]["rpc"],
             method["method"]["address"],
         )
