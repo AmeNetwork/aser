@@ -20,7 +20,7 @@ private_key = os.getenv("EVM_PRIVATE_KEY")
 account = Account.from_key(private_key)
 
 # Initialize Chat2Web3 object for handling blockchain interactions
-chat2web3 = Chat2Web3("evm", account)
+chat2web3 = Chat2Web3(account)
 
 # Add a method named "getUserNameByAddress" to chat2web3
 chat2web3.add(

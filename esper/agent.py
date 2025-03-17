@@ -53,7 +53,7 @@ class Agent:
 
         # set chat2web3
         if self.chat2web3:
-            self.tools_functions.extend(self.chat2web3.get_onchain().functions)
+            self.tools_functions.extend(self.chat2web3.functions)
 
     def chat(self, text, uid=None):
 
@@ -124,7 +124,7 @@ class Agent:
 
                 function_rsult = None
 
-                if self.chat2web3 != None and self.chat2web3.is_onchain_tool_function(
+                if self.chat2web3 != None and self.chat2web3.is_chat2web3_function(
                     function.name
                 ):
 
