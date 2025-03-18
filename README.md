@@ -144,7 +144,7 @@ agent=Agent(name="esper agent",model="gpt-3.5-turbo",trace=trace)
 response=agent.chat("what is bitcoin?")
 ```
 
-Create an AI Agent with [MSCP](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol):       
+Create an AI Agent with [Model Smart Contract Protocol](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol):       
 ```python
 from esper import Agent
 from esper.mscp import Connector
