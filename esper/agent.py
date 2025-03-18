@@ -124,7 +124,7 @@ class Agent:
 
                 function_rsult = None
 
-                if self.chat2web3 != None and self.chat2web3.is_chat2web3_function(
+                if self.chat2web3 != None and self.chat2web3.has(
                     function.name
                 ):
 

@@ -1,8 +1,8 @@
 import string
 import json
 from eth_abi import encode, decode
-from esper.utils import solidity_to_openai_type
 from esper.mscp.connector import Connector
+from esper.mscp.lib import solidity_to_openai_type
 
 class Chat2Web3:
     def __init__(self,account):
@@ -11,11 +11,11 @@ class Chat2Web3:
         self.functions = []
         self.account = account 
         
-    def add(self, name, description, method):
+    def add(self, name, prompt, method):
 
         evm_component_method = {
             "name": name,
-            "description": description,
+            "description": prompt,
             "method": method,
         }
         self.methods.append(evm_component_method)
@@ -29,7 +29,7 @@ class Chat2Web3:
             "type": "function",
             "function": {
                 "name": name,
-                "description": description,
+                "description": prompt,
                 "parameters": {"type": "object", "properties": properties},
             },
         }
@@ -66,8 +66,9 @@ class Chat2Web3:
         return result
 
 
-    def is_chat2web3_function(self,function_name):
-        return any(item['name'] == function_name for item in self.methods)    
+    def has(self,function_name):
+        return any(item['name'] == function_name for item in self.methods)
+
 
 
         

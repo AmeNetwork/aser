@@ -5,7 +5,7 @@
 
 Esper is a lightweight, self-assembling AI agent. It focuses on building interactive applications that combine AI with social content.
 
-![](./examples/architecture.png)
+![](./examples/images/architecture.png)
 
 ## Installation 
 
@@ -144,39 +144,35 @@ agent=Agent(name="esper agent",model="gpt-3.5-turbo",trace=trace)
 response=agent.chat("what is bitcoin?")
 ```
 
-Create an AI Agent with MSCP:
+Create an AI Agent with [MSCP](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol):       
 ```python
 from esper import Agent
-from esper.mscp import AmeComponent
+from esper.mscp import Connector
 from eth_account import Account
 import os
 from esper.mscp.chat2web3 import Chat2Web3
 
-# Initialize AmeComponent, connecting to a local Ethereum node
-component = AmeComponent(
-    "http://127.0.0.1:8545",  # URL of the local Ethereum node
-    "0x29a79095352a718B3D7Fe84E1F14E9F34A35598e"  # Contract address
+# Create a connector to connect to the component
+component = Connector(
+    "http://127.0.0.1:8545", # RPC of the component network
+    "0x29a79095352a718B3D7Fe84E1F14E9F34A35598e"  # component address
 )
 
 # Get the methods of the contract
 methods = component.get_methods()
 
-# Retrieve the private key from environment variables
-private_key = os.getenv("EVM_PRIVATE_KEY")
-
-# Create an account using the private key
-account = Account.from_key(private_key)
+#Import the private key from the environment variable
+account = Account.from_key(os.getenv("EVM_PRIVATE_KEY"))
 
 # Initialize Chat2Web3 object for handling blockchain interactions
-chat2web3 = Chat2Web3("evm", account)
+chat2web3 = Chat2Web3(account)
 
-# Add a method named "getUserNameByAddress" to chat2web3
+# Add a method named "getUserInfoByAddress" to chat2web3
 chat2web3.add(
-    "getUserNameByAddress",
-    "when a user want to get user name and age, it will return 2 value, one is name, the one is age",
-    methods["getUser"],  # Use the getUser method from the contract
+    name="getUserInfoByAddress",
+    prompt="When a user wants to get a user's name and age, it will return 2 values: one is the name, and the other is the age.",
+    method=methods["getUser"],  # Use the getUser method from the contract
 )
-
 
 # Create an Agent instance
 agent = Agent(
@@ -185,12 +181,10 @@ agent = Agent(
     chat2web3=chat2web3  # Use the previously created chat2web3 object
 )
 
-# Use the agent to chat and retrieve the username for a specific address
-response = agent.chat("get user name 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
+# Agent responds with final answer
+response = agent.chat("What is the user's name and age?0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
 
 print(response)
-
-
 ```
 
 Create an AI Agent Server:
