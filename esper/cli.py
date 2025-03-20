@@ -12,7 +12,7 @@ from esper.agent import Agent
 from esper.memory import Memory
 import time
 from esper.tools import Tools
-from esper.toolkits import erc20, pancake
+from esper.toolkits import erc20, pancake, defillama
 
 
 class Cli(cmd.Cmd):
@@ -25,7 +25,7 @@ class Cli(cmd.Cmd):
         self.memory = Memory(type="sqlite")
 
         tools = Tools()
-        tools.load_toolkits([erc20,pancake])
+        tools.load_toolkits([erc20,pancake,defillama])
         self.agent = Agent(
             name="esper agent", model="gpt-3.5-turbo", memory=self.memory, tools=tools
         )

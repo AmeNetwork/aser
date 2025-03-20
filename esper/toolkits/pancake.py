@@ -27,8 +27,6 @@ account = Account.from_key(os.getenv("EVM_PRIVATE_KEY"))
 pancakeswap_router = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
 
 
-amount = 0.01
-
 router_abi = [
     {
         "inputs": [
@@ -165,7 +163,6 @@ def approve_token(token_address, amount):
 def swap_eth_for_tokens(to_token, amount, slippage_percentage=0.5):
     amount_in_wei = web3.to_wei(amount, "ether")
 
-    # 确保 WBNB 和 to_token 都是校验和地址
     wbnb_address = Web3.to_checksum_address(WBNB)
     to_token_address = Web3.to_checksum_address(to_token)
 
@@ -368,7 +365,7 @@ def get_balance(token_symbol):
         if from_token_address.lower() == WBNB.lower():
             balance = web3.eth.get_balance(account.address)
             balance_in_ether = web3.from_wei(balance, "ether")
-            return  json.dumps({"balance": str(balance_in_ether)})
+            return  json.dumps({"balance": str(balance_in_ether),"token_address": WBNB})
         else:
             token_contract = web3.eth.contract(
                 address=from_token_address, abi=erc20_abi
@@ -376,7 +373,7 @@ def get_balance(token_symbol):
             balance = token_contract.functions.balanceOf(account.address).call()
             decimals = token_contract.functions.decimals().call()
             balance_in_token = balance / (10**decimals)
-            return json.dumps({"balance": balance_in_token})
+            return json.dumps({"balance": balance_in_token,"token_address": from_token_address})
 
 
 
@@ -471,6 +468,7 @@ pancake = [
         },
         "function": swap,
         "extra_prompt": "show more information, including account address, from_token address, to_token address, amount, slippage_percentage, result",
+        "example":"exchange 0.01 bnb to usdt"
     }, {
         "name": "get_balance",
         "description": "get token balance by token symbol",
@@ -485,6 +483,7 @@ pancake = [
             "required": ["token_symbol"],
         },
         "function": get_balance,
-        "extra_prompt": None,
+        "extra_prompt": "you must show more information, including balance, token_address",
+        "example":"get my bnb balance"
     }
 ]

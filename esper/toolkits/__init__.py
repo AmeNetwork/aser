@@ -1,2 +1,3 @@
 from .erc20 import erc20
 from .pancake import pancake
+from .defillama import defillama

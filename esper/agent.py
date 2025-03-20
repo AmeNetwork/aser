@@ -103,6 +103,8 @@ class Agent:
 
             response = self.agent.chat.completions.create(**params)
 
+            
+
             function_message = response.choices[0].message
 
             if function_message.tool_calls:
