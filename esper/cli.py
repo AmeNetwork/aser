@@ -9,7 +9,8 @@ from rich.panel import Panel
 from esper.agent import Agent
 from esper.memory import Memory
 import time
-
+from esper.tools import Tools
+from esper.toolkits import erc20
 
 class Cli(cmd.Cmd):
 
@@ -19,8 +20,12 @@ class Cli(cmd.Cmd):
 
         self.uid = time.time()
         self.memory = Memory(type="sqlite")
+
+
+        tools = Tools()
+        tools.load_toolkits([erc20])
         self.agent = Agent(
-            name="esper agent", model="gpt-3.5-turbo", memory=self.memory
+            name="esper agent", model="gpt-3.5-turbo", memory=self.memory, tools=tools
         )
         intro_text = Text()
 

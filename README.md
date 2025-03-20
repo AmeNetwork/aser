@@ -134,6 +134,16 @@ agent=Agent(name="esper",model="gpt-3.5-turbo",tools=tools)
 
 response=agent.chat("what is bitcoin price?")
 ```
+Create an AI Agent with Toolkits:
+```python
+from esper.tools import Tools
+from esper.toolkits import erc20
+from esper.agent import Agent
+tools=Tools()
+tools.load_toolkits([erc20])
+agent=Agent(name="token agent",model="gpt-3.5-turbo")
+response=agent.chat("deploy a erc20 token, name is test, symbol is tst")
+```
 
 Create an AI Agent with Trace:
 ```python

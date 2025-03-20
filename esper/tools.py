@@ -28,8 +28,23 @@ class Tools:
     def get_function(self,function_name):
         return [tool for tool in self.functions if tool["name"] == function_name][0]
 
-
-    
+    def load_toolkits(self,toolkits):
+        
+        for toolkit in toolkits:
+            for tool in toolkit:
+                self.tools.append({
+                    "type": "function",
+                    "function": {
+                        "name": tool["name"],
+                        "description": tool["description"],
+                        "parameters": tool["parameters"]
+                    }
+                })
+                self.functions.append({
+                    "name": tool["name"],
+                    "function":tool["function"]
+                })
+        
 
 
     

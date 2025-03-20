@@ -166,6 +166,7 @@ class Agent:
 
             return return_message["content"]
         except Exception as e:
+            print(e)
             self.error = str(e)  
             return_message = {"role": "assistant", "content": "Sorry, I am not able to answer your question."}
             return return_message["content"]
