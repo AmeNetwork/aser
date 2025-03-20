@@ -1,5 +1,5 @@
 from openai import OpenAI
-from esper.utils import get_model_env,knowledge_to_prompt
+from esper.utils import get_model_env, knowledge_to_prompt
 
 import json
 import time
@@ -10,7 +10,7 @@ class Agent:
 
         self.name = properties["name"]
         self.model = properties["model"]
-        self.description =properties.get("description", "")
+        self.description = properties.get("description", "")
         self.memory = properties.get("memory", None)
         self.knowledge = properties.get("knowledge", None)
 
@@ -25,8 +25,7 @@ class Agent:
         self.trace = properties.get("trace", None)
         self.error = None
         self.tools_log = None
-    
-        
+
         self._setup()
 
     def get_info(self):
@@ -61,7 +60,6 @@ class Agent:
             start_time = int(time.time() * 1000)
             system_message = {"role": "system", "content": self.description}
             messages = [system_message]
-       
 
             # set knowledge
             if self.knowledge:
@@ -75,12 +73,14 @@ class Agent:
 
             user_message = {"role": "user", "content": text}
 
-             # set memory
+            # set memory
             if self.memory:
                 history = self.memory.query(key=uid)
                 if history:
                     for item in history:
-                        messages.append({"role": item["role"], "content": item["content"]})
+                        messages.append(
+                            {"role": item["role"], "content": item["content"]}
+                        )
                 self.memory.insert(
                     key=uid,
                     role=user_message["role"],
@@ -99,19 +99,13 @@ class Agent:
             if self.tools_functions:
                 params["tools"] = self.tools_functions
 
-
-        
             return_message = None
 
             response = self.agent.chat.completions.create(**params)
 
             function_message = response.choices[0].message
 
-            
-
             if function_message.tool_calls:
-
-
 
                 function = function_message.tool_calls[0].function
 
@@ -124,17 +118,25 @@ class Agent:
 
                 function_rsult = None
 
-                if self.chat2web3 != None and self.chat2web3.has(
-                    function.name
-                ):
+                if self.chat2web3 != None and self.chat2web3.has(function.name):
 
                     function_rsult = self.chat2web3.call(function)
 
                 else:
 
-                    function_rsult = self.tools.get_function(function.name)["function"](
+                    toolkit_function = self.tools.get_function(function.name)
+
+                    function_rsult = toolkit_function["function"](
                         **json.loads(function.arguments)
                     )
+
+                    if toolkit_function["extra_prompt"]:
+                        messages.append(
+                            {
+                                "role": "assistant",
+                                "content": toolkit_function["extra_prompt"],
+                            }
+                        )
 
                 tool_message = {
                     "role": "tool",
@@ -155,7 +157,10 @@ class Agent:
 
             else:
 
-                return_message = {"role": "assistant", "content": function_message.content}
+                return_message = {
+                    "role": "assistant",
+                    "content": function_message.content,
+                }
 
             if self.memory:
                 self.memory.insert(
@@ -166,14 +171,20 @@ class Agent:
 
             return return_message["content"]
         except Exception as e:
-            print(e)
-            self.error = str(e)  
-            return_message = {"role": "assistant", "content": "Sorry, I am not able to answer your question."}
+            print(f"An error occurred: {str(e)}")
+            import traceback
+
+            traceback.print_exc()
+            self.error = str(e)
+            return_message = {
+                "role": "assistant",
+                "content": "Sorry, I am not able to answer your question.",
+            }
             return return_message["content"]
         finally:
 
             if self.trace:
-    
+
                 self.trace.add(
                     uid=uid,
                     session=self.trace.session,
@@ -184,8 +195,6 @@ class Agent:
                     tools_log=self.tools_log,
                     start_time=start_time,
                     end_time=int(time.time() * 1000),
-                    feed_back= None,
+                    feed_back=None,
                     error=self.error,
                 )
-
-        

@@ -3,7 +3,7 @@ class Tools:
         self.tools = []
         self.functions = []
 
-    def add(self, name, description, function, parameters):
+    def add(self, name, description, function, parameters,extra_prompt=None):
         self.tools.append(
             {
                 "type": "function",
@@ -16,7 +16,8 @@ class Tools:
         )
         self.functions.append({
             "name": name,
-            "function":function
+            "function":function,
+            "extra_prompt":extra_prompt
         })
     
     def get_tool(self,tool_name):
@@ -27,6 +28,7 @@ class Tools:
 
     def get_function(self,function_name):
         return [tool for tool in self.functions if tool["name"] == function_name][0]
+
 
     def load_toolkits(self,toolkits):
         
@@ -42,7 +44,8 @@ class Tools:
                 })
                 self.functions.append({
                     "name": tool["name"],
-                    "function":tool["function"]
+                    "function":tool["function"],
+                    "extra_prompt":tool["extra_prompt"]
                 })
         
 

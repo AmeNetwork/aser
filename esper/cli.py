@@ -6,11 +6,14 @@ from rich.console import Console
 from rich.spinner import Spinner
 from rich.text import Text
 from rich.panel import Panel
+from rich.markdown import Markdown
+from rich.style import Style
 from esper.agent import Agent
 from esper.memory import Memory
 import time
 from esper.tools import Tools
-from esper.toolkits import erc20
+from esper.toolkits import erc20, pancake
+
 
 class Cli(cmd.Cmd):
 
@@ -21,9 +24,8 @@ class Cli(cmd.Cmd):
         self.uid = time.time()
         self.memory = Memory(type="sqlite")
 
-
         tools = Tools()
-        tools.load_toolkits([erc20])
+        tools.load_toolkits([erc20,pancake])
         self.agent = Agent(
             name="esper agent", model="gpt-3.5-turbo", memory=self.memory, tools=tools
         )
@@ -39,9 +41,17 @@ class Cli(cmd.Cmd):
     def do_chat(self, arg):
         with self.console.status("thinking", spinner="dots") as status:
             result = self.agent.chat(arg, uid=self.uid)
-            result_text = Text()
-            result_text.append(result, style="green")
-            self.console.print(result_text)
+            # result_text = Text()
+            # result_text.append(result, style="green")
+            default_style = Style(color="green")
+            md = Markdown(
+                result,
+                code_theme="monokai",
+                hyperlinks=True,
+                style=default_style,
+            )
+
+            self.console.print(md)
 
     def do_help(self, arg):
 

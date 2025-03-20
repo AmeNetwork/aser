@@ -7,7 +7,8 @@ import json
 
 load_dotenv()
 
-w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
+w3 = Web3(Web3.HTTPProvider('https://bsc-dataseed.binance.org/'))
+account = Account.from_key(os.getenv("EVM_PRIVATE_KEY"))
 
 def depoly_erc20(name, symbol, decimals = 18, totalSupply = 1000000000):
 
@@ -89,8 +90,6 @@ def depoly_erc20(name, symbol, decimals = 18, totalSupply = 1000000000):
     ]["abi"]
 
     MyToken = w3.eth.contract(abi=abi, bytecode=bytecode)
-
-    account = Account.from_key(os.getenv("EVM_PRIVATE_KEY"))
 
     transaction = MyToken.constructor(name, symbol, decimals, totalSupply * (10 ** decimals)).build_transaction(
         {
@@ -198,10 +197,6 @@ def transfer_erc20(contract_address, to_address, amount):
 
     contract = w3.eth.contract(address=contract_address, abi=ERC20_ABI)
 
-
-    account = Account.from_key(os.getenv("EVM_PRIVATE_KEY"))
-
-
     decimals = contract.functions.decimals().call()
 
     actual_amount = amount * (10 ** decimals)
@@ -283,16 +278,10 @@ def get_erc20_balance(contract_address, account_address):
     })
 
 
-# transfer_erc20("0x45B0BbaceEdcFbae96AeC2d2fFEf70777B0B3aE3","0x993B763e1821aa9628Af658E8a76E48deCd85fcd",100)
-
-# response=get_erc20_balance("0x45B0BbaceEdcFbae96AeC2d2fFEf70777B0B3aE3","0xa0Ee7A142d267C1f36714E4a8F75612F20a79720")
-# print(response)
-
-
 erc20 = [
     {
         "name": "depoly_erc20",
-        "description": "when user ask token price, return token price",
+        "description": "when user ask depoly erc20",
         "parameters": {
             "type": "object",
             "properties": {
@@ -316,9 +305,10 @@ erc20 = [
             "required": ["name", "symbol"],
         },
         "function": depoly_erc20,
+        "extra_prompt":None
     },    {
         "name": "get_erc20_balance",
-        "description": "when user ask erc20 balance, return erc20 balance",
+        "description": "when user ask erc20 balance, user needs to provide contract address and account address",
         "parameters": {
             "type": "object",
             "properties": {
@@ -334,6 +324,7 @@ erc20 = [
             "required": ["account", "token"],
         },
         "function": get_erc20_balance,
+        "extra_prompt":None
     },    {
         "name": "transfer_erc20",
         "description": "when user ask transfer erc20",
@@ -356,6 +347,7 @@ erc20 = [
             "required": ["account", "token","amount"],
         },
         "function": transfer_erc20,
+        "extra_prompt":None
     }
 ]
 
