@@ -1,5 +1,5 @@
-from esper.tools import Tools
-from esper.agent import Agent
+from amer.tools import Tools
+from amer.agent import Agent
 tools=Tools()
 def get_btc_price():
     return "$10,0000"
@@ -11,7 +11,7 @@ tools.add(
     function=get_btc_price,
 )
 
-agent=Agent(name="esper",model="gpt-3.5-turbo",description="btc agent",tools=tools)
+agent=Agent(name="amer",model="gpt-3.5-turbo",description="btc agent",tools=tools)
 
 response=agent.chat("what is bitcoin price?")
 

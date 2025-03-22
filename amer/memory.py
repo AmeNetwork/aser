@@ -1,6 +1,6 @@
-from esper.storage.tinydb import TinyDBMemory
-from esper.storage.supabase import SupabaseMemory
-from esper.storage.sqlite import SQLiteMemory
+from amer.storage.tinydb import TinyDBMemory
+from amer.storage.supabase import SupabaseMemory
+from amer.storage.sqlite import SQLiteMemory
 import os
 
 class Memory:

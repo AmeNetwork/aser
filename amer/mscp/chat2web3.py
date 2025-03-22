@@ -1,8 +1,8 @@
 import string
 import json
 from eth_abi import encode, decode
-from esper.mscp.connector import Connector
-from esper.mscp.lib import solidity_to_openai_type
+from amer.mscp.connector import Connector
+from amer.mscp.lib import solidity_to_openai_type
 
 class Chat2Web3:
     def __init__(self,account):

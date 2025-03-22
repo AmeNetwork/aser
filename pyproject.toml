@@ -3,8 +3,8 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ame-esper"
-version = "0.1.2"
+name = "amer"
+version = "0.1.0"
 description = "An AI Agent"
 authors = [
     {name = "rickey", email = "hello_rickey@163.com"},
@@ -38,14 +38,14 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/AmeNetwork/esper"
-"Bug Tracker" = "https://github.com/AmeNetwork/esper/issues"
+Homepage = "https://github.com/AmeNetwork/amer"
+"Bug Tracker" = "https://github.com/AmeNetwork/amer/issues"
 
 
 [tool.setuptools]
-packages = ["esper"]
+packages = ["amer"]
 include-package-data = true
 
 [tool.setuptools.package-data]
-"esper" = ["**/*.py", "**/*.json", "**/*.yaml", "**/*.yml"]
+"amer" = ["**/*.py", "**/*.json", "**/*.yaml", "**/*.yml"]
 
