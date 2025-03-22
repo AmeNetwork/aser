@@ -1,4 +1,4 @@
-from amer.mscp.lib import get_data_types
+from aser.mscp.lib import get_data_types
 from web3 import Web3
 
 class Connector:

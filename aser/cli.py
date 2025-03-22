@@ -8,11 +8,11 @@ from rich.text import Text
 from rich.panel import Panel
 from rich.markdown import Markdown
 from rich.style import Style
-from amer.agent import Agent
-from amer.memory import Memory
+from aser.agent import Agent
+from aser.memory import Memory
 import time
-from amer.tools import Tools
-from amer.toolkits import erc20, pancake, defillama, coinmarketcap, goplus
+from aser.tools import Tools
+from aser.toolkits import erc20, pancake, defillama, coinmarketcap, goplus
 
 
 class Cli(cmd.Cmd):
@@ -27,7 +27,7 @@ class Cli(cmd.Cmd):
         tools = Tools()
         tools.load_toolkits([erc20,pancake,defillama,coinmarketcap,goplus])
         self.agent = Agent(
-            name="amer agent", model="gpt-3.5-turbo", memory=self.memory, tools=tools
+            name="aser agent", model="gpt-3.5-turbo", memory=self.memory, tools=tools
         )
         intro_text = Text()
 
@@ -36,7 +36,7 @@ class Cli(cmd.Cmd):
         )
 
         self.intro = intro_text
-        self.prompt = "amer> "
+        self.prompt = "aser> "
 
     def do_chat(self, arg):
         with self.console.status("thinking", spinner="dots") as status:

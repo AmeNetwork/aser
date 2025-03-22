@@ -1,5 +1,5 @@
-from amer.agent import Agent
-from amer.knowledge import Knowledge
+from aser.agent import Agent
+from aser.knowledge import Knowledge
 
 knowledge = Knowledge(name="CryptoHistory", query_ns=1)
 knowledge_data = [
@@ -21,8 +21,8 @@ knowledge_data = [
 ]
 knowledge.upsert(knowledge_data)
 agent = Agent(
-    name="amer agent",
-    description="amer agent",
+    name="aser agent",
+    description="aser agent",
     model="gpt-3.5-turbo",
     knowledge=knowledge,
 )

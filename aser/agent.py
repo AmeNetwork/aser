@@ -1,5 +1,5 @@
 from openai import OpenAI
-from amer.utils import get_model_env, knowledge_to_prompt
+from aser.utils import get_model_env, knowledge_to_prompt
 
 import json
 import time

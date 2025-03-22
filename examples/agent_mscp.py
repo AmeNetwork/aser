@@ -1,8 +1,8 @@
-from amer import Agent
-from amer.mscp import Connector
+from aser import Agent
+from aser.mscp import Connector
 from eth_account import Account
 import os
-from amer.mscp.chat2web3 import Chat2Web3
+from aser.mscp.chat2web3 import Chat2Web3
 
 # Create a connector to connect to the component
 component = Connector(

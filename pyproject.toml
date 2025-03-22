@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "amer"
+name = "aser"
 version = "0.1.0"
 description = "An AI Agent"
 authors = [
@@ -38,14 +38,14 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/AmeNetwork/amer"
-"Bug Tracker" = "https://github.com/AmeNetwork/amer/issues"
-
+Homepage = "https://github.com/AmeNetwork/aser"
+"Bug Tracker" = "https://github.com/AmeNetwork/aser/issues"
 
 [tool.setuptools]
-packages = ["amer"]
+packages = ["aser"]
 include-package-data = true
+license-files = []
 
 [tool.setuptools.package-data]
-"amer" = ["**/*.py", "**/*.json", "**/*.yaml", "**/*.yml"]
+"aser" = ["**/*.py", "**/*.json", "**/*.yaml", "**/*.yml"]
 

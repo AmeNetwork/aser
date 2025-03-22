@@ -1,9 +1,9 @@
-# Amer
+# Aser
 > [!Warning]  
-> Amer does not issue any tokens!
+> Aser does not issue any tokens!
 
 
-Amer is a lightweight, self-assembling AI agent. It focuses on building interactive applications that combine AI with social content.
+Aser is a lightweight, self-assembling AI agent. It focuses on building interactive applications that combine AI with social content.
 
 ![](./examples/images/architecture.png)
 
@@ -12,14 +12,14 @@ Amer is a lightweight, self-assembling AI agent. It focuses on building interact
 **Install from pypi:**
 
 ```bash
-pip3 install ame-amer
+pip3 install aser
 ```
 
 **Clone the repository:**
 
 ```bash
-git clone https://github.com/AmeNetwork/amer.git
-cd amer
+git clone https://github.com/AmeNetwork/aser.git
+cd aser
 pip3 install -r requirements.txt
 ```
 
@@ -47,16 +47,16 @@ export $(grep -v '^#' .env | xargs)
 Create a simple AI Agent:
 
 ```python
-from amer.agent import Agent
-agent=Agent(name="amer agent",model="gpt-3.5-turbo")
+from aser.agent import Agent
+agent=Agent(name="aser agent",model="gpt-3.5-turbo")
 response=agent.chat("What is Bitcoin?")
 ```
 
 Create Discord and Telegram AI Agent in 1 minute: 
 ```python
 # Discord AI Agent
-from amer.social.discord import DiscordClient
-from amer.agent import Agent
+from aser.social.discord import DiscordClient
+from aser.agent import Agent
 agent=Agent(name="discord agent", description="discord agent",model="gpt-3.5-turbo")
 discord_agent = DiscordClient(agent)
 discord_agent.run()
@@ -64,8 +64,8 @@ discord_agent.run()
   
 ```python
 # Telegram AI Agent
-from amer.social.telegram import TelegramClient
-from amer.agent import Agent
+from aser.social.telegram import TelegramClient
+from aser.agent import Agent
 agent=Agent(name="telegram agent", description="telegram agent",model="gpt-3.5-turbo")
 telegram_agent=TelegramClient(agent)
 telegram_agent.run()
@@ -73,19 +73,19 @@ telegram_agent.run()
 
 Create an AI Agent with Memory:
 ```python
-from amer.agent import Agent
-from amer.memory import Memory
+from aser.agent import Agent
+from aser.memory import Memory
 memory = Memory(type="sqlite")
 agent = Agent(
-    name="amer agent", model="gpt-3.5-turbo", memory=memory
+    name="aser agent", model="gpt-3.5-turbo", memory=memory
 )
 response = agent.chat("What is Bitcoin?", uid=1)
 ```
 
 Create an AI Agent with Knowledge:
 ```python
-from amer.agent import Agent
-from amer.knowledge import Knowledge
+from aser.agent import Agent
+from aser.knowledge import Knowledge
 
 knowledge = Knowledge(name="CryptoHistory", query_ns=1)
 knowledge_data = [
@@ -107,8 +107,8 @@ knowledge_data = [
 ]
 knowledge.upsert(knowledge_data)
 agent = Agent(
-    name="amer agent",
-    description="amer agent",
+    name="aser agent",
+    description="aser agent",
     model="gpt-3.5-turbo",
     knowledge=knowledge,
 )
@@ -117,8 +117,8 @@ response = agent.chat("what is Ethereum?")
 
 Create an AI Agent with Tools:
 ```python
-from amer.tools import Tools
-from amer.agent import Agent
+from aser.tools import Tools
+from aser.agent import Agent
 tools=Tools()
 def get_btc_price():
     return "$10,0000"
@@ -130,15 +130,15 @@ tools.add(
     function=get_btc_price,
 )
 
-agent=Agent(name="amer",model="gpt-3.5-turbo",tools=tools)
+agent=Agent(name="aser",model="gpt-3.5-turbo",tools=tools)
 
 response=agent.chat("what is bitcoin price?")
 ```
 Create an AI Agent with Toolkits:
 ```python
-from amer.tools import Tools
-from amer.toolkits import erc20
-from amer.agent import Agent
+from aser.tools import Tools
+from aser.toolkits import erc20
+from aser.agent import Agent
 tools=Tools()
 tools.load_toolkits([erc20])
 agent=Agent(name="token agent",model="gpt-3.5-turbo")
@@ -147,20 +147,20 @@ response=agent.chat("deploy a erc20 token, name is test, symbol is tst")
 
 Create an AI Agent with Trace:
 ```python
-from amer.trace import Trace
-from amer.agent import Agent
+from aser.trace import Trace
+from aser.agent import Agent
 trace=Trace(session=1)
-agent=Agent(name="amer agent",model="gpt-3.5-turbo",trace=trace)
+agent=Agent(name="aser agent",model="gpt-3.5-turbo",trace=trace)
 response=agent.chat("what is bitcoin?")
 ```
 
 Create an AI Agent with [Model Smart Contract Protocol](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol):       
 ```python
-from amer import Agent
-from amer.mscp import Connector
+from aser import Agent
+from aser.mscp import Connector
 from eth_account import Account
 import os
-from amer.mscp.chat2web3 import Chat2Web3
+from aser.mscp.chat2web3 import Chat2Web3
 
 # Create a connector to connect to the component
 component = Connector(
@@ -199,8 +199,8 @@ print(response)
 
 Create an AI Agent Server:
 ```python
-from amer.api import API
-from amer.agent import Agent
+from aser.api import API
+from aser.agent import Agent
 agent=Agent(name="api-agent",model="gpt-3.5-turbo")
 api=API(agent)
 api.run()

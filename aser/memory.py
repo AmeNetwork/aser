@@ -1,6 +1,6 @@
-from amer.storage.tinydb import TinyDBMemory
-from amer.storage.supabase import SupabaseMemory
-from amer.storage.sqlite import SQLiteMemory
+from aser.storage.tinydb import TinyDBMemory
+from aser.storage.supabase import SupabaseMemory
+from aser.storage.sqlite import SQLiteMemory
 import os
 
 class Memory:
