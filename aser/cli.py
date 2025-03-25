@@ -12,7 +12,7 @@ from aser.agent import Agent
 from aser.memory import Memory
 import time
 from aser.tools import Tools
-from aser.toolkits import erc20, pancake, defillama, coinmarketcap, goplus
+from aser.toolkits import erc20, pancake, defillama, coinmarketcap, goplus, blockbeats
 
 
 class Cli(cmd.Cmd):
@@ -25,7 +25,7 @@ class Cli(cmd.Cmd):
         self.memory = Memory(type="sqlite")
 
         tools = Tools()
-        tools.load_toolkits([erc20,pancake,defillama,coinmarketcap,goplus])
+        tools.load_toolkits([blockbeats])
         self.agent = Agent(
             name="aser agent", model="gpt-3.5-turbo", memory=self.memory, tools=tools
         )
