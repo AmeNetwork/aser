@@ -26,6 +26,8 @@ class Agent:
         self.error = None
         self.tools_log = None
 
+   
+
         self._setup()
 
     def get_info(self):
@@ -54,7 +56,7 @@ class Agent:
         if self.chat2web3:
             self.tools_functions.extend(self.chat2web3.functions)
 
-    def chat(self, text, uid=None):
+    def chat(self, text, uid=None,response_format=None):
 
         try:
             start_time = int(time.time() * 1000)
@@ -101,11 +103,18 @@ class Agent:
 
             return_message = None
 
-            response = self.agent.chat.completions.create(**params)
+         
 
+            if response_format:
+                params["response_format"]=response_format
+                completion = self.agent.chat.completions.parse(**params)
+
+            else:
+                completion = self.agent.chat.completions.create(**params)
             
+          
 
-            function_message = response.choices[0].message
+            function_message = completion.choices[0].message
 
             if function_message.tool_calls:
 

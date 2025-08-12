@@ -8,7 +8,7 @@ Learn more about Swarms https://github.com/kyegomez/swarms
 
 
 class AserSwarms(SwarmsAgent):
-    def __init__(self,config, *args, **kwargs):
+    def __init__(self, config, *args, **kwargs):
 
         self.agent = AserAgent(**config)
         super().__init__(*args, **kwargs)

@@ -3,14 +3,15 @@ class Tools:
         self.tools = []
         self.functions = []
 
-    def add(self, name, description, function, parameters,extra_prompt=None):
+    def add(self, name, description, function, parameters,strict=False,extra_prompt=None):
         self.tools.append(
             {
                 "type": "function",
                 "function": {
                     "name": name,
                     "description": description,
-                    "parameters": parameters
+                    "parameters": parameters,
+                    "strict": strict
                 }
             }
         )
@@ -39,7 +40,8 @@ class Tools:
                     "function": {
                         "name": tool["name"],
                         "description": tool["description"],
-                        "parameters": tool["parameters"]
+                        "parameters": tool["parameters"],
+                        "strict":tool["strict"]
                     }
                 })
                 self.functions.append({
