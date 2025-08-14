@@ -6,23 +6,26 @@ import time
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 class CheckWork(BaseModel):
     verify:bool
 
-class AgentTask:
-    def __init__(self, _agent, _rpc, _contract, _account, _role):
+class Seika:
+    def __init__(self, _agent, _rpc, _contract, _account, _role,_interval):
 
         self.agent = _agent
         self.account = _account
 
-        with open("examples/agent_order/abi.json", "r", encoding="utf-8") as f:
+        with open("aser/connectors/abi/seika_abi.json", "r", encoding="utf-8") as f:
             abi = json.load(f)
         self.web3 = Web3(Web3.HTTPProvider(_rpc))
         self.contract = self.web3.eth.contract(address=_contract, abi=abi)
 
         self.role = _role
+
+        self.interval=_interval
 
 
     def get_order(self):
@@ -58,7 +61,7 @@ class AgentTask:
         )
         estimated_gas = self.web3.eth.estimate_gas(estimated_txn)
         gasPrice = self.web3.eth.gas_price
-        print(estimated_txn)
+
         txn = self.contract.functions.createWork(order_id, content).build_transaction(
             {
                 "from": self.account.address,
@@ -82,7 +85,7 @@ class AgentTask:
         )
         estimated_gas = self.web3.eth.estimate_gas(estimated_txn)
         gasPrice = self.web3.eth.gas_price
-        print(estimated_txn)
+
         txn = self.contract.functions.checkWork(work_id, agree).build_transaction(
             {
                 "from": self.account.address,
@@ -133,47 +136,62 @@ class AgentTask:
 
     def run(self):
 
- 
-        if self.role == "publisher":
+        while True:
 
-            order_work = self.get_order_work()
+            
 
-            print(order_work)
+            if self.role == "publisher":
 
-            message=f"""
-                You are a verifier. Please verify whether it is correct
+                print("publisher")
+              
+                order_work = self.get_order_work()
 
-                Question:{order_work["order_detail"]}
+                if order_work!=None: 
 
-                Answer:{order_work["work_detail"]}
+                    message=f"""
+                        You are a verifier. Please verify whether it is correct
 
-            """
+                        Question:{order_work["order_detail"]}
 
-            response=self.agent.chat(message,response_format=CheckWork)
+                        Answer:{order_work["work_detail"]}
 
-            result=json.loads(response)["verify"]
+                    """
 
-            self.check_work(order_work["work_id"], result)
+              
 
-            print(result)
+                    response=self.agent.chat(message,response_format=CheckWork)
 
-        else:
+                    result=json.loads(response)["verify"]
+
+                    self.check_work(order_work["work_id"], result)
 
 
-            order=self.get_order()
+            else:
 
-            message=f"""
 
-                Question:{order["description"]}
+                print("worker")
 
-            """
+                order=self.get_order()
 
-            response=self.agent.chat(message)
 
-            txn_hash=self.submit_work(order["id"], response)
+                if order!=None: 
+                    message=f"""
 
-            print(txn_hash)
-               
+                        Question:{order["description"]}
+
+                    """
+
+             
+
+                    response=self.agent.chat(message)
+
+                    txn_hash=self.submit_work(order["id"], response)
+
+        
+
+
+            time.sleep(self.interval)
+                
            
 
 
