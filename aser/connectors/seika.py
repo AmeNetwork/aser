@@ -9,11 +9,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class CheckWork(BaseModel):
-    verify:bool
+    verify: bool
+
 
 class Seika:
-    def __init__(self, _agent, _rpc, _contract, _account, _role,_interval):
+    def __init__(self, _agent, _rpc, _contract, _account, _role, _interval):
 
         self.agent = _agent
         self.account = _account
@@ -25,8 +27,7 @@ class Seika:
 
         self.role = _role
 
-        self.interval=_interval
-
+        self.interval = _interval
 
     def get_order(self):
         worker_order_ids = self.contract.functions.getOrderIdsByWorker(
@@ -46,7 +47,6 @@ class Seika:
             }
             if order_detail[0] not in worker_order_ids:
                 return order
-
 
     def submit_work(self, order_id, content):
 
@@ -74,9 +74,10 @@ class Seika:
         txn_hash = self.web3.eth.send_raw_transaction(signed_txn.raw_transaction).hex()
         return txn_hash
 
-
     def check_work(self, work_id, agree):
-        estimated_txn = self.contract.functions.checkWork(work_id, agree).build_transaction(
+        estimated_txn = self.contract.functions.checkWork(
+            work_id, agree
+        ).build_transaction(
             {
                 "from": self.account.address,
                 "value": 0,
@@ -97,7 +98,6 @@ class Seika:
         signed_txn = self.account.sign_transaction(txn)
         txn_hash = self.web3.eth.send_raw_transaction(signed_txn.raw_transaction).hex()
         return txn_hash
-
 
     def get_order_work(self):
 
@@ -132,23 +132,21 @@ class Seika:
                             "work_id": work_id,
                             "work_detail": work_detail,
                         }
-
+                    
 
     def run(self):
 
         while True:
 
-            
+            if self.role == "reviewer":
 
-            if self.role == "publisher":
+                print("reviewer: query order")
 
-                print("publisher")
-              
                 order_work = self.get_order_work()
 
-                if order_work!=None: 
+                if order_work != None:
 
-                    message=f"""
+                    message = f"""
                         You are a verifier. Please verify whether it is correct
 
                         Question:{order_work["order_detail"]}
@@ -157,43 +155,27 @@ class Seika:
 
                     """
 
-              
+                    response = self.agent.chat(message, response_format=CheckWork)
 
-                    response=self.agent.chat(message,response_format=CheckWork)
-
-                    result=json.loads(response)["verify"]
+                    result = json.loads(response)["verify"]
 
                     self.check_work(order_work["work_id"], result)
 
-
             else:
 
+                print("worker: query order")
 
-                print("worker")
+                order = self.get_order()
 
-                order=self.get_order()
+                print("worker:",order)
 
+                if order != None:
+                    message = order["description"]
 
-                if order!=None: 
-                    message=f"""
+                    response = self.agent.chat(message)
 
-                        Question:{order["description"]}
+                    print("worker:",response)
 
-                    """
-
-             
-
-                    response=self.agent.chat(message)
-
-                    txn_hash=self.submit_work(order["id"], response)
-
-        
-
+                    txn_hash = self.submit_work(order["id"], response)
 
             time.sleep(self.interval)
-                
-           
-
-
-
-        

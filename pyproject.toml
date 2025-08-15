@@ -34,7 +34,9 @@ dependencies = [
     "mastodon.py >= 2.0.1",
     "atproto >=0.0.59",
     "rich >= 13.9.4",
-    "py-solc-x >=2.0.3"
+    "py-solc-x >=2.0.3",
+    "bs4 >=0.0.2",
+    "html2text >= 2025.4.15"
 ]
 
 [project.urls]

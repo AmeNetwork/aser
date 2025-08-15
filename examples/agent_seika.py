@@ -2,26 +2,36 @@ import os
 import threading
 from dotenv import load_dotenv
 from eth_account import Account
-
-load_dotenv()
+from aser.tools import Tools
+from aser.toolkits import cast
 from aser.connectors import Seika
 from aser.agent import Agent
 
+load_dotenv()
 rpc = "http://127.0.0.1:8545"
-contract_address = "0x5B3120d0dA5FDcBA7aef87A9c3c64829C1c0D76B"
-account = Account.from_key(os.getenv("EVM_PRIVATE_KEY"))
-publisher = Account.from_key(os.getenv("PUBLISHER_PRIVATE_KEY"))
+contract_address = "0x3A1D75769758705caB1385377d4D88b8193A5f37"
+worker_account = Account.from_key(os.getenv("WORKER_AGENT_PRIVATE_KEY"))
+reviewer_account = Account.from_key(os.getenv("REVIEWER_AGENT_PRIVATE_KEY"))
 
-agent = Agent(name="agent", model="gpt-4o-mini")
+tools = Tools()
+tools.load_toolkits([cast])
+worker_agent = Agent(name="worker agent", model="gpt-4o-mini", tools=tools)
 
-publisher_agent_task = Seika(agent, rpc, contract_address, publisher, "publisher",5)
+reviewer_agent = Agent(name="reviewer agent", model="gpt-4o-mini")
 
-worker_agent_task = Seika(agent, rpc, contract_address, account, "worker",5)
+worker_agent_task = Seika(
+    worker_agent, rpc, contract_address, worker_account, "worker", 5
+)
+reviewer_agent_task = Seika(
+    reviewer_agent, rpc, contract_address, reviewer_account, "reviewer", 5
+)
 
 
 worker_thread = threading.Thread(target=worker_agent_task.run)
-publisher_thread = threading.Thread(target=publisher_agent_task.run)
-
+reviewer_thread = threading.Thread(target=reviewer_agent_task.run)
 
 worker_thread.start()
-publisher_thread.start()
+reviewer_thread.start()
+
+worker_thread.join()
+reviewer_thread.join()

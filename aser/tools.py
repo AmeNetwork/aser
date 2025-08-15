@@ -32,6 +32,8 @@ class Tools:
 
 
     def load_toolkits(self,toolkits):
+
+  
         
         for toolkit in toolkits:
             for tool in toolkit:
@@ -41,7 +43,7 @@ class Tools:
                         "name": tool["name"],
                         "description": tool["description"],
                         "parameters": tool["parameters"],
-                        "strict":tool["strict"]
+                        # "strict":tool["strict"]
                     }
                 })
                 self.functions.append({
