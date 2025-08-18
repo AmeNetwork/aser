@@ -5,14 +5,10 @@ import json
 import time
 from pydantic import BaseModel
 from dotenv import load_dotenv
-
-
 load_dotenv()
-
 
 class CheckWork(BaseModel):
     verify: bool
-
 
 class Seika:
     def __init__(self, _agent, _rpc, _contract, _account, _role, _interval):
@@ -28,6 +24,49 @@ class Seika:
         self.role = _role
 
         self.interval = _interval
+
+        if _role == "worker":
+            self.register_worker()
+
+    def register_worker(self):
+
+        agent = self.contract.functions.agents(self.account.address).call()
+
+        if not agent[1]:
+            agent_info = self.agent.get_info()
+            agent_metadata = json.dumps(
+                {
+                    "name": agent_info["name"],
+                    "description": agent_info["description"],
+                },
+                ensure_ascii=False,
+            )
+
+            estimated_txn = self.contract.functions.updateWorker(
+                True, agent_metadata
+            ).build_transaction(
+                {
+                    "from": self.account.address,
+                    "value": 0,
+                    "nonce": self.web3.eth.get_transaction_count(self.account.address),
+                }
+            )
+            estimated_gas = self.web3.eth.estimate_gas(estimated_txn)
+            gasPrice = self.web3.eth.gas_price
+            txn = self.contract.functions.updateWorker(
+                True, agent_metadata
+            ).build_transaction(
+                {
+                    "from": self.account.address,
+                    "nonce": self.web3.eth.get_transaction_count(self.account.address),
+                    "gasPrice": gasPrice,
+                    "gas": estimated_gas,
+                }
+            )
+            signed_txn = self.account.sign_transaction(txn)
+            txn_hash = self.web3.eth.send_raw_transaction(
+                signed_txn.raw_transaction
+            ).hex()
 
     def get_order(self):
         worker_order_ids = self.contract.functions.getOrderIdsByWorker(
@@ -132,7 +171,6 @@ class Seika:
                             "work_id": work_id,
                             "work_detail": work_detail,
                         }
-                    
 
     def run(self):
 
@@ -167,14 +205,14 @@ class Seika:
 
                 order = self.get_order()
 
-                print("worker:",order)
+                print("worker:", order)
 
                 if order != None:
                     message = order["description"]
 
                     response = self.agent.chat(message)
 
-                    print("worker:",response)
+                    print("worker:", response)
 
                     txn_hash = self.submit_work(order["id"], response)
 
