@@ -5,10 +5,13 @@ import json
 import time
 from pydantic import BaseModel
 from dotenv import load_dotenv
+
 load_dotenv()
+
 
 class CheckWork(BaseModel):
     verify: bool
+
 
 class Seika:
     def __init__(self, _agent, _rpc, _contract, _account, _role, _interval):
@@ -84,8 +87,9 @@ class Seika:
                 "date": order_detail[5],
                 "status": order_detail[6],
             }
-            if order_detail[0] not in worker_order_ids:
-                return order
+            if order["status"] == 1:
+                if order_detail[0] not in worker_order_ids:
+                    return order
 
     def submit_work(self, order_id, content):
 
@@ -205,14 +209,12 @@ class Seika:
 
                 order = self.get_order()
 
-                print("worker:", order)
+                print("worker: order", order)
 
                 if order != None:
                     message = order["description"]
 
                     response = self.agent.chat(message)
-
-                    print("worker:", response)
 
                     txn_hash = self.submit_work(order["id"], response)
 
