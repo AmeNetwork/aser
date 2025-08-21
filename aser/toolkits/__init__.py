@@ -7,3 +7,4 @@ from .blockbeats import blockbeats
 from .deepgram import deepgram
 from .web2markdown import web2markdown
 from .cast import cast
+from .web3bio import web3bio

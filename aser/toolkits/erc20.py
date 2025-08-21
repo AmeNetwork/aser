@@ -7,25 +7,30 @@ import json
 
 load_dotenv()
 
-w3 = Web3(Web3.HTTPProvider('https://bsc-dataseed.binance.org/'))
+w3 = Web3(Web3.HTTPProvider("https://bsc-dataseed.binance.org/"))
 account = Account.from_key(os.getenv("EVM_PRIVATE_KEY"))
 
-def depoly_erc20(name, symbol, decimals = 18, totalSupply = 1000000000):
+
+def depoly_erc20(name, symbol, decimals=18, totalSupply=1000000000):
 
     installed_versions = get_installed_solc_versions()
     required_version = "0.8.0"
 
     if required_version not in installed_versions:
- 
+
         install_solc(required_version)
 
     import solcx
+
     solcx.set_solc_version(required_version)
 
-    erc20_source_code = """
+    erc20_source_code = (
+        """
     pragma solidity ^0.8.0;
 
-    contract """+name+""" {
+    contract """
+        + name
+        + """ {
         string public name;
         string public symbol;
         uint8 public decimals;
@@ -69,6 +74,7 @@ def depoly_erc20(name, symbol, decimals = 18, totalSupply = 1000000000):
         }
     }
     """
+    )
 
     compiled_sol = compile_standard(
         {
@@ -91,7 +97,9 @@ def depoly_erc20(name, symbol, decimals = 18, totalSupply = 1000000000):
 
     MyToken = w3.eth.contract(abi=abi, bytecode=bytecode)
 
-    transaction = MyToken.constructor(name, symbol, decimals, totalSupply * (10 ** decimals)).build_transaction(
+    transaction = MyToken.constructor(
+        name, symbol, decimals, totalSupply * (10**decimals)
+    ).build_transaction(
         {
             "from": account.address,
             "nonce": w3.eth.get_transaction_count(account.address),
@@ -100,11 +108,7 @@ def depoly_erc20(name, symbol, decimals = 18, totalSupply = 1000000000):
         }
     )
 
-
-
-    signed_txn = w3.eth.account.sign_transaction(
-        transaction, private_key=account.key
-    )
+    signed_txn = w3.eth.account.sign_transaction(transaction, private_key=account.key)
 
     tx_hash = w3.eth.send_raw_transaction(signed_txn.raw_transaction)
 
@@ -112,124 +116,153 @@ def depoly_erc20(name, symbol, decimals = 18, totalSupply = 1000000000):
 
     contract_address = tx_receipt.contractAddress
 
-    return json.dumps({
-        "token_name": name,
-        "token_symbol": symbol,
-        "token_decimals": decimals,
-        "token_totalSupply": totalSupply,
-        "token_address": contract_address,
-        "depolyed_by": account.address,
-    })
+    return json.dumps(
+        {
+            "token_name": name,
+            "token_symbol": symbol,
+            "token_decimals": decimals,
+            "token_totalSupply": totalSupply,
+            "token_address": contract_address,
+            "depolyed_by": account.address,
+        }
+    )
+
 
 def transfer_erc20(contract_address, to_address, amount):
- 
+
     ERC20_ABI = [
         {
             "constant": True,
             "inputs": [],
             "name": "name",
             "outputs": [{"name": "", "type": "string"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "constant": False,
-            "inputs": [{"name": "_spender", "type": "address"}, {"name": "_value", "type": "uint256"}],
+            "inputs": [
+                {"name": "_spender", "type": "address"},
+                {"name": "_value", "type": "uint256"},
+            ],
             "name": "approve",
             "outputs": [{"name": "success", "type": "bool"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "constant": True,
             "inputs": [],
             "name": "totalSupply",
             "outputs": [{"name": "", "type": "uint256"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "constant": False,
-            "inputs": [{"name": "_from", "type": "address"}, {"name": "_to", "type": "address"}, {"name": "_value", "type": "uint256"}],
+            "inputs": [
+                {"name": "_from", "type": "address"},
+                {"name": "_to", "type": "address"},
+                {"name": "_value", "type": "uint256"},
+            ],
             "name": "transferFrom",
             "outputs": [{"name": "success", "type": "bool"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "constant": True,
             "inputs": [{"name": "", "type": "address"}],
             "name": "balanceOf",
             "outputs": [{"name": "", "type": "uint256"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "constant": False,
-            "inputs": [{"name": "_to", "type": "address"}, {"name": "_value", "type": "uint256"}],
+            "inputs": [
+                {"name": "_to", "type": "address"},
+                {"name": "_value", "type": "uint256"},
+            ],
             "name": "transfer",
             "outputs": [{"name": "success", "type": "bool"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "constant": True,
-            "inputs": [{"name": "", "type": "address"}, {"name": "", "type": "address"}],
+            "inputs": [
+                {"name": "", "type": "address"},
+                {"name": "", "type": "address"},
+            ],
             "name": "allowance",
             "outputs": [{"name": "", "type": "uint256"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "anonymous": False,
-            "inputs": [{"indexed": True, "name": "from", "type": "address"}, {"indexed": True, "name": "to", "type": "address"}, {"indexed": False, "name": "value", "type": "uint256"}],
+            "inputs": [
+                {"indexed": True, "name": "from", "type": "address"},
+                {"indexed": True, "name": "to", "type": "address"},
+                {"indexed": False, "name": "value", "type": "uint256"},
+            ],
             "name": "Transfer",
-            "type": "event"
+            "type": "event",
         },
         {
             "anonymous": False,
-            "inputs": [{"indexed": True, "name": "owner", "type": "address"}, {"indexed": True, "name": "spender", "type": "address"}, {"indexed": False, "name": "value", "type": "uint256"}],
+            "inputs": [
+                {"indexed": True, "name": "owner", "type": "address"},
+                {"indexed": True, "name": "spender", "type": "address"},
+                {"indexed": False, "name": "value", "type": "uint256"},
+            ],
             "name": "Approval",
-            "type": "event"
+            "type": "event",
         },
         {
             "constant": True,
             "inputs": [],
             "name": "decimals",
             "outputs": [{"name": "", "type": "uint8"}],
-            "type": "function"
-        }
+            "type": "function",
+        },
     ]
-
 
     contract = w3.eth.contract(address=contract_address, abi=ERC20_ABI)
 
     decimals = contract.functions.decimals().call()
 
-    actual_amount = amount * (10 ** decimals)
+    actual_amount = amount * (10**decimals)
 
-    gas_estimate = contract.functions.transfer(to_address, actual_amount).estimate_gas({
-        'from': account.address,
-    })
+    gas_estimate = contract.functions.transfer(to_address, actual_amount).estimate_gas(
+        {
+            "from": account.address,
+        }
+    )
 
     gas_price = w3.eth.gas_price
 
-    transaction = contract.functions.transfer(to_address, actual_amount).build_transaction({
-        'from': account.address,
-        'nonce': w3.eth.get_transaction_count(account.address),
-        'gas': gas_estimate, 
-        'gasPrice':gas_price,
-    })
-
+    transaction = contract.functions.transfer(
+        to_address, actual_amount
+    ).build_transaction(
+        {
+            "from": account.address,
+            "nonce": w3.eth.get_transaction_count(account.address),
+            "gas": gas_estimate,
+            "gasPrice": gas_price,
+        }
+    )
 
     signed_txn = w3.eth.account.sign_transaction(transaction, private_key=account.key)
 
-
     tx_hash = w3.eth.send_raw_transaction(signed_txn.raw_transaction)
-
 
     tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
-    return json.dumps({
-        "transaction_hash": tx_hash.hex(),
-        "from": account.address,
-        "to": to_address,
-        "amount": amount,
-        "status": "success" if tx_receipt.status == 1 else "failed"
-    })
+    return json.dumps(
+        {
+            "transaction_hash": tx_hash.hex(),
+            "from": account.address,
+            "to": to_address,
+            "amount": amount,
+            "status": "success" if tx_receipt.status == 1 else "failed",
+        }
+    )
+
 
 def get_erc20_balance(contract_address, account_address):
 
@@ -239,43 +272,35 @@ def get_erc20_balance(contract_address, account_address):
             "inputs": [{"name": "_owner", "type": "address"}],
             "name": "balanceOf",
             "outputs": [{"name": "balance", "type": "uint256"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "constant": True,
             "inputs": [],
             "name": "decimals",
             "outputs": [{"name": "", "type": "uint8"}],
-            "type": "function"
+            "type": "function",
         },
         {
             "constant": True,
             "inputs": [],
             "name": "symbol",
             "outputs": [{"name": "", "type": "string"}],
-            "type": "function"
-        }
+            "type": "function",
+        },
     ]
-
 
     contract = w3.eth.contract(address=contract_address, abi=ERC20_ABI)
 
-
     balance = contract.functions.balanceOf(account_address).call()
-
 
     decimals = contract.functions.decimals().call()
 
-
     symbol = contract.functions.symbol().call()
 
+    actual_balance = balance / (10**decimals)
 
-    actual_balance = balance / (10 ** decimals)
-
-    return json.dumps({
-        "address": account_address,
-        "balance": actual_balance
-    })
+    return json.dumps({"address": account_address, "balance": actual_balance})
 
 
 erc20 = [
@@ -305,8 +330,9 @@ erc20 = [
             "required": ["name", "symbol"],
         },
         "function": depoly_erc20,
-        "extra_prompt":None
-    },    {
+        "extra_prompt": None,
+    },
+    {
         "name": "get_erc20_balance",
         "description": "when user ask erc20 balance, user needs to provide contract address and account address",
         "parameters": {
@@ -319,13 +345,14 @@ erc20 = [
                 "account_address": {
                     "type": "string",
                     "description": "account address",
-                }
+                },
             },
             "required": ["account", "token"],
         },
         "function": get_erc20_balance,
-        "extra_prompt":None
-    },    {
+        "extra_prompt": None,
+    },
+    {
         "name": "transfer_erc20",
         "description": "when user ask transfer erc20",
         "parameters": {
@@ -342,13 +369,11 @@ erc20 = [
                 "amount": {
                     "type": "integer",
                     "description": "amount",
-                }
+                },
             },
-            "required": ["account", "token","amount"],
+            "required": ["account", "token", "amount"],
         },
         "function": transfer_erc20,
-        "extra_prompt":None
-    }
+        "extra_prompt": None,
+    },
 ]
-
-

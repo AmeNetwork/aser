@@ -1,6 +1,6 @@
 from openai import OpenAI
 from aser.utils import get_model_env, knowledge_to_prompt
-
+from aser.tools import Tools
 import json
 import time
 
@@ -14,19 +14,27 @@ class Agent:
         self.memory = properties.get("memory", None)
         self.knowledge = properties.get("knowledge", None)
 
-        self.tools = properties.get("tools", None)
-        self.chat2web3 = properties.get("chat2web3", None)
+        if properties.get("tools"):
+            self.tools = Tools()
+            self.tools.load_toolkits(properties.get("tools"))
+            self.tools_functions = self.tools.get_tools()
+        else:
+            self.tools = None
+            self.tools_functions = []
+
+        if properties.get("chat2web3"):
+            self.tools_functions.extend(self.chat2web3.functions)
+        else:
+            self.chat2web3 = None
 
         self.max_completion_tokens = properties.get("max_completion_tokens", None)
         self.max_token = properties.get("max_token", None)
-
-        self.tools_functions = []
 
         self.trace = properties.get("trace", None)
         self.error = None
         self.tools_log = None
 
-        self._setup()
+        self.agent = OpenAI(**get_model_env(self.model))
 
     def get_info(self):
         return {
@@ -41,18 +49,6 @@ class Agent:
             "max_token": self.max_token,
             "trace": self.trace,
         }
-
-    def _setup(self):
-
-        self.agent = OpenAI(**get_model_env(self.model))
-
-        # set tools
-        if self.tools:
-            self.tools_functions = self.tools.get_tools()
-
-        # set chat2web3
-        if self.chat2web3:
-            self.tools_functions.extend(self.chat2web3.functions)
 
     def chat(self, text, uid=None, response_format=None):
 

@@ -2,7 +2,6 @@ import os
 import threading
 from dotenv import load_dotenv
 from eth_account import Account
-from aser.tools import Tools
 from aser.toolkits import cast
 from aser.connectors import Seika
 from aser.agent import Agent
@@ -18,9 +17,7 @@ worker_account = Account.from_key(os.getenv("WORKER_AGENT_PRIVATE_KEY"))
 reviewer_account = Account.from_key(os.getenv("REVIEWER_AGENT_PRIVATE_KEY"))
 
 # Set worker agent
-tools = Tools()
-tools.load_toolkits([cast])
-worker_agent = Agent(name="worker agent", model="gpt-4o-mini", tools=tools)
+worker_agent = Agent(name="worker agent", model="gpt-4o-mini", tools=[cast])
 
 # Set reviewer agent
 reviewer_agent = Agent(name="reviewer agent", model="gpt-4o-mini")
