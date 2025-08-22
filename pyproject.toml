@@ -36,7 +36,8 @@ dependencies = [
     "rich >= 13.9.4",
     "py-solc-x >=2.0.3",
     "bs4 >=0.0.2",
-    "html2text >= 2025.4.15"
+    "html2text >= 2025.4.15",
+    "semchunk >= 3.2.3" 
 ]
 
 [project.urls]

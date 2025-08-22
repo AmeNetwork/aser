@@ -61,6 +61,7 @@ class Agent:
             if self.knowledge:
 
                 knowledge_content = knowledge_to_prompt(self.knowledge, text)
+
                 knowledge_message = {
                     "role": "assistant",
                     "content": knowledge_content,

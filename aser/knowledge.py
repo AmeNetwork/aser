@@ -1,4 +1,6 @@
 import chromadb
+from aser.utils import get_chunks, get_file_data
+
 
 
 class Knowledge:
@@ -7,20 +9,13 @@ class Knowledge:
         self.collection = self.chroma_client.get_or_create_collection(name)
         self.query_ns = query_ns
 
-    def upsert(self, data):
-        documents = []
-        metadatas = []
-        ids = []
-        for item in data:
-            documents.append(item["document"])
-            metadatas.append(item["metadata"])
-            ids.append(item["id"])
-        self.collection.upsert(documents=documents, metadatas=metadatas, ids=ids)
+    def upsert(self, ids, documents, metadatas=None):
+        self.collection.upsert(ids=ids, documents=documents, metadatas=metadatas)
 
     def delete(self, id):
         self.collection.delete(ids=[id])
 
-    def query(self,query_texts, query_ns=None, where=None, where_document=None):
+    def query(self, query_texts, query_ns=None, where=None, where_document=None):
         results = self.collection.query(
             query_texts=query_texts,
             n_results=query_ns or self.query_ns,
@@ -30,6 +25,12 @@ class Knowledge:
         return results
 
     def destory(self):
-        self.chroma_client.delete_collection(self.collection.name) 
+        self.chroma_client.delete_collection(self.collection.name)
 
-        
+    def knowledger_from_file(self, file_path, chunk_size=300):
+        file_data = get_file_data(file_path)
+        chunks = get_chunks(file_data, chunk_size)
+        ids = [str(i) for i in range(len(chunks))]
+        self.upsert(ids, documents=chunks)
+
+
