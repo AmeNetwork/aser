@@ -1,5 +1,5 @@
 from openai import OpenAI
-from aser.utils import get_model_env, knowledge_to_prompt
+from aser.utils import get_model_env, knowledge_to_prompt,chain_of_think
 from aser.tools import Tools
 import json
 import time
@@ -49,8 +49,11 @@ class Agent:
             "max_token": self.max_token,
             "trace": self.trace,
         }
+    
+    def thinking(self, text):
+        return chain_of_think(text, self.chat)
 
-    def chat(self, text, uid=None, response_format=None):
+    def chat(self, text,pre_messages=None, uid=None, response_format=None):
 
         try:
             start_time = int(time.time() * 1000)
@@ -67,6 +70,10 @@ class Agent:
                     "content": knowledge_content,
                 }
                 messages.append(knowledge_message)
+
+            # set pre_messages
+            if pre_messages or pre_messages!=[]:
+                messages.extend(pre_messages)    
 
             user_message = {"role": "user", "content": text}
 
