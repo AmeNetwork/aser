@@ -7,7 +7,8 @@ from .knowledge import Knowledge
 from .memory import Memory
 from .tools import Tools
 from .trace import Trace
-from . import mscp,social,storage,utils
+from .cli import Cli
+from . import mscp,social,storage,utils,cli
 
 
 

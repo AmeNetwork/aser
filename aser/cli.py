@@ -9,26 +9,19 @@ from rich.panel import Panel
 from rich.markdown import Markdown
 from rich.style import Style
 from aser.agent import Agent
-from aser.memory import Memory
-import time
-from aser.tools import Tools
-from aser.toolkits import deepgram
 
+import time
 
 class Cli(cmd.Cmd):
 
-    def __init__(self):
+    def __init__(self, agent):
         super().__init__()
         self.console = Console()
 
         self.uid = time.time()
-        self.memory = Memory(type="sqlite")
 
-        tools = Tools()
-        tools.load_toolkits([deepgram])
-        self.agent = Agent(
-            name="aser agent", model="gpt-3.5-turbo", memory=self.memory, tools=tools
-        )
+        self.agent = agent
+
         intro_text = Text()
 
         intro_text.append(
@@ -36,11 +29,12 @@ class Cli(cmd.Cmd):
         )
 
         self.intro = intro_text
-        self.prompt = "aser> "
+        self.prompt = f"{self.agent.name} > "
 
     def do_chat(self, arg):
-        with self.console.status("thinking", spinner="dots") as status:
-            result = self.agent.chat(arg, uid=self.uid)
+        print(arg)
+        with self.console.status("Cooking up your answer...", spinner="dots") as status:
+            result = self.agent.chat(arg)
             # result_text = Text()
             # result_text.append(result, style="green")
             default_style = Style(color="green")
@@ -66,7 +60,6 @@ class Cli(cmd.Cmd):
         )
 
     def do_clear(self, arg):
-        self.memory.clear(self.uid)
         os.system("cls" if os.name == "nt" else "clear")
 
     def do_exit(self, arg):
@@ -85,5 +78,5 @@ class Cli(cmd.Cmd):
             return
 
 
-if __name__ == "__main__":
-    Cli().cmdloop()
+
+

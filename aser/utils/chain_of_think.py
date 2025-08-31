@@ -1,12 +1,14 @@
 import yaml
-def chain_of_think(text,chat_function):
+
+
+def chain_of_think(text, chat_function):
 
     history_text = ""
     plan_text = ""
     pre_messages = []
     history = []
     planning = []
-    result=[]
+    result = []
 
     is_continued = True
 
@@ -44,8 +46,10 @@ def chain_of_think(text,chat_function):
         response = chat_function(prompt, pre_messages)
 
         result.append(response)
-    
-        response_yaml = yaml.safe_load(response.replace("```yaml", "").replace("```", "").strip())
+
+        response_yaml = yaml.safe_load(
+            response.replace("```yaml", "").replace("```", "").strip()
+        )
 
         is_continued = response_yaml["is_continued"]
         if is_continued:
@@ -54,12 +58,11 @@ def chain_of_think(text,chat_function):
                 planning.extend(response_yaml["planning"])
                 plan_text = planning[0]["description"]
                 history_text = ""
-          
 
             else:
                 plan_text = planning[len(history)]["description"]
                 history_text = history[len(history) - 1]
-            
+
             history.append(plan_text)
 
             pre_messages.append(
@@ -71,4 +74,3 @@ def chain_of_think(text,chat_function):
             continue
         else:
             return result
-            

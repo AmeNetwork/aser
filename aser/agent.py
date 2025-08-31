@@ -23,6 +23,7 @@ class Agent:
             self.tools_functions = []
 
         if properties.get("chat2web3"):
+            self.chat2web3 = properties.get("chat2web3")
             self.tools_functions.extend(self.chat2web3.functions)
         else:
             self.chat2web3 = None
@@ -53,7 +54,7 @@ class Agent:
     def thinking(self, text):
         return chain_of_think(text, self.chat)
 
-    def chat(self, text,pre_messages=None, uid=None, response_format=None):
+    def chat(self, text,pre_messages=[], uid=None, response_format=None):
 
         try:
             start_time = int(time.time() * 1000)
@@ -72,8 +73,10 @@ class Agent:
                 messages.append(knowledge_message)
 
             # set pre_messages
-            if pre_messages or pre_messages!=[]:
+            if pre_messages!=[]:
                 messages.extend(pre_messages)    
+               
+                
 
             user_message = {"role": "user", "content": text}
 
