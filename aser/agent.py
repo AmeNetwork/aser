@@ -1,5 +1,5 @@
 from openai import OpenAI
-from aser.utils import get_model_env, knowledge_to_prompt,chain_of_think
+from aser.utils import get_model_env, knowledge_to_prompt, chain_of_think
 from aser.tools import Tools
 import json
 import time
@@ -13,20 +13,34 @@ class Agent:
         self.description = properties.get("description", "")
         self.memory = properties.get("memory", None)
         self.knowledge = properties.get("knowledge", None)
+        self.tools_functions=[]
 
         if properties.get("tools"):
-            self.tools = Tools()
-            self.tools.load_toolkits(properties.get("tools"))
-            self.tools_functions = self.tools.get_tools()
+            tools=Tools()
+            tools.load_toolkits(properties.get("tools"))
+            
+            self.tools=tools
+            
+            self.tools_functions.extend(tools.get_tools())
+
         else:
             self.tools = None
-            self.tools_functions = []
+     
 
         if properties.get("chat2web3"):
             self.chat2web3 = properties.get("chat2web3")
             self.tools_functions.extend(self.chat2web3.functions)
+      
+        
         else:
             self.chat2web3 = None
+
+        if properties.get("mcp"):
+            self.mcp = properties.get("mcp")
+            for mcp in self.mcp:
+                self.tools_functions.extend(mcp.get_tools_functions())
+        else:
+            self.mcp = None
 
         self.max_completion_tokens = properties.get("max_completion_tokens", None)
         self.max_token = properties.get("max_token", None)
@@ -50,11 +64,11 @@ class Agent:
             "max_token": self.max_token,
             "trace": self.trace,
         }
-    
+
     def thinking(self, text):
         return chain_of_think(text, self.chat)
 
-    def chat(self, text,pre_messages=[], uid=None, response_format=None):
+    def chat(self, text, pre_messages=[], uid=None, response_format=None):
 
         try:
             start_time = int(time.time() * 1000)
@@ -73,10 +87,8 @@ class Agent:
                 messages.append(knowledge_message)
 
             # set pre_messages
-            if pre_messages!=[]:
-                messages.extend(pre_messages)    
-               
-                
+            if pre_messages != []:
+                messages.extend(pre_messages)
 
             user_message = {"role": "user", "content": text}
 
@@ -130,12 +142,29 @@ class Agent:
 
                 function_rsult = None
 
+     
+
+                # call chat2web3
                 if self.chat2web3 != None and self.chat2web3.has(function.name):
 
                     function_rsult = self.chat2web3.call(function)
 
-                else:
+                # call mcp
+                if self.mcp != None:
+              
+                    for mcp in self.mcp:
+                        if mcp.has_tool(function.name):
+                            function_rsult = mcp.call_tool(
+                                function.name, json.loads(function.arguments)
+                            ).content
+                  
+                            break
 
+                # call tools
+
+         
+                if self.tools != None and self.tools.has_tool(function.name):
+                  
                     toolkit_function = self.tools.get_function(function.name)
 
                     function_rsult = toolkit_function["function"](

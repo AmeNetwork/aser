@@ -45,34 +45,39 @@ load_dotenv()
 ```bash
 export $(grep -v '^#' .env | xargs)
 ```
+## Basic Usage
+```python
+from aser.agent import Agent
+agent=Agent(name="aser agent",description="aser agent",model="gpt-4.1-mini")
+response=agent.chat("what's bitcoin?")
+print(response)
+```
 
-## Examples
+## Integrations & Examples
 
-[Create a simple AI Agent](./examples/agent.py)
+Create a Discord AI Agent [example](./examples/agent_discord.py)
 
-[Create Discord AI Agent](./examples/agent_discord.py)
+Create a Telegram AI Agent [example](./examples/agent_telegram.py)
 
-[Create Telegram AI Agent](./examples/agent_telegram.py)
+Create a Farcaster AI Agent [example](./examples/agent_farcaster.py)
 
-[Create Farcaster AI Agent](./examples/agent_farcaster.py)
+Create an AI Agent with Memory [example](./examples/agent_memory.py)
 
-[Create an AI Agent with Memory](./examples/agent_memory.py)
+Create an AI Agent with Knowledge [example](./examples/agent_knowledge.py)          
 
-[Create an AI Agent with Knowledge](./examples/agent_knowledge.py)
+Create an AI Agent with Tools [example](./examples/agent_tools.py)  
 
-[Create an AI Agent with Tools](./examples/agent_tools.py)  
+Create an AI Agent with Toolkits [example](./examples/agent_toolkits.py)
 
-[Create an AI Agent with Toolkits](./examples/agent_toolkits.py)
+Create an AI Agent with Trace [example](./examples/agent_trace.py)
 
-[Create an AI Agent with Trace](./examples/agent_trace.py)
+Create an AI Agent with Model Smart Contract Protocol [example](./examples/agent_mscp.py)
 
-[Create an AI Agent with Model Smart Contract Protocol](./examples/agent_mscp.py)
+Create an AI Agent Server [example](./examples/agent_server.py)
 
-[Create an AI Agent Server](./examples/agent_server.py)
+Create an AI Agent with Cli [example](./examples/agent_cli.py)
 
-[Create an AI Agent with Cli](./examples/agent_cli.py)
+Create an AI Agent with Thinking [example](./examples/agent_thinking.py)
 
-[Create an AI Agent with Thinking](./examples/agent_thinking.py)
-
-[Integrate Swarms](./examples/aser_swarms.py)
+Create an AI Agent with Swarms [example](./examples/aser_swarms.py)
 

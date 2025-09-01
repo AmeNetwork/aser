@@ -8,7 +8,7 @@ from .memory import Memory
 from .tools import Tools
 from .trace import Trace
 from .cli import Cli
-from . import mscp,social,storage,utils,cli
+from . import mscp,social,storage,utils,cli,mcp
 
 
 

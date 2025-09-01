@@ -23,6 +23,14 @@ class Tools:
     def get_function(self,function_name):
         return [tool for tool in self.functions if tool["name"] == function_name][0]
 
+    def has_tool(self,tool_name):
+
+        is_tool=False
+        for tool in self.tools:
+            if tool["function"]["name"] == tool_name:
+                is_tool=True
+                break
+        return is_tool
 
     def load_toolkits(self,toolkits):
 
@@ -41,6 +49,7 @@ class Tools:
                         "function":tool["function"],
                         "extra_prompt":tool["extra_prompt"]
                     })
+        
    
     
     
