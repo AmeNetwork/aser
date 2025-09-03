@@ -57,32 +57,39 @@ def check_contract(chain_name, contract_address):
 
     if response.status_code == 200:
 
-        response_json = response.json()["result"][contract_address]
+        if response.json()["message"]=="OK":
 
-        def get_value(key):
-            return response_json.get(key, "unknown")
+            response_json = response.json()["result"][contract_address]
 
-        return_str = f"""
-        Token Address: {contract_address}
-        Token Name: {get_value("token_name")}
-        Token Symbol: {get_value("token_symbol")}
-        Token Total Supply: {get_value("total_supply")}
-        Holder Count: {get_value("holder_count")}
-        Creator Address: {get_value("creator_address")}
-        Creator Balance: {get_value("creator_balance")}
-        Buy Tax: {convert_to_yes_no(get_value("buy_tax"))}
-        Sell Tax: {convert_to_yes_no(get_value("sell_tax"))}
-        Transfer Pausable: {convert_to_yes_no(get_value("transfer_pausable"))}
-        Can't Buy: {convert_to_yes_no(get_value("cannot_buy"))}
-        Can't Sell All: {convert_to_yes_no(get_value("cannot_sell_all"))}
-        Hidden Owner: {convert_to_yes_no(get_value("hidden_owner"))}
-        Blacklist: {convert_to_yes_no(get_value("is_blacklisted"))}
-        Whitelist: {convert_to_yes_no(get_value("is_whitelisted"))}
-        Honeypot: {convert_to_yes_no(get_value("is_honeypot"))}
-        Open Source: {convert_to_yes_no(get_value("is_open_source"))}
+            def get_value(key):
+                return response_json.get(key, "unknown")
 
-        """
+            return_str = f"""
+            Token Address: {contract_address}
+            Token Name: {get_value("token_name")}
+            Token Symbol: {get_value("token_symbol")}
+            Token Total Supply: {get_value("total_supply")}
+            Holder Count: {get_value("holder_count")}
+            Creator Address: {get_value("creator_address")}
+            Creator Balance: {get_value("creator_balance")}
+            Buy Tax: {convert_to_yes_no(get_value("buy_tax"))}
+            Sell Tax: {convert_to_yes_no(get_value("sell_tax"))}
+            Transfer Pausable: {convert_to_yes_no(get_value("transfer_pausable"))}
+            Can't Buy: {convert_to_yes_no(get_value("cannot_buy"))}
+            Can't Sell All: {convert_to_yes_no(get_value("cannot_sell_all"))}
+            Hidden Owner: {convert_to_yes_no(get_value("hidden_owner"))}
+            Blacklist: {convert_to_yes_no(get_value("is_blacklisted"))}
+            Whitelist: {convert_to_yes_no(get_value("is_whitelisted"))}
+            Honeypot: {convert_to_yes_no(get_value("is_honeypot"))}
+            Open Source: {convert_to_yes_no(get_value("is_open_source"))}
 
+            """
+
+           
+        else:
+            return_str = f"""
+            {response.json()["message"]}
+            """
         return return_str
     else:
         chain_names = list(chains.keys())

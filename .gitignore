@@ -179,3 +179,6 @@ data/*
 
 #Mac DS Store
 .DS_Store
+
+# Local Test
+localtest
