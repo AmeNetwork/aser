@@ -1,11 +1,10 @@
 # Aser
 
-> [!Warning]  
-> Aser does not issue any tokens!
-
 Aser is equipped with standardized AI capability middleware, such as knowledge, memory, tracing, thinking, API interfaces, and social clients. By dynamically integrating Web3 toolkits, it helps developers quickly build and launch AI agents with native Web3 capabilities.
 
 ![](./examples/images/architecture.png)
+
+[Website](https://ame.network) | [Documentation](https://docs.ame.network/aser/overview) | [Get Support](https://t.me/hello_rickey) 
 
 ## Installation
 
@@ -48,7 +47,7 @@ export $(grep -v '^#' .env | xargs)
 ## Basic Usage
 ```python
 from aser.agent import Agent
-agent=Agent(name="aser agent",description="aser agent",model="gpt-4.1-mini")
+agent=Agent(name="aser agent",model="gpt-4.1-mini")
 response=agent.chat("what's bitcoin?")
 print(response)
 ```
@@ -75,7 +74,7 @@ Create an AI Agent with Model Smart Contract Protocol [example](./examples/agent
 
 Create an AI Agent Server [example](./examples/agent_server.py)
 
-Create an AI Agent with Cli [example](./examples/agent_cli.py)
+Create an AI Agent with CLI [example](./examples/agent_cli.py)
 
 Create an AI Agent with Thinking [example](./examples/agent_thinking.py)
 
