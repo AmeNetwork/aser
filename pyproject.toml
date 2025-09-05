@@ -18,7 +18,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "openai >= 1.63.2",
+    "openai >= 1.63.2", 
     "web3 >= 7.8.0",
     "discord-py-interactions >= 5.14.0",
     "python-telegram-bot >= 21.10",
@@ -34,10 +34,9 @@ dependencies = [
     "mastodon.py >= 2.0.1",
     "atproto >=0.0.59",
     "rich >= 13.9.4",
-    "py-solc-x >=2.0.3",
     "bs4 >=0.0.2",
     "html2text >= 2025.4.15",
-    "semchunk >= 3.2.3" 
+    "semchunk >= 3.2.3", 
     "fastmcp >= 2.12.0"
 ]
 
