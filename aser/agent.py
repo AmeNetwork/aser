@@ -67,6 +67,7 @@ class Agent:
 
     def thinking(self, text):
         return chain_of_think(text, self.chat)
+    
 
     def chat(self, text, pre_messages=[], uid=None, response_format=None):
 

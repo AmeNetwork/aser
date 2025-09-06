@@ -1,0 +1,12 @@
+workflow:
+  name: "workflow_1"
+  timeout: 0
+  steps:
+    - id: "step_1"
+      input: "who is 0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
+      output: "step_3"
+    - id: "step_2"
+      input: "write a content about ethereum"
+      output: "step_3"
+    - id: "step_3"
+      input: "send the content in the forecaster, max 100 words"
