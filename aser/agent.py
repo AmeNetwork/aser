@@ -9,29 +9,28 @@ class Agent:
     def __init__(self, **properties):
 
         self.name = properties["name"]
+        self.avatar = properties.get("avatar", None)
         self.model = properties["model"]
         self.description = properties.get("description", "")
         self.memory = properties.get("memory", None)
         self.knowledge = properties.get("knowledge", None)
-        self.tools_functions=[]
+        self.tools_functions = []
 
         if properties.get("tools"):
-            tools=Tools()
+            tools = Tools()
             tools.load_toolkits(properties.get("tools"))
-            
-            self.tools=tools
-            
+
+            self.tools = tools
+
             self.tools_functions.extend(tools.get_tools())
 
         else:
             self.tools = None
-     
 
         if properties.get("chat2web3"):
             self.chat2web3 = properties.get("chat2web3")
             self.tools_functions.extend(self.chat2web3.functions)
-      
-        
+
         else:
             self.chat2web3 = None
 
@@ -54,6 +53,7 @@ class Agent:
     def get_info(self):
         return {
             "name": self.name,
+            "avatar": self.avatar,
             "model": self.model,
             "description": self.description,
             "memory": self.memory,
@@ -67,9 +67,8 @@ class Agent:
 
     def thinking(self, text):
         return chain_of_think(text, self.chat)
-    
 
-    def chat(self, text, pre_messages=[], uid=None, response_format=None):
+    def chat(self, text, uid=None, pre_messages=[], response_format=None):
 
         try:
             start_time = int(time.time() * 1000)
@@ -143,8 +142,6 @@ class Agent:
 
                 function_rsult = None
 
-     
-
                 # call chat2web3
                 if self.chat2web3 != None and self.chat2web3.has(function.name):
 
@@ -152,20 +149,19 @@ class Agent:
 
                 # call mcp
                 if self.mcp != None:
-              
+
                     for mcp in self.mcp:
                         if mcp.has_tool(function.name):
                             function_rsult = mcp.call_tool(
                                 function.name, json.loads(function.arguments)
                             ).content
-                  
+
                             break
 
                 # call tools
 
-         
                 if self.tools != None and self.tools.has_tool(function.name):
-                  
+
                     toolkit_function = self.tools.get_function(function.name)
 
                     function_rsult = toolkit_function["function"](
