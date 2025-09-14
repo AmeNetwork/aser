@@ -18,7 +18,7 @@ def generate_image(prompt):
         "watermark_enabled": False,
     }
     headers = {
-        "Authorization": f"Bearer {os.getenv('BIG_MODEL')}",
+        "Authorization": f"Bearer {os.getenv('BIG_MODEL_API_KEY')}",
         "Content-Type": "application/json",
     }
 

@@ -72,7 +72,7 @@ Create an AI Agent with Trace [example](./examples/agent_trace.py)
 
 Create an AI Agent with Model Smart Contract Protocol [example](./examples/agent_mscp.py)
 
-Create an AI Agent Server [example](./examples/agent_server.py)
+Create an AI Agent Server [example](./examples/agent_api.py)
 
 Create an AI Agent with CLI [example](./examples/agent_cli.py)
 

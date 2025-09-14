@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aser"
-version = "0.1.3"
+version = "0.1.4"
 description = "An AI Agent"
 authors = [
     {name = "rickey", email = "hello_rickey@163.com"},

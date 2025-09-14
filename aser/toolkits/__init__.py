@@ -11,3 +11,4 @@ from .web3bio import web3bio
 from .exa import exa
 from .cogview3 import cogview3
 from .runware import runware
+from .v2ex import v2ex

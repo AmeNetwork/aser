@@ -4,8 +4,8 @@ from aser.agent import Agent
 
 tools=Tools()
 
-def get_btc_price():
-    return "10,0000"
+def get_btc_price(arguments):
+    return "100,000"
 
 get_btc_price_tool=tools.create(
     name="get_bitcoin_price",
