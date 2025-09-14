@@ -4,46 +4,35 @@ Aser is equipped with standardized AI capability middleware, such as knowledge, 
 
 ![](./examples/images/architecture.png)
 
-[Website](https://ame.network) | [Documentation](https://docs.ame.network/aser/overview) | [Get Support](https://t.me/hello_rickey) 
+[Website](https://ame.network) | [Documentation](https://docs.ame.network/aser/overview) | [Get Support](https://t.me/hello_rickey)  | [中文](./README_CN.md) 
 
 ## Installation
 
 **Install from pypi:**
 
 ```bash
-pip3 install aser
+pip install aser
 ```
 
-**Clone the repository:**
+**Or clone the repository:**
 
 ```bash
 git clone https://github.com/AmeNetwork/aser.git
 cd aser
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Set up environment variables
 
-Please refer to `.env.example` file, and create a `.env` file with your own settings. You can use two methods to import environment variables.
+Please refer to `.env.example` file, and create a `.env` file with your own settings. You don't need to configure all environment variables, just select the ones you use.  
 
-**Using python-dotenv:**
-
+**.env file example:**
 ```bash
-pip install python-dotenv
+#OPENAI
+OPENAI_API_BASE=https://openrouter.ai/api/v1
+OPENAI_KEY=<your openai key>
 ```
 
-Then add the following code to your python file.
-
-```python
-from dotenv import load_dotenv
-load_dotenv()
-```
-
-**Exporting all variables in the terminal:**
-
-```bash
-export $(grep -v '^#' .env | xargs)
-```
 ## Basic Usage
 ```python
 from aser.agent import Agent
@@ -85,4 +74,5 @@ Create an AI Agent with MCP [example](./examples/agent_mcp.py)
 Create an AI Agent with Workflow [example](./examples/agent_workflow.py)
 
 Create an AI Agent with UI [example](https://github.com/AmeNetwork/ame-ui)
+
 
