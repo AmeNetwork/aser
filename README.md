@@ -80,3 +80,9 @@ Create an AI Agent with Thinking [example](./examples/agent_thinking.py)
 
 Create an AI Agent with Swarms [example](./examples/aser_swarms.py)
 
+Create an AI Agent with MCP [example](./examples/agent_mcp.py)
+
+Create an AI Agent with Workflow [example](./examples/agent_workflow.py)
+
+Create an AI Agent with UI [example](https://github.com/AmeNetwork/ame-ui)
+

@@ -1,6 +1,6 @@
 import chromadb
+import os
 from aser.utils import get_chunks, get_file_data
-
 
 
 class Knowledge:
@@ -33,4 +33,23 @@ class Knowledge:
         ids = [str(i) for i in range(len(chunks))]
         self.upsert(ids, documents=chunks)
 
-
+    def knowledge_from_folder(
+        self, folder_path, suffix_list=[".mdx", ".md"], chunk_size=300
+    ):
+        contents = []
+        for root, dirs, files in os.walk(folder_path):
+            for file in files:
+                for suffix in suffix_list:
+                    if file.lower().endswith(suffix.lower()):
+                        file_path = os.path.join(root, file)
+                        try:
+                            with open(file_path, "r", encoding="utf-8") as f:
+                                contents.append(f.read())
+                        except Exception as e:
+                            print(f"Error reading file {file_path}: {e}")
+                            pass
+                        break
+        chunks = get_chunks("\n".join(contents), chunk_size)
+        ids = [str(i) for i in range(len(chunks))]
+        self.upsert(ids, documents=chunks)
+       
