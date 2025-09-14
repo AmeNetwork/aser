@@ -31,15 +31,31 @@ OPENAI_API_BASE=https://openrouter.ai/api/v1
 OPENAI_KEY=<你的 openai key>
 ```
 
-## 基本用法
+## 用法
 ```python
+# 基础
 from aser.agent import Agent
 agent=Agent(name="aser agent",model="gpt-4.1-mini")
 response=agent.chat("what's bitcoin?")
 print(response)
 ```
+```python
+# 完整配置
+aser = Agent(
+    name="aser",
+    model="gpt-4o-mini", 
+    tools=[web3bio, exa], 
+    knowledge=knowledge,
+    memory=memory,
+    chat2web3=[connector],
+    mcp=[price],
+    trace=trace
+)
+```
+
 
 ## 集成与示例
+如果您克隆了项目源代码，请在运行examples之前在根目录中运行`pip install -e .`以便 Python 从本地源代码中查找并导入 aser 模块。如果您通过 `pip install aser` 安装它，则可以直接运行examples。
 
 创建 Discord AI Agent [示例](./examples/agent_discord.py)
 

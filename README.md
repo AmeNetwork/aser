@@ -33,15 +33,31 @@ OPENAI_API_BASE=https://openrouter.ai/api/v1
 OPENAI_KEY=<your openai key>
 ```
 
-## Basic Usage
+## Usage
 ```python
+#Basic
 from aser.agent import Agent
 agent=Agent(name="aser agent",model="gpt-4.1-mini")
 response=agent.chat("what's bitcoin?")
 print(response)
 ```
+```python
+# Full configuration
+aser = Agent(
+    name="aser",
+    model="gpt-4o-mini", 
+    tools=[web3bio, exa], 
+    knowledge=knowledge,
+    memory=memory,
+    chat2web3=[connector],
+    mcp=[price],
+    trace=trace
+)
+```
 
 ## Integrations & Examples
+If you clone the project source code, before running the examples, please run `pip install -e .` in the root directory, which allows Python to find and import the aser module from the local source code. If you install it via `pip install aser` , you can run the examples directly.
+
 
 Create a Discord AI Agent [example](./examples/agent_discord.py)
 
