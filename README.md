@@ -58,12 +58,7 @@ aser = Agent(
 ## Integrations & Examples
 If you clone the project source code, before running the examples, please run `pip install -e .` in the root directory, which allows Python to find and import the aser module from the local source code. If you install it via `pip install aser` , you can run the examples directly.
 
-
-Create a Discord AI Agent [example](./examples/agent_discord.py)
-
-Create a Telegram AI Agent [example](./examples/agent_telegram.py)
-
-Create a Farcaster AI Agent [example](./examples/agent_farcaster.py)
+Create an AI Agent with Model [example](./examples/agent_model.py)
 
 Create an AI Agent with Memory [example](./examples/agent_memory.py)
 
@@ -83,12 +78,14 @@ Create an AI Agent with CLI [example](./examples/agent_cli.py)
 
 Create an AI Agent with Thinking [example](./examples/agent_thinking.py)
 
-Create an AI Agent with Swarms [example](./examples/aser_swarms.py)
-
 Create an AI Agent with MCP [example](./examples/agent_mcp.py)
 
 Create an AI Agent with Workflow [example](./examples/agent_workflow.py)
 
 Create an AI Agent with UI [example](https://github.com/AmeNetwork/ame-ui)
 
+Create a Discord AI Agent [example](./examples/agent_discord.py)
 
+Create a Telegram AI Agent [example](./examples/agent_telegram.py)
+
+Create a Farcaster AI Agent [example](./examples/agent_farcaster.py)
