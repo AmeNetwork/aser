@@ -1,8 +1,9 @@
 from openai import OpenAI
-from aser.utils import get_model_env, knowledge_to_prompt, chain_of_think
+from aser.utils import knowledge_to_prompt, chain_of_think
 from aser.tools import Tools
 import json
 import time
+import os
 
 
 class Agent:
@@ -11,6 +12,7 @@ class Agent:
         self.name = properties["name"]
         self.avatar = properties.get("avatar", None)
         self.model = properties["model"]
+        self.model_config = properties.get("model_config", None)
         self.description = properties.get("description", "")
         self.memory = properties.get("memory", None)
         self.knowledge = properties.get("knowledge", None)
@@ -48,7 +50,15 @@ class Agent:
         self.error = None
         self.tools_log = None
 
-        self.agent = OpenAI(**get_model_env(self.model))
+        self.model_config = properties.get(
+            "model_config",
+            {
+                "base_url": os.getenv("MODEL_BASE_URL"),
+                "api_key": os.getenv("MODEL_KEY"),
+            },
+        )
+
+        self.agent = OpenAI(**self.model_config)
 
     def get_info(self):
         return {

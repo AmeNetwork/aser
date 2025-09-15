@@ -28,9 +28,9 @@ Please refer to `.env.example` file, and create a `.env` file with your own sett
 
 **.env file example:**
 ```bash
-#OPENAI
-OPENAI_API_BASE=https://openrouter.ai/api/v1
-OPENAI_KEY=<your openai key>
+#MODEL
+MODEL_BASE_URL=https://openrouter.ai/api/v1
+MODEL_KEY=<your model key>
 ```
 
 ## Usage

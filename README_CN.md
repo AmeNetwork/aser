@@ -4,39 +4,41 @@ Aser 配备了标准化的 AI 能力中间件，如知识、记忆、追踪、�
 
 ![](./examples/images/architecture.png)
 
-[官方网站](https://ame.network) | [文档](https://docs.ame.network/aser/overview) | [获取支持](https://t.me/hello_rickey)
+[官网](https://ame.network) | [文档](https://docs.ame.network/aser/overview) | [获取支持](https://t.me/hello_rickey)  | [English](./README.md)
 
-## 安装方法
+## 安装
 
 **通过 pypi 安装：**
+
 ```bash
 pip install aser
 ```
 
 **或克隆仓库：**
+
 ```bash
 git clone https://github.com/AmeNetwork/aser.git
 cd aser
 pip install -r requirements.txt
 ```
 
-## 环境变量设置
+## 配置环境变量
 
-请参考 `.env.example` 文件，并根据自己的需求创建 `.env` 文件。无需配置所有环境变量，只需选择需要使用的部分。
+请参考 `.env.example` 文件，并根据您的设置创建 `.env` 文件。无需配置所有环境变量，只需选择您需要使用的部分。
 
 **.env 文件示例：**
 ```bash
-#OPENAI
-OPENAI_API_BASE=https://openrouter.ai/api/v1
-OPENAI_KEY=<你的 openai key>
+#MODEL
+MODEL_BASE_URL=https://openrouter.ai/api/v1
+MODEL_KEY=<你的模型密钥>
 ```
 
 ## 用法
 ```python
-# 基础
+# 基础用法
 from aser.agent import Agent
 agent=Agent(name="aser agent",model="gpt-4.1-mini")
-response=agent.chat("what's bitcoin?")
+response=agent.chat("什么是比特币？")
 print(response)
 ```
 ```python
@@ -53,38 +55,37 @@ aser = Agent(
 )
 ```
 
-
 ## 集成与示例
-如果您克隆了项目源代码，请在运行examples之前在根目录中运行`pip install -e .`以便 Python 从本地源代码中查找并导入 aser 模块。如果您通过 `pip install aser` 安装它，则可以直接运行examples。
+如果您克隆了项目源码，在运行示例前请在根目录执行 `pip install -e .`，这样 Python 能够从本地源码找到并导入 aser 模块。如果通过 `pip install aser` 安装，可直接运行示例。
+
+创建带自定义模型配置的 AI Agent [示例](./examples/agent_model.py)
+
+创建带记忆的 AI Agent [示例](./examples/agent_memory.py)
+
+创建带知识的 AI Agent [示例](./examples/agent_knowledge.py)
+
+创建带工具的 AI Agent [示例](./examples/agent_tools.py)
+
+创建带工具包的 AI Agent [示例](./examples/agent_toolkits.py)
+
+创建带追踪的 AI Agent [示例](./examples/agent_trace.py)
+
+创建带模型智能合约协议的 AI Agent [示例](./examples/agent_mscp.py)
+
+创建 AI Agent 服务器 [示例](./examples/agent_api.py)
+
+创建带命令行的 AI Agent [示例](./examples/agent_cli.py)
+
+创建带思考能力的 AI Agent [示例](./examples/agent_thinking.py)
+
+创建带 MCP 的 AI Agent [示例](./examples/agent_mcp.py)
+
+创建带工作流的 AI Agent [示例](./examples/agent_workflow.py)
+
+创建带 UI 的 AI Agent [示例](https://github.com/AmeNetwork/ame-ui)
 
 创建 Discord AI Agent [示例](./examples/agent_discord.py)
 
 创建 Telegram AI Agent [示例](./examples/agent_telegram.py)
 
 创建 Farcaster AI Agent [示例](./examples/agent_farcaster.py)
-
-创建具备记忆的 AI Agent [示例](./examples/agent_memory.py)
-
-创建具备知识的 AI Agent [示例](./examples/agent_knowledge.py)
-
-创建具备工具的 AI Agent [示例](./examples/agent_tools.py)
-
-创建具备工具包的 AI Agent [示例](./examples/agent_toolkits.py)
-
-创建具备追踪的 AI Agent [示例](./examples/agent_trace.py)
-
-创建具备模型智能合约协议的 AI Agent [示例](./examples/agent_mscp.py)
-
-创建 AI Agent 服务器 [示例](./examples/agent_api.py)
-
-创建具备命令行的 AI Agent [示例](./examples/agent_cli.py)
-
-创建具备思考能力的 AI Agent [示例](./examples/agent_thinking.py)
-
-创建具备群体协作的 AI Agent [示例](./examples/aser_swarms.py)
-
-创建具备 MCP 的 AI Agent [示例](./examples/agent_mcp.py)
-
-创建具备工作流的 AI Agent [示例](./examples/agent_workflow.py)
-
-创建具备 UI 的 AI Agent [示例](https://github.com/AmeNetwork/ame-ui)
