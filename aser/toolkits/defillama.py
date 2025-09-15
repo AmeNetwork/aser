@@ -1,9 +1,11 @@
 import requests
 import json
-
+from aser.tools import tool
 defillama_url="https://api.llama.fi/"
-def get_tvl(protocol):
-    
+
+@tool()
+def get_tvl(protocol:str):
+    """get tvl by protocol name, protocol is necessary"""
     response = requests.get(f"{defillama_url}tvl/{protocol}")
     
     if response.status_code == 200:
@@ -11,8 +13,9 @@ def get_tvl(protocol):
     else:
         return "Not found"
 
-def get_volume(protocol):
-
+@tool()
+def get_volume(protocol:str):
+    """get volume by protocol name, protocol is necessary"""
     response = requests.get(f"{defillama_url}summary/dexs/{protocol}?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true&dataType=dailyVolume")
 
     if response.status_code == 200:
@@ -33,39 +36,8 @@ def get_volume(protocol):
 
 
 defillama = [
-    {
-        "name": "get_tvl",
-        "description": "get tvl by protocol name",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "protocol": {
-                    "type": "string",
-                    "description": "protocol name",
-                }
-            },
-            "required": ["protocol"],
-        },
-        "function": get_tvl,
-        "extra_prompt": None,
-        "example":"get tvl of uniswap"
-    }, {
-        "name": "get_volume",
-        "description": "get volume by protocol name",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "protocol": {
-                    "type": "string",
-                    "description": "protocol name",
-                }
-            },
-            "required": ["protocol"],
-        },
-        "function": get_volume,
-        "extra_prompt": None,
-        "example":"get volume of uniswap"
-    }
+    get_tvl,
+    get_volume
 ]
 
 

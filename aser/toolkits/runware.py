@@ -2,10 +2,12 @@ import requests
 import os
 from dotenv import load_dotenv
 import uuid
+from aser.tools import tool
 load_dotenv()
 
-
-def generate_image(prompt):
+@tool()
+def runware(prompt:str):
+    """generate image by prompt"""
     url = "https://api.runware.ai/v1"
     headers = {
         "Content-Type": "application/json"
@@ -36,22 +38,3 @@ def generate_image(prompt):
     return image_url
 
 
-runware = [
-    {
-        "name": "generate_image",
-        "description": "when user want to generate image, use this tool",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "prompt": {
-                    "type": "string",
-                    "description": "prompt to generate image",
-                }
-            },
-            "required": ["prompt"],
-        },
-        "function": generate_image,
-        "extra_prompt": None,
-        "example": "generate image of a cat",
-    }
-]

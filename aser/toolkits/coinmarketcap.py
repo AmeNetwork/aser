@@ -1,10 +1,12 @@
 import requests
 import os
 from dotenv import load_dotenv
-
-load_dotenv()
-def get_cryptocurrency_price(symbol):
-
+from aser.tools import tool
+@tool()
+def coinmarketcap(symbol:str):
+    """
+    get cryptocurrency price
+    """
     symbol_upper=symbol.upper()
 
     url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
@@ -35,25 +37,6 @@ def get_cryptocurrency_price(symbol):
     except :
         return "Not Found"
 
-# price=get_cryptocurrency_price("bnb")
-# print(price)
 
-coinmarketcap = [
-    {
-        "name": "get_cryptocurrency_price",
-        "description": "This function is used to fetch real-time cryptocurrency prices. Use it when asked about current prices or market values of cryptocurrencies. Get the current price of a cryptocurrency by its token symbol. Supports major cryptocurrencies like BTC, ETH, USDT, etc.", 
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "symbol": {
-                    "type": "string",
-                    "description": "The cryptocurrency token symbol (e.g., BTC for Bitcoin, ETH for Ethereum)",
-                }
-            },
-            "required": ["symbol"],
-        },
-        "function": get_cryptocurrency_price,
-        "extra_prompt": None,
-        "example":"get price of bitcoin, btc price"
-    }
-]
+
+ 

@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+from aser.tools import tool
 
 load_dotenv()
 
@@ -8,7 +9,11 @@ load_dotenv()
 import requests
 
 
-def generate_image(prompt):
+@tool()
+def cogview3(prompt: str):
+    """
+    generate image with cogview3
+    """
     url = "https://open.bigmodel.cn/api/paas/v4/images/generations"
 
     payload = {
@@ -28,25 +33,3 @@ def generate_image(prompt):
     image_url = response_json["data"][0]["url"]
 
     return image_url
-
-
-
-cogview3 = [
-    {
-        "name": "generate_image",
-        "description": "when user want to generate image, use this tool",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "prompt": {
-                    "type": "string",
-                    "description": "prompt to generate image",
-                }
-            },
-            "required": ["prompt"],
-        },
-        "function": generate_image,
-        "extra_prompt": None,
-        "example": "generate image of a cat",
-    }
-]

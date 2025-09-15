@@ -1,11 +1,12 @@
 import requests
 import os
 from dotenv import load_dotenv
-
+from aser.tools import tool
 load_dotenv()
 
-
-def search(query):
+@tool()
+def exa(query:str):
+    """search for information"""
     url = "https://api.exa.ai/search"
     headers = {
         "x-api-key": os.getenv("EXA_API_KEY"),
@@ -22,22 +23,3 @@ def search(query):
     return content
 
 
-exa = [
-    {
-        "name": "search",
-        "description": "search for information",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "query": {
-                    "type": "string",
-                    "description": "query to search",
-                }
-            },
-            "required": ["query"],
-        },
-        "function": search,
-        "extra_prompt": None,
-        "example": "search for latest research in LLMs",
-    }
-]

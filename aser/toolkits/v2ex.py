@@ -2,9 +2,11 @@ import requests
 import os
 from dotenv import load_dotenv
 
+from aser.tools import tool
 
-def get_v2ex_latest():
-
+@tool()
+def v2ex():
+    """get latest topics on v2ex"""
     url = f"https://www.v2ex.com/api/topics/latest.json"
     response = requests.get(url)
 
@@ -19,13 +21,4 @@ def get_v2ex_latest():
         return None
 
 
-v2ex = [
-    {
-        "name": "get_v2ex_latest",
-        "description": "get latest topics on v2ex",
-        "parameters": None,
-        "function": get_v2ex_latest,
-        "extra_prompt": None,
-        "example": "get latest topics on v2ex",
-    }
-]
+

@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import html2text
 import re
+from aser.tools import tool
 def clear_up(markdown_content):
 
     cleaned_content = re.sub(r'^\s*\*.*$', '', markdown_content, flags=re.MULTILINE)
@@ -14,8 +15,9 @@ def clear_up(markdown_content):
     
     return cleaned_content
 
-def web_to_markdown(url):
-
+@tool()
+def web2markdown(url:str):
+    """get markdown content by web url"""
     response = requests.get(url)
     html_content = response.text
 
@@ -36,25 +38,5 @@ def web_to_markdown(url):
 
     return markdown_content_handled
 
-
-web2markdown = [
-    {
-        "name": "web_to_markdown",
-        "description": "get markdown content by web url",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "url": {
-                    "type": "string",
-                    "description": "web url",
-                }
-            },
-            "required": ["url"],
-        },
-        "function": web_to_markdown,
-        "extra_prompt": None,
-        "example": None,
-    }
-]
 
 

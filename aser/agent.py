@@ -19,12 +19,8 @@ class Agent:
         self.tools_functions = []
 
         if properties.get("tools"):
-            tools = Tools()
-            tools.load_toolkits(properties.get("tools"))
-
-            self.tools = tools
-
-            self.tools_functions.extend(tools.get_tools())
+            self.tools = Tools(properties.get("tools"))
+            self.tools_functions.extend(self.tools.get_tools())
 
         else:
             self.tools = None
@@ -177,14 +173,6 @@ class Agent:
                     function_rsult = toolkit_function["function"](
                         **json.loads(function.arguments)
                     )
-
-                    if toolkit_function["extra_prompt"]:
-                        messages.append(
-                            {
-                                "role": "assistant",
-                                "content": toolkit_function["extra_prompt"],
-                            }
-                        )
 
                 tool_message = {
                     "role": "tool",

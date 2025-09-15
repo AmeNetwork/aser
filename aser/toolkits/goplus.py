@@ -1,6 +1,6 @@
 import requests
 import json
-
+from aser.tools import tool
 chains = {
     "ETHEREUM": "1",
     "BSC": "56",
@@ -42,8 +42,9 @@ def convert_to_yes_no(value):
     else:
         return str(value)
 
-
-def check_contract(chain_name, contract_address):
+@tool()
+def goplus(chain_name:str, contract_address:str):
+    """get contract info by chain name and contract address"""
     chain_id = chains.get(chain_name.upper())
 
     base_url = "https://api.gopluslabs.io/api/v1/token_security"
@@ -101,32 +102,3 @@ def check_contract(chain_name, contract_address):
         return {"error": "Failed to retrieve data", "message": f""}
 
 
-# chain_name = "Ethereum"
-# contract_address = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
-
-# result=check_contract(chain_name, contract_address)
-# print(result)
-
-goplus = [
-    {
-        "name": "check_contract",
-        "description": "get contract info by chain name and contract address",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "chain_name": {
-                    "type": "string",
-                    "description": "chain name",
-                },
-                "contract_address": {
-                    "type": "string",
-                    "description": "contract address",
-                },
-            },
-            "required": ["chain_name", "contract_address"],
-        },
-        "function": check_contract,
-        "extra_prompt": None,
-        "example": "Ethereum 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-    }
-]
