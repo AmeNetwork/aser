@@ -8,6 +8,10 @@ def get_model_env(model_name):
     if 'gpt' in model_name:
         model_env["base_url"]=os.getenv("OPENAI_API_BASE")
         model_env["api_key"]=os.getenv("OPENAI_KEY")
+    
+    elif 'qwen' in model_name:
+        model_env["base_url"]=os.getenv("QWEN_API_BASE")
+        model_env["api_key"]=os.getenv("QWEN_KEY")
         
     elif 'claude' in model_name:
         model_env["base_url"]=os.getenv("ANTHROPIC_API_BASE")
