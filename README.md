@@ -55,14 +55,17 @@ aser = Agent(
 )
 ```
 
-## Integrations & Examples
+## Get Started
 If you clone the project source code, before running the examples, please run `pip install -e .` in the root directory, which allows Python to find and import the aser module from the local source code. If you install it via `pip install aser` , you can run the examples directly.
 
-Create an AI Agent with Model [example](./examples/agent_model.py)
+### Beginner: 
+Your First AI Agent [example](./examples/agent.py)
+
+Create an AI Agent with Model Config [example](./examples/agent_model.py)
 
 Create an AI Agent with Memory [example](./examples/agent_memory.py)
 
-Create an AI Agent with Knowledge [example](./examples/agent_knowledge.py)          
+Create an AI Agent with Knowledge [example](./examples/agent_knowledge.py)     
 
 Create an AI Agent with Tools [example](./examples/agent_tools.py)  
 
@@ -70,11 +73,17 @@ Create an AI Agent with Toolkits [example](./examples/agent_toolkits.py)
 
 Create an AI Agent with Trace [example](./examples/agent_trace.py)
 
-Create an AI Agent with Model Smart Contract Protocol [example](./examples/agent_mscp.py)
-
 Create an AI Agent Server [example](./examples/agent_api.py)
 
 Create an AI Agent with CLI [example](./examples/agent_cli.py)
+
+Create a Discord AI Agent [example](./examples/agent_discord.py)
+
+Create a Telegram AI Agent [example](./examples/agent_telegram.py)
+
+Create a Farcaster AI Agent [example](./examples/agent_farcaster.py)
+
+### Intermediate:
 
 Create an AI Agent with Thinking [example](./examples/agent_thinking.py)
 
@@ -84,8 +93,7 @@ Create an AI Agent with Workflow [example](./examples/agent_workflow.py)
 
 Create an AI Agent with UI [example](https://github.com/AmeNetwork/ame-ui)
 
-Create a Discord AI Agent [example](./examples/agent_discord.py)
 
-Create a Telegram AI Agent [example](./examples/agent_telegram.py)
+### Advanced:
 
-Create a Farcaster AI Agent [example](./examples/agent_farcaster.py)
+Create an AI Agent with Model Smart Contract Protocol [example](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol)

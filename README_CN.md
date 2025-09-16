@@ -22,9 +22,9 @@ cd aser
 pip install -r requirements.txt
 ```
 
-## 配置环境变量
+## 设置环境变量
 
-请参考 `.env.example` 文件，并根据您的设置创建 `.env` 文件。无需配置所有环境变量，只需选择您需要使用的部分。
+请参考 `.env.example` 文件，并根据自己的设置创建 `.env` 文件。无需配置所有环境变量，只需选择你需要使用的部分。
 
 **.env 文件示例：**
 ```bash
@@ -55,10 +55,13 @@ aser = Agent(
 )
 ```
 
-## 集成与示例
-如果您克隆了项目源码，在运行示例前请在根目录执行 `pip install -e .`，这样 Python 能够从本地源码找到并导入 aser 模块。如果通过 `pip install aser` 安装，可直接运行示例。
+## 快速开始
+如果你是克隆项目源码，在运行示例前请先在根目录执行 `pip install -e .`，这样 Python 能够从本地源码找到并导入 aser 模块。如果通过 `pip install aser` 安装，可直接运行示例。
 
-创建带自定义模型配置的 AI Agent [示例](./examples/agent_model.py)
+### 入门：
+你的第一个 AI Agent [示例](./examples/agent.py)
+
+创建带模型配置的 AI Agent [示例](./examples/agent_model.py)
 
 创建带记忆的 AI Agent [示例](./examples/agent_memory.py)
 
@@ -70,11 +73,17 @@ aser = Agent(
 
 创建带追踪的 AI Agent [示例](./examples/agent_trace.py)
 
-创建带模型智能合约协议的 AI Agent [示例](./examples/agent_mscp.py)
-
 创建 AI Agent 服务器 [示例](./examples/agent_api.py)
 
 创建带命令行的 AI Agent [示例](./examples/agent_cli.py)
+
+创建 Discord AI Agent [示例](./examples/agent_discord.py)
+
+创建 Telegram AI Agent [示例](./examples/agent_telegram.py)
+
+创建 Farcaster AI Agent [示例](./examples/agent_farcaster.py)
+
+### 进阶：
 
 创建带思考能力的 AI Agent [示例](./examples/agent_thinking.py)
 
@@ -84,8 +93,6 @@ aser = Agent(
 
 创建带 UI 的 AI Agent [示例](https://github.com/AmeNetwork/ame-ui)
 
-创建 Discord AI Agent [示例](./examples/agent_discord.py)
+### 高级：
 
-创建 Telegram AI Agent [示例](./examples/agent_telegram.py)
-
-创建 Farcaster AI Agent [示例](./examples/agent_farcaster.py)
+创建带模型智能合约协议的 AI Agent [示例](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol)
