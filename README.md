@@ -1,6 +1,6 @@
 # Aser
 
-Aser is equipped with standardized AI capability middleware, such as knowledge, memory, tracing, thinking, API interfaces, and social clients. By dynamically integrating Web3 toolkits, it helps developers quickly build and launch AI agents with native Web3 capabilities.
+Aser is equipped with standardized AI capability middleware, such as knowledge, memory, tracing, CoT, API interfaces, and social clients. By dynamically integrating Web3 toolkits, it helps developers quickly build and launch AI agents with native Web3 capabilities.
 
 ![](./examples/images/architecture.png)
 
@@ -85,13 +85,25 @@ Create a Farcaster AI Agent [example](./examples/agent_farcaster.py)
 
 ### Intermediate:
 
-Create an AI Agent with Thinking [example](./examples/agent_thinking.py)
+Create an AI Agent with Chain of Thought [example](./examples/agent_cot.py)
 
 Create an AI Agent with MCP [example](./examples/agent_mcp.py)
 
 Create an AI Agent with Workflow [example](./examples/agent_workflow.py)
 
 Create an AI Agent with UI [example](https://github.com/AmeNetwork/ame-ui)
+
+Evaluate an AI Agent [example](./examples/agent_evaluation.py)
+
+Router Multi-Agents [example](./examples/router_multi_agents.py)
+
+Sequential Multi-Agents [example](./examples/sequential_multi_agents.py)
+
+Parallel Multi-Agents [example](./examples/parallel_multi_agents.py)
+
+Reactive Multi-Agents [example](./examples/reactive_multi_agents.py)
+
+Hierarchical Multi-Agents [example](./examples/hierarchical_multi_agents.py)
 
 
 ### Advanced:

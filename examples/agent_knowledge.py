@@ -7,8 +7,8 @@ knowledge.knowledger_from_file("README.md")
 
 agent = Agent(
     name="aser agent",
-    description="aser agent",
     model="gpt-4.1-mini",
     knowledge=knowledge,
 )
 response = agent.chat("what is aser agent?")
+print(response)

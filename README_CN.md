@@ -1,6 +1,6 @@
 # Aser
 
-Aser 配备了标准化的 AI 能力中间件，如知识、记忆、追踪、思考、API 接口和社交客户端。通过动态集成 Web3 工具包，帮助开发者快速构建并发布具备原生 Web3 能力的 AI Agent。
+Aser 配备了标准化的 AI 能力中间件，如知识、记忆、追踪、链式思考（CoT）、API 接口和社交客户端。通过动态集成 Web3 工具包，帮助开发者快速构建并上线具备原生 Web3 能力的 AI Agent。
 
 ![](./examples/images/architecture.png)
 
@@ -22,7 +22,7 @@ cd aser
 pip install -r requirements.txt
 ```
 
-## 设置环境变量
+## 配置环境变量
 
 请参考 `.env.example` 文件，并根据自己的设置创建 `.env` 文件。无需配置所有环境变量，只需选择你需要使用的部分。
 
@@ -56,7 +56,7 @@ aser = Agent(
 ```
 
 ## 快速开始
-如果你是克隆项目源码，在运行示例前请先在根目录执行 `pip install -e .`，这样 Python 能够从本地源码找到并导入 aser 模块。如果通过 `pip install aser` 安装，可直接运行示例。
+如果你是克隆项目源码，在运行示例前，请在根目录执行 `pip install -e .`，这样 Python 能从本地源码找到并导入 aser 模块。如果通过 `pip install aser` 安装，可直接运行示例。
 
 ### 入门：
 你的第一个 AI Agent [示例](./examples/agent.py)
@@ -73,7 +73,7 @@ aser = Agent(
 
 创建带追踪的 AI Agent [示例](./examples/agent_trace.py)
 
-创建 AI Agent 服务器 [示例](./examples/agent_api.py)
+创建 AI Agent 服务端 [示例](./examples/agent_api.py)
 
 创建带命令行的 AI Agent [示例](./examples/agent_cli.py)
 
@@ -85,13 +85,25 @@ aser = Agent(
 
 ### 进阶：
 
-创建带思考能力的 AI Agent [示例](./examples/agent_thinking.py)
+创建带链式思考的 AI Agent [示例](./examples/agent_cot.py)
 
 创建带 MCP 的 AI Agent [示例](./examples/agent_mcp.py)
 
 创建带工作流的 AI Agent [示例](./examples/agent_workflow.py)
 
 创建带 UI 的 AI Agent [示例](https://github.com/AmeNetwork/ame-ui)
+
+评估 AI Agent [示例](./examples/agent_evaluation.py)
+
+路由多智能体 [示例](./examples/router_multi_agents.py)
+
+顺序多智能体 [示例](./examples/sequential_multi_agents.py)
+
+并行多智能体 [示例](./examples/parallel_multi_agents.py)
+
+响应式多智能体 [示例](./examples/reactive_multi_agents.py)
+
+分层多智能体 [示例](./examples/hierarchical_multi_agents.py)
 
 ### 高级：
 

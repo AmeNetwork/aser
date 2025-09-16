@@ -11,7 +11,10 @@ from .cli import Cli
 from .workflow import Workflow
 from .mcp import MCP
 from .team import Team
+from .evaluator import Evaluator
+from .cot import CoT
 from . import social,storage,utils
+
 
 
 

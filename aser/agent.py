@@ -1,5 +1,5 @@
 from openai import OpenAI
-from aser.utils import knowledge_to_prompt, chain_of_think
+from aser.utils import knowledge_to_prompt, handle_tool_function
 from aser.tools import Tools
 import json
 import time
@@ -71,9 +71,6 @@ class Agent:
             "trace": self.trace,
         }
 
-    def thinking(self, text):
-        return chain_of_think(text, self.chat)
-
     def chat(self, text, uid=None, pre_messages=[], response_format=None):
 
         try:
@@ -121,6 +118,7 @@ class Agent:
                 "max_tokens": self.max_token,
             }
 
+            # set tools
             if self.tools_functions:
                 params["tools"] = self.tools_functions
 
@@ -146,33 +144,9 @@ class Agent:
                     }
                 )
 
-                function_rsult = None
-
-                # call chat2web3
-                if self.chat2web3 != None and self.chat2web3.has(function.name):
-
-                    function_rsult = self.chat2web3.call(function)
-
-                # call mcp
-                if self.mcp != None:
-
-                    for mcp in self.mcp:
-                        if mcp.has_tool(function.name):
-                            function_rsult = mcp.call_tool(
-                                function.name, json.loads(function.arguments)
-                            ).content
-
-                            break
-
-                # call tools
-
-                if self.tools != None and self.tools.has_tool(function.name):
-
-                    toolkit_function = self.tools.get_function(function.name)
-
-                    function_rsult = toolkit_function["function"](
-                        **json.loads(function.arguments)
-                    )
+                function_rsult = handle_tool_function(
+                    function, self.chat2web3, self.mcp, self.tools
+                )
 
                 tool_message = {
                     "role": "tool",
