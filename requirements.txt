@@ -17,3 +17,4 @@ web3 >= 7.8.0
 semchunk >= 3.2.3
 fastmcp >= 2.12.0
 html2text >= 2025.4.15
+mscp >= 0.1.2
