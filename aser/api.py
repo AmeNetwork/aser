@@ -4,12 +4,6 @@ import uvicorn
 from pydantic import BaseModel
 import secrets
 
-
-# class ChatRequest(BaseModel):
-#     text: str
-#     uid: str = None
-
-
 class API:
     def __init__(self, agent, version="v1", allow_origins=["*"], verify=None):
         self.app = FastAPI()

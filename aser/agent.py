@@ -1,5 +1,5 @@
 from openai import OpenAI
-from aser.utils import knowledge_to_prompt, handle_tool_function
+from aser.utils import knowledge_to_prompt, handle_tool_function,safe_serialize
 from aser.tools import Tools
 import json
 import time
@@ -27,6 +27,9 @@ class Agent:
 
         if properties.get("chat2web3"):
             self.chat2web3 = properties.get("chat2web3")
+
+            print(self.chat2web3)
+            
             self.tools_functions.extend(self.chat2web3.functions)
 
         else:
@@ -62,13 +65,13 @@ class Agent:
             "avatar": self.avatar,
             "model": self.model,
             "description": self.description,
-            "memory": self.memory,
-            "knowledge": self.knowledge,
-            "tools": self.tools,
-            "chat2web3": self.chat2web3,
+            "memory": safe_serialize(self.memory),
+            "knowledge": safe_serialize(self.knowledge),
+            "tools": safe_serialize(self.tools.functions) if self.tools else None,
+            "chat2web3": safe_serialize(self.chat2web3.functions) if self.chat2web3 else None,
             "max_completion_tokens": self.max_completion_tokens,
             "max_token": self.max_token,
-            "trace": self.trace,
+            "trace": safe_serialize(self.trace)
         }
 
     def chat(self, text, uid=None, pre_messages=[], response_format=None):
