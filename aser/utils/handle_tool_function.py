@@ -7,9 +7,9 @@ def handle_tool_function(function, chat2web3, mcp, tools):
         function_rsult = chat2web3.call(function)
 
     if mcp != None:
-        for mcp in mcp:
-            if mcp.has_tool(function.name):
-                function_rsult = mcp.call_tool(
+        for mcp_item in mcp:
+            if mcp_item.has_tool(function.name):
+                function_rsult = mcp_item.call_tool(
                     function.name, json.loads(function.arguments)
                 ).content
                 break

@@ -34,10 +34,8 @@ dependencies = [
     "mastodon.py >= 2.0.1",
     "atproto >=0.0.59",
     "rich >= 13.9.4",
-    "bs4 >=0.0.2",
-    "html2text >= 2025.4.15",
     "semchunk >= 3.2.3", 
-    "fastmcp >= 2.12.0",
+    "fastmcp >= 2.12.3",
     "mscp >= 0.1.2"
 ]
 

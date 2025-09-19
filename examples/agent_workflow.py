@@ -5,7 +5,6 @@ workflow_agent=Agent(
     model="gpt-4.1-mini",
     tools=[web3bio,cast]
 )
-
 post_caster_workflow=Workflow(workflow_agent,"examples/workflow.yaml")
 post_caster_workflow.start()
 

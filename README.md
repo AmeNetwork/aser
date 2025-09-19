@@ -1,10 +1,10 @@
 # Aser
 
-Aser is equipped with standardized AI capability middleware, such as memory, RAG, MCP, CoT, API, and social clients. By dynamically integrating toolkits, it helps developers quickly build and launch AI agents.
+Aser is a minimalist, modular, and versatile AI agent framework. You can assemble an agent with just a few lines of code.
 
 ![](./examples/images/architecture.png)
 
-[Website](https://ame.network) | [Documentation](https://docs.ame.network/aser/overview) | [Get Support](https://t.me/hello_rickey)  | [中文](./README_CN.md) 
+[Website](https://ame.network) | [Documentation](https://docs.ame.network/aser/overview) | [Get Support](https://t.me/hello_rickey) | [中文](./README_CN.md)
 
 ## Installation
 
@@ -24,16 +24,18 @@ pip install -r requirements.txt
 
 ## Set up environment variables
 
-Please refer to `.env.example` file, and create a `.env` file with your own settings. You don't need to configure all environment variables, just select the ones you use.  
+Please refer to `.env.example` file, and create a `.env` file with your own settings. You don't need to configure all environment variables, just select the ones you use.
 
 **.env file example:**
+
 ```bash
 #MODEL
-MODEL_BASE_URL=https://openrouter.ai/api/v1
+MODEL_BASE_URL=<your model base url>
 MODEL_KEY=<your model key>
 ```
 
 ## Usage
+
 ```python
 #Basic
 from aser.agent import Agent
@@ -41,12 +43,13 @@ agent=Agent(name="aser agent",model="gpt-4.1-mini")
 response=agent.chat("what's bitcoin?")
 print(response)
 ```
+
 ```python
 # Full configuration
 aser = Agent(
     name="aser",
-    model="gpt-4o-mini", 
-    tools=[web3bio, exa], 
+    model="gpt-4o-mini",
+    tools=[web3bio, exa],
     knowledge=knowledge,
     memory=memory,
     chat2web3=[connector],
@@ -56,56 +59,39 @@ aser = Agent(
 ```
 
 ## Get Started
+
 If you clone the project source code, before running the examples, please run `pip install -e .` in the root directory, which allows Python to find and import the aser module from the local source code. If you install it via `pip install aser` , you can run the examples directly.
 
-### Beginner: 
-Your First AI Agent [example](./examples/agent.py)
+### Beginner:
 
-Create an AI Agent with Model Config [example](./examples/agent_model.py)
-
-Create an AI Agent with Memory [example](./examples/agent_memory.py)
-
-Create an AI Agent with Knowledge [example](./examples/agent_knowledge.py)     
-
-Create an AI Agent with Tools [example](./examples/agent_tools.py)  
-
-Create an AI Agent with Toolkits [example](./examples/agent_toolkits.py)
-
-Create an AI Agent with Trace [example](./examples/agent_trace.py)
-
-Create an AI Agent Server [example](./examples/agent_api.py)
-
-Create an AI Agent with CLI [example](./examples/agent_cli.py)
-
-Create a Discord AI Agent [example](./examples/agent_discord.py)
-
-Create a Telegram AI Agent [example](./examples/agent_telegram.py)
-
-Create a Farcaster AI Agent [example](./examples/agent_farcaster.py)
+- [Aser Agent](./examples/agent.py): Your First AI Agent
+- [Model Config](./examples/agent_model.py): Customize the LLM configuration
+- [Memory](./examples/agent_memory.py): Build an agent with memory storage
+- [RAG](./examples/agent_knowledge.py): Build an agent with knowledge retrieval
+- [Tools](./examples/agent_tools.py): Build an agent with tools
+- [Toolkits](./examples/agent_toolkits.py): Use built-in toolkits
+- [Trace](./examples/agent_trace.py): Build an agent with tracing
+- [API](./examples/agent_api.py): Build an agent with API server
+- [CLI](./examples/agent_cli.py): Interact with the agent using the CLI
+- [Discord](./examples/agent_discord.py): Build an agent with Discord client
+- [Telegram](./examples/agent_telegram.py): Build an agent with Telegram client
+- [Farcaster](./examples/agent_farcaster.py): Build an agent with Farcaster client
 
 ### Intermediate:
 
-Create an AI Agent with Chain of Thought [example](./examples/agent_cot.py)
-
-Create an AI Agent with MCP [example](./examples/agent_mcp.py)
-
-Create an AI Agent with Workflow [example](./examples/agent_workflow.py)
-
-Create an AI Agent with UI [example](https://github.com/AmeNetwork/ame-ui)
-
-Evaluate an AI Agent [example](./examples/agent_evaluation.py)
-
-Router Multi-Agents [example](./examples/router_multi_agent.py)
-
-Sequential Multi-Agents [example](./examples/sequential_multi_agent.py)
-
-Parallel Multi-Agents [example](./examples/parallel_multi_agent.py)
-
-Reactive Multi-Agents [example](./examples/reactive_multi_agent.py)
-
-Hierarchical Multi-Agents [example](./examples/hierarchical_multi_agent.py)
-
+- [CoT](./examples/agent_cot.py): Chain of Thought
+- [MCP](./examples/agent_mcp.py): Model Context Protocol 
+- [Workflow](./examples/agent_workflow.py): Custom Agent Workflows
+- [Evaluation](./examples/agent_evaluation.py): Evaluate an AI Agent
+- [Router Multi-Agent](./examples/router_multi_agent.py): Multiple agents distribute tasks based on routing
+- [Sequential Multi-Agent](./examples/sequential_multi_agent.py): Multiple agents work sequentially
+- [Parallel Multi-Agent](./examples/parallel_multi_agent.py): Multiple agents work simultaneously
+- [Reactive Multi-Agent](./examples/reactive_multi_agent.py): Multiple agents respond to changes
+- [Hierarchical Multi-Agent](./examples/hierarchical_multi_agent.py): Multiple agents work at different levels
+- [Agent UI](https://github.com/AmeNetwork/ame-ui): Interact with the agent through the UI
 
 ### Advanced:
 
-Create an AI Agent with Model Smart Contract Protocol [example](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol)
+- [MSCP](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol): Model Smart Contract Protocol
+- [A2Aser](./examples/a2a.py): Integrate Google Agent2Agent (A2A) Protocol
+- [A2A Client](./examples/a2a_client.py): Agent to Agent Client

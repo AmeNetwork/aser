@@ -27,8 +27,6 @@ class Agent:
 
         if properties.get("chat2web3"):
             self.chat2web3 = properties.get("chat2web3")
-
-            print(self.chat2web3)
             
             self.tools_functions.extend(self.chat2web3.functions)
 
@@ -69,9 +67,11 @@ class Agent:
             "knowledge": safe_serialize(self.knowledge),
             "tools": safe_serialize(self.tools.functions) if self.tools else None,
             "chat2web3": safe_serialize(self.chat2web3.functions) if self.chat2web3 else None,
+            "mcp": safe_serialize(self.mcp) if self.mcp else None,
             "max_completion_tokens": self.max_completion_tokens,
             "max_token": self.max_token,
-            "trace": safe_serialize(self.trace)
+            "trace": safe_serialize(self.trace),
+            "tools_functions": self.tools_functions ,
         }
 
     def chat(self, text, uid=None, pre_messages=[], response_format=None):
@@ -134,6 +134,8 @@ class Agent:
             else:
                 completion = self.agent.chat.completions.create(**params)
 
+       
+
             function_message = completion.choices[0].message
 
             if function_message.tool_calls:
@@ -160,7 +162,7 @@ class Agent:
                 messages.append(tool_message)
 
                 params["messages"] = messages
-
+            
                 tool_response = self.agent.chat.completions.create(**params)
 
                 return_message = {
