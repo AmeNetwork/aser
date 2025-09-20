@@ -93,5 +93,5 @@ If you clone the project source code, before running the examples, please run `p
 ### Advanced:
 
 - [MSCP](https://github.com/AmeNetwork/Model-Smart-Contract-Protocol): Model Smart Contract Protocol
-- [A2Aser](./examples/a2a.py): Integrate Google Agent2Agent (A2A) Protocol
+- [A2Aser](./examples/a2aser.py): Integrate Google Agent2Agent (A2A) Protocol
 - [A2A Client](./examples/a2a_client.py): Agent to Agent Client
