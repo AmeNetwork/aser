@@ -10,14 +10,12 @@ try:
     from a2a.types import (
         AgentCapabilities,
         AgentCard,
-        AgentSkill,
+        AgentSkill
     )
 except ImportError:
     raise ImportError(
         "you need to install a2a-sdk, please run `pip install a2a-sdk`"
     )
-
-from aser.agent import Agent
 
 
 class A2Aser:
@@ -27,9 +25,12 @@ class A2Aser:
                  version="1.0.0",
                  default_input_modes=['text'],
                  default_output_modes=['text'],
-                 capabilities=AgentCapabilities(streaming=True),
+                 capabilities = AgentCapabilities(streaming=True),
+                 extensions=None,
                  extra_skills_info=[]
                  ):
+        self.url=url
+        self.agent=agent
         agent_info = agent.get_info()
         skills = []
         for index, tool in enumerate(agent_info["tools_functions"]):
@@ -42,6 +43,9 @@ class A2Aser:
             )
             skills.append(skill)
 
+        if extensions:
+            capabilities.extensions=extensions
+
         self.agent_card = AgentCard(
             name=agent_info["name"],
             description=agent_info["description"],
@@ -50,10 +54,14 @@ class A2Aser:
             default_input_modes=default_input_modes,
             default_output_modes=default_output_modes,
             capabilities=capabilities,
-            skills=skills)
+            skills=skills
+        )
 
+
+
+    def run(self):
         request_handler = DefaultRequestHandler(
-            agent_executor=A2AserAgentExecutor(agent),
+            agent_executor=A2AserAgentExecutor(self.agent),
             task_store=InMemoryTaskStore(),
         )
 
@@ -62,7 +70,7 @@ class A2Aser:
             http_handler=request_handler
         )
 
-        parsed = urlparse(url)
+        parsed = urlparse(self.url)
         host = parsed.hostname
         port = parsed.port
         uvicorn.run(server.build(), host=host, port=port)

@@ -16,5 +16,5 @@ agent = Agent(
 
 a2aser = A2Aser(agent)
 
-
+a2aser.run()
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aser"
-version = "0.1.7"
+version = "0.1.8"
 description = "An AI Agent"
 authors = [
     {name = "rickey", email = "hello_rickey@163.com"},
@@ -36,7 +36,8 @@ dependencies = [
     "rich >= 13.9.4",
     "semchunk >= 3.2.3", 
     "fastmcp >= 2.12.3",
-    "mscp >= 0.1.2"
+    "mscp >= 0.1.4",
+    "a2a-sdk>= 0.3.6" 
 ]
 
 [project.urls]
