@@ -81,6 +81,7 @@ If you clone the project source code, before running the examples, please run `p
 
 - [CoT](./examples/agent_cot.py): Chain of Thought
 - [MCP](./examples/agent_mcp.py): Model Context Protocol 
+- [Text2SQL](./examples/agent_text2sql.py): Build an agent with Text2SQL
 - [Workflow](./examples/agent_workflow.py): Custom Agent Workflows
 - [Evaluation](./examples/agent_evaluation.py): Evaluate an AI Agent
 - [Router Multi-Agent](./examples/router_multi_agent.py): Multiple agents distribute tasks based on routing

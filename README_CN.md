@@ -81,6 +81,7 @@ aser = Agent(
 
 - [CoT](./examples/agent_cot.py)：思维链
 - [MCP](./examples/agent_mcp.py)：模型上下文协议
+- [Text2SQL](./examples/agent_text2sql.py): 构建一个带有Text2SQL的代理
 - [Workflow](./examples/agent_workflow.py)：自定义智能体工作流
 - [Evaluation](./examples/agent_evaluation.py)：评估 AI Agent
 - [Router Multi-Agent](./examples/router_multi_agent.py)：多智能体根据路由分配任务

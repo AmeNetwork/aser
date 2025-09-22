@@ -13,6 +13,7 @@ from .team import Team
 from .evaluator import Evaluator
 from .cot import CoT
 from .a2aser import A2Aser
+from .text2sql import Text2SQL
 from . import social,storage,utils
 
 
