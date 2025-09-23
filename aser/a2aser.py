@@ -69,11 +69,12 @@ class A2Aser:
             agent_card=self.agent_card,
             http_handler=request_handler
         )
-
+        print(f"agent card: {self.url}.well-known/agent-card.json")
         parsed = urlparse(self.url)
         host = parsed.hostname
         port = parsed.port
         uvicorn.run(server.build(), host=host, port=port)
+
 
 
 class A2AserAgentExecutor(AgentExecutor):

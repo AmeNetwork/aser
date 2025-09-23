@@ -100,3 +100,9 @@ If you clone the project source code, before running the examples, please run `p
 ### Experiments:
 - [ERC8004 Server Agent](./examples/a2a_erc8004_server.py): Server Agent Offers services and executes tasks
 - [ERC8004 Identity](./examples/agent_mscp_erc8004.py): Identity registration is performed using the MSCP ERC8004 Connector
+
+## License
+Aser is open-source and licensed under the MIT License.
+
+
+![](./examples/images/star.png)

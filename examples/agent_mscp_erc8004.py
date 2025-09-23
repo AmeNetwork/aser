@@ -13,7 +13,7 @@ chat2web3 = Chat2Web3([identity_connector])
 agent = Agent(name="chat2web3", model="gpt-4o", chat2web3=chat2web3)
 response = agent.chat(
     f"""
-    create a newAgent
+    create a erc8004 newAgent
     agentDomain: http://www.ame.network
     agentAddress: {account.address}"""
 )

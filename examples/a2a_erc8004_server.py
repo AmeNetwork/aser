@@ -22,7 +22,7 @@ agent = Agent(
 identity_extension = create_identity_extension(
     registrations=[
         {
-            "agentId": 12345,
+            "agentId": 1,
             "agentAddress": f"eip155:1:{Account.from_key(os.getenv("EVM_PRIVATE_KEY")).address}",
             "signature": "0x"
         }
