@@ -1,4 +1,7 @@
-"""https://developers.giphy.com/"""
+"""
+Learn more about Giphy API
+https://developers.giphy.com/
+"""
 import os
 from dotenv import load_dotenv
 import json

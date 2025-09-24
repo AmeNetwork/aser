@@ -15,7 +15,7 @@ def runware(prompt:str):
     data = [
         {
             "taskType": "authentication",
-            "apiKey": os.getenv("RUNWARE_KEY")
+            "apiKey": os.getenv("RUNWARE_API_KEY")
         },
         {
             "taskType": "imageInference",
@@ -35,6 +35,6 @@ def runware(prompt:str):
     response = requests.post(url, headers=headers, json=data)
     response_json=response.json()
     image_url=response_json["data"][0]["imageURL"]
-    return image_url
+    return f"image url:{image_url}"
 
 

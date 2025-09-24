@@ -12,3 +12,4 @@ from .cogview3 import cogview3
 from .runware import runware
 from .v2ex import v2ex
 from .giphy import giphy
+from .lighthouse import lighthouse

@@ -6,11 +6,8 @@ class Step:
     def __init__(self, step):
         self.id = step["id"]
         self.input = step["input"]
-        self.output = step.get("output", None)
-        self.result = None
+        self.output = step.get("output", [])
 
-    def set_result(self, result):
-        self.result = result
 
 
 class Workflow:
@@ -22,22 +19,27 @@ class Workflow:
             self.timeout = workflow_yaml["workflow"]["timeout"]
             self.steps = []
             self.step_ouput_map = {}
+
             for step in workflow_yaml["workflow"]["steps"]:
                 self.steps.append(Step(step))
 
     def start_once(self):
         for step in self.steps:
+          
             if self.step_ouput_map.get(step.id):
                 for output in self.step_ouput_map[step.id]:
                     step.input = f"{step.input}\n{output}"
             result = self.agent.chat(step.input)
-            step.set_result(result)
             if step.output:
-                if step.output not in self.step_ouput_map:
-                    self.step_ouput_map[step.output] = []
-                self.step_ouput_map[step.output].append(result)
+                step_output= step.output           
+                if not isinstance(step_output, (list, tuple)):
+                    step_output = [step_output]
+                for output_item in step_output:
+                    if output_item not in self.step_ouput_map:
+                        self.step_ouput_map[output_item] = []
+                    self.step_ouput_map[output_item].append(result)
             else:
-                print(result)
+                return result
 
     def start(self):
         if self.timeout != 0:
