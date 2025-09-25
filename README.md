@@ -4,7 +4,7 @@ Aser is a minimalist, modular, and versatile AI agent framework. You can assembl
 
 ![](./examples/images/architecture.png)
 
-[Website](https://ame.network) | [Documentation](https://docs.ame.network/aser/overview) | [Get Support](https://t.me/hello_rickey) | [中文](./README_CN.md)
+[Twitter](https://x.com/Web3Rickey) | [Documentation](https://docs.ame.network/aser/overview) | [Get Support](https://t.me/hello_rickey) | [中文](./README_CN.md)
 
 ## Installation
 
