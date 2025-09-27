@@ -32,4 +32,6 @@ def cogview3(prompt: str):
     response_json = response.json()
     image_url = response_json["data"][0]["url"]
 
+
+
     return image_url

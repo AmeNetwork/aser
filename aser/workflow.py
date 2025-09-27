@@ -29,6 +29,7 @@ class Workflow:
             if self.step_ouput_map.get(step.id):
                 for output in self.step_ouput_map[step.id]:
                     step.input = f"{step.input}\n{output}"
+                    print(f"step {step.id} input: {step.input}")
             result = self.agent.chat(step.input)
             if step.output:
                 step_output= step.output           
