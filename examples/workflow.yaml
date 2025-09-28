@@ -10,3 +10,4 @@ workflow:
       output: "step_3"
     - id: "step_3"
       input: "send the content in the forecaster, max 100 words"
+      output: "done"

@@ -24,14 +24,15 @@ class Workflow:
                 self.steps.append(Step(step))
 
     def start_once(self):
+
         for step in self.steps:
           
             if self.step_ouput_map.get(step.id):
                 for output in self.step_ouput_map[step.id]:
                     step.input = f"{step.input}\n{output}"
-                    print(f"step {step.id} input: {step.input}")
             result = self.agent.chat(step.input)
-            if step.output:
+       
+            if step.output or step.output != "done":
                 step_output= step.output           
                 if not isinstance(step_output, (list, tuple)):
                     step_output = [step_output]
@@ -39,8 +40,7 @@ class Workflow:
                     if output_item not in self.step_ouput_map:
                         self.step_ouput_map[output_item] = []
                     self.step_ouput_map[output_item].append(result)
-            else:
-                return result
+        return result
 
     def start(self):
         if self.timeout != 0:
