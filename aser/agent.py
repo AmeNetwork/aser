@@ -138,6 +138,8 @@ class Agent:
 
             function_message = completion.choices[0].message
 
+
+
             if function_message.tool_calls:
 
                 function = function_message.tool_calls[0].function

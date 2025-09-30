@@ -5,7 +5,7 @@ class Tools:
     def __init__(self, toolkits):
         self.tools = []
         self.functions = []
-        self.load_toolkits(toolkits)
+   
 
     def get_tool(self, tool_name):
         return [tool for tool in self.tools if tool["function"]["name"] == tool_name][0]
@@ -24,40 +24,6 @@ class Tools:
                 is_tool = True
                 break
         return is_tool
-
-    def load_toolkits(self, toolkits):
-
-        for toolkit in toolkits:
-            if isinstance(toolkit, list):
-                for tool in toolkit:
-                    self.tools.append(
-                        {
-                            "type": "function",
-                            "function": {
-                                "name": tool["name"],
-                                "description": tool["description"],
-                                "parameters": tool["parameters"],
-                            },
-                        }
-                    )
-                    self.functions.append(
-                        {"name": tool["name"], "function": tool["function"]}
-                    )
-            else:
-
-                self.tools.append(
-                    {
-                        "type": "function",
-                        "function": {
-                            "name": toolkit["name"],
-                            "description": toolkit["description"],
-                            "parameters": toolkit["parameters"],
-                        },
-                    }
-                )
-                self.functions.append(
-                    {"name": toolkit["name"], "function": toolkit["function"]}
-                )
 
     @staticmethod
     def tool(name=None, description=None):

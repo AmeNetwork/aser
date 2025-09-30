@@ -96,10 +96,12 @@ If you clone the project source code, before running the examples, please run `p
 - [MSCP](./examples/agent_mcp.py): Model Smart Contract Protocol
 - [A2Aser](./examples/a2a_server.py): Integrate Google Agent2Agent (A2A) Protocol
 - [A2A Client](./examples/a2a_client.py): Agent to Agent Client
+- [Self-Coding Tool](./examples/self_coding_tool.py): Agent can self-code to build tools
 
 ### Experiments:
 - [ERC8004 Server Agent](./examples/a2a_erc8004_server.py): Server Agent Offers services and executes tasks
 - [ERC8004 Identity](./examples/agent_mscp_erc8004.py): Identity registration is performed using the MSCP ERC8004 Connector
+
 
 ## License
 Aser is open-source and licensed under the MIT License.
