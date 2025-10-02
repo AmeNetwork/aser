@@ -19,6 +19,7 @@ class Agent:
         self.tools_functions = []
 
         if properties.get("tools"):
+            
             self.tools = Tools(properties.get("tools"))
             self.tools_functions.extend(self.tools.get_tools())
 

@@ -7,19 +7,20 @@ from aser.agent import Agent
 
 
 # decorator
-@tool(description="this function is used to get btc price")
+@tool
 def get_btc_price():
+    """this function is used to get btc price"""
     return "100,000"
 
 
-@tool()
-def get_user_age(coin_name: str):
-    """this function is used to get coin price"""
-    if coin_name == "alice":
+@tool
+def get_user_age(user_name: str):
+    """this function is used to get user age"""
+    if user_name == "alice":
         return "18"
-    elif coin_name == "bob":
+    elif user_name == "bob":
         return "20"
-    return f"user {coin_name} age is not found"
+    return f"user {user_name} age is not found"
 
 
 #dict
