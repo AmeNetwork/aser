@@ -14,3 +14,4 @@ from .v2ex import v2ex
 from .giphy import giphy
 from .lighthouse import lighthouse
 from .recall import recall
+from .gopher import gopher
