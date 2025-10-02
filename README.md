@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/amenetwork-aser-badge.png)](https://mseep.ai/app/amenetwork-aser)
+
 # Aser
 
 Aser is a minimalist, modular, and versatile AI agent framework. You can assemble an agent with just a few lines of code.
