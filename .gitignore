@@ -182,3 +182,5 @@ data/*
 
 # Local Test
 localtest
+
+.vscode
