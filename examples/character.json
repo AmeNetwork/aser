@@ -1,0 +1,43 @@
+{
+  "name": "Alice",
+  "age": 30,
+  "gender": "female",
+  "mbti": "ISTJ",
+  "location": "New York",
+  "like": ["books", "movies"],
+  "dislike": ["sports"],
+  "occupation":{
+      "title": "teacher",
+      "company": "ABC Inc.",
+      "salary": "$50000/year"
+  },
+  "education":{
+      "degree": "Bachelor of Science",
+      "major": "Computer Science",
+      "university": "XYZ University"
+  },
+  "relationships": {
+    "friend": [
+      {
+        "name": "Bob",
+        "age": 19,
+        "gender": "male"
+      }
+    ],
+    "spouse": {
+      "name": "Charlie",
+      "age": 30,
+      "gender": "male"
+    },
+    "children": [
+      {
+        "name": "David",
+        "age": 5,
+        "gender": "male"
+      }
+    ]
+  },
+  "speech_style": "humorous",
+  "emotion": "happy",
+  "emotion_intensity": 0.8
+}

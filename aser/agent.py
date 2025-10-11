@@ -11,12 +11,14 @@ class Agent:
 
         self.name = properties["name"]
         self.avatar = properties.get("avatar", None)
+        self.character = properties.get("character", None)
         self.model = properties["model"]
         self.model_config = properties.get("model_config", None)
         self.description = properties.get("description", "")
         self.memory = properties.get("memory", None)
         self.knowledge = properties.get("knowledge", None)
         self.tools_functions = []
+        
 
         if properties.get("tools"):
             
@@ -62,6 +64,7 @@ class Agent:
         return {
             "name": self.name,
             "avatar": self.avatar,
+            "character": self.character,
             "model": self.model,
             "description": self.description,
             "memory": safe_serialize(self.memory),
@@ -80,6 +83,8 @@ class Agent:
         try:
             start_time = int(time.time() * 1000)
             system_message = {"role": "system", "content": self.description}
+            if self.character:
+                system_message["content"] += f"\n{self.character}"
             messages = [system_message]
 
             # set knowledge

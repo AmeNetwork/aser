@@ -1,20 +1,20 @@
 # Aser
 
-Aser 是一个极简、模块化且多功能的 AI Agent 框架。你只需几行代码即可组装一个智能体。
+Aser是一个极简、模块化且多功能的AI代理框架。您只需几行代码即可组装一个代理。
 
 ![](./examples/images/architecture.png)
 
-[推特](https://x.com/Web3Rickey) | [文档](https://docs.ame.network/aser/overview) | [获取支持](https://t.me/hello_rickey) | [English](./README.md)
+[Twitter](https://x.com/Web3Rickey) | [文档](https://docs.ame.network/aser/overview) | [获取支持](https://t.me/hello_rickey) | [English](./README.md)
 
 ## 安装
 
-**通过 pypi 安装：**
+**从pypi安装:**
 
 ```bash
 pip install aser
 ```
 
-**或克隆仓库：**
+**或克隆仓库:**
 
 ```bash
 git clone https://github.com/AmeNetwork/aser.git
@@ -24,22 +24,22 @@ pip install -r requirements.txt
 
 ## 设置环境变量
 
-请参考 `.env.example` 文件，并根据你的配置创建 `.env` 文件。无需配置所有环境变量，只需选择你需要的即可。
+请参考`.env.example`文件，创建您自己的`.env`文件。您不需要配置所有环境变量，只需选择您使用的那些。
 
-**.env 文件示例：**
+**.env文件示例:**
 
 ```bash
 #MODEL
-MODEL_BASE_URL=<你的模型基础地址>
-MODEL_KEY=<你的模型密钥>
+MODEL_BASE_URL=<您的模型基础URL>
+MODEL_KEY=<您的模型密钥>
 ```
 
-## 用法示例
+## 使用
 
 ```python
-# 基础用法
+#基础
 from aser.agent import Agent
-agent=Agent(name="aser agent",model="gpt-4.1-mini")
+agent=Agent(name="aser代理",model="gpt-4.1-mini")
 response=agent.chat("什么是比特币？")
 print(response)
 ```
@@ -60,48 +60,52 @@ aser = Agent(
 
 ## 快速开始
 
-如果你是通过克隆源码安装，在运行示例前请在根目录执行 `pip install -e .`，这样 Python 能够从本地源码导入 aser 模块。如果通过 `pip install aser` 安装，可直接运行示例。
+如果您克隆了项目源代码，在运行示例前，请在根目录运行`pip install -e .`，这允许Python从本地源代码找到并导入aser模块。如果您通过`pip install aser`安装，可以直接运行示例。
 
-### 入门示例：
+### 初级:
 
-- [Aser Agent](./examples/agent.py)：你的第一个 AI Agent
-- [模型配置](./examples/agent_model.py)：自定义 LLM 配置
-- [记忆存储](./examples/agent_memory.py)：构建带记忆的智能体
-- [知识检索](./examples/agent_knowledge.py)：构建带知识检索的智能体
-- [工具集成](./examples/agent_tools.py)：集成工具
-- [内置工具包](./examples/agent_toolkits.py)：使用内置工具包
-- [追踪功能](./examples/agent_trace.py)：构建带追踪的智能体
-- [API 服务](./examples/agent_api.py)：构建 API 服务智能体
-- [命令行交互](./examples/agent_cli.py)：通过 CLI 交互
-- [Discord 集成](./examples/agent_discord.py)：集成 Discord 客户端
-- [Telegram 集成](./examples/agent_telegram.py)：集成 Telegram 客户端
-- [Farcaster 集成](./examples/agent_farcaster.py)：集成 Farcaster 客户端
+- [Aser代理](./examples/agent.py): 您的第一个AI代理
+- [模型配置](./examples/agent_model.py): 自定义LLM配置
+- [角色](./examples/agent_character.py): 构建具有角色的代理
+- [记忆](./examples/agent_memory.py): 构建具有记忆存储的代理
+- [RAG](./examples/agent_knowledge.py): 构建具有知识检索的代理
+- [工具](./examples/agent_tools.py): 构建具有工具的代理
+- [工具包](./examples/agent_toolkits.py): 使用内置工具包
+- [追踪](./examples/agent_trace.py): 构建具有追踪功能的代理
+- [API](./examples/agent_api.py): 构建具有API服务器的代理
+- [CLI](./examples/agent_cli.py): 使用CLI与代理交互
+- [Discord](./examples/agent_discord.py): 构建具有Discord客户端的代理
+- [Telegram](./examples/agent_telegram.py): 构建具有Telegram客户端的代理
+- [Farcaster](./examples/agent_farcaster.py): 构建具有Farcaster客户端的代理
 
-### 进阶示例：
+### 中级:
 
-- [CoT](./examples/agent_cot.py)：思维链
-- [MCP](./examples/agent_mcp.py)：模型上下文协议
-- [Text2SQL](./examples/agent_text2sql.py)：文本转 SQL 智能体
-- [自定义工作流](./examples/agent_workflow.py)：自定义智能体工作流
-- [智能体评估](./examples/agent_evaluation.py)：评估 AI Agent
-- [路由多智能体](./examples/router_multi_agent.py)：多智能体任务分发
-- [顺序多智能体](./examples/sequential_multi_agent.py)：多智能体顺序协作
-- [并行多智能体](./examples/parallel_multi_agent.py)：多智能体并行协作
-- [响应式多智能体](./examples/reactive_multi_agent.py)：多智能体响应变化
-- [分层多智能体](./examples/hierarchical_multi_agent.py)：多智能体分层协作
-- [Agent UI](https://github.com/AmeNetwork/ame-ui)：通过 UI 交互
+- [思维链](./examples/agent_cot.py): 思维链
+- [MCP](./examples/agent_mcp.py): 模型上下文协议
+- [Text2SQL](./examples/agent_text2sql.py): 构建具有Text2SQL功能的代理
+- [工作流](./examples/agent_workflow.py): 自定义代理工作流
+- [评估](./examples/agent_evaluation.py): 评估AI代理
+- [路由多代理](./examples/router_multi_agent.py): 多个代理基于路由分配任务
+- [顺序多代理](./examples/sequential_multi_agent.py): 多个代理顺序工作
+- [并行多代理](./examples/parallel_multi_agent.py): 多个代理同时工作
+- [响应式多代理](./examples/reactive_multi_agent.py): 多个代理响应变化
+- [分层多代理](./examples/hierarchical_multi_agent.py): 多个代理在不同层级工作
+- [代理UI](https://github.com/AmeNetwork/ame-ui): 通过UI与代理交互
 
-### 高级示例：
+### 高级:
 
-- [MSCP](./examples/agent_mcp.py)：模型智能合约协议
-- [A2Aser](./examples/a2a_server.py)：集成 Google Agent2Agent (A2A) 协议
-- [A2A 客户端](./examples/a2a_client.py)：Agent 间通信客户端
+- [MSCP](./examples/agent_mcp.py): 模型智能合约协议
+- [A2Aser](./examples/a2a_server.py): 集成Google Agent2Agent (A2A)协议
+- [A2A客户端](./examples/a2a_client.py): 代理到代理客户端
+- [自编码工具](./examples/self_coding_tool.py): 代理可以自编码构建工具
 
-### 实验性功能：
-- [ERC8004 服务智能体](./examples/a2a_erc8004_server.py)：服务智能体提供服务并执行任务
-- [ERC8004 身份](./examples/agent_mscp_erc8004.py)：通过 MSCP ERC8004 连接器进行身份注册
+### 实验:
+- [ERC8004服务器代理](./examples/a2a_erc8004_server.py): 服务器代理提供服务并执行任务
+- [ERC8004身份](./examples/agent_mscp_erc8004.py): 使用MSCP ERC8004连接器进行身份注册
+
 
 ## 许可证
-Aser 是开源项目，采用 MIT 许可证。
+Aser是开源的，采用MIT许可证授权。
+
 
 ![](./examples/images/star.png)

@@ -5,3 +5,4 @@ from .get_function_parameters import get_function_parameters
 from .handle_tool_function import handle_tool_function
 from .safe_serialize import safe_serialize
 from .erc8004_extension import create_identity_extension
+from .load_character import load_character

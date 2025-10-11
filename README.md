@@ -66,6 +66,7 @@ If you clone the project source code, before running the examples, please run `p
 
 - [Aser Agent](./examples/agent.py): Your First AI Agent
 - [Model Config](./examples/agent_model.py): Customize the LLM configuration
+- [Character](./examples/agent_character.py): Build an agent with character
 - [Memory](./examples/agent_memory.py): Build an agent with memory storage
 - [RAG](./examples/agent_knowledge.py): Build an agent with knowledge retrieval
 - [Tools](./examples/agent_tools.py): Build an agent with tools
