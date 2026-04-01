@@ -34,6 +34,37 @@ MODEL_BASE_URL=<您的模型基础URL>
 MODEL_KEY=<您的模型密钥>
 ```
 
+## 支持的 LLM 提供商
+
+Aser 兼容任何 OpenAI 兼容 API。通过内置 `providers` 模块可快速配置：
+
+| 提供商 | 模型 | 上下文长度 |
+|--------|------|-----------|
+| OpenAI | gpt-4o, gpt-4.1-mini, … | 最高 128K |
+| [MiniMax](https://platform.minimax.io) | MiniMax-M2.7, MiniMax-M2.7-highspeed, MiniMax-M2.5, MiniMax-M2.5-highspeed | **204K** |
+| 任意 OpenAI 兼容 API | 设置 `MODEL_BASE_URL` + `MODEL_KEY` | 取决于模型 |
+
+### 使用 MiniMax
+
+```bash
+export MINIMAX_API_KEY=your_api_key_here
+```
+
+```python
+from aser.agent import Agent
+from aser.providers import MINIMAX, MINIMAX_MODELS
+
+agent = Agent(
+    name="minimax_agent",
+    model=MINIMAX_MODELS["standard"],   # "MiniMax-M2.7"
+    model_config=MINIMAX,
+)
+response = agent.chat("你好，请介绍一下 MiniMax。")
+print(response)
+```
+
+完整示例参见 [examples/agent_minimax.py](./examples/agent_minimax.py)。
+
 ## 使用
 
 ```python
@@ -66,6 +97,7 @@ aser = Agent(
 
 - [Aser代理](./examples/agent.py): 您的第一个AI代理
 - [模型配置](./examples/agent_model.py): 自定义LLM配置
+- [MiniMax](./examples/agent_minimax.py): 使用 MiniMax M2.7/M2.5 模型（204K 上下文）
 - [角色](./examples/agent_character.py): 构建具有角色的代理
 - [记忆](./examples/agent_memory.py): 构建具有记忆存储的代理
 - [RAG](./examples/agent_knowledge.py): 构建具有知识检索的代理
