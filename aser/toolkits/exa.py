@@ -6,7 +6,7 @@ load_dotenv()
 
 @tool()
 def exa(query:str):
-    """search for information"""
+    """search the web using Exa, the fastest and most accurate web search API for AI"""
     url = "https://api.exa.ai/search"
     headers = {
         "x-api-key": os.getenv("EXA_API_KEY"),
