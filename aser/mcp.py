@@ -7,7 +7,7 @@ from fastmcp.client import Client
 
 class MCP:
     def __init__(self, url, auth=None, header=None):
-        transport = StreamableHttpTransport(url, auth, header)
+        transport = StreamableHttpTransport(url, headers=header, auth=auth)
         client = Client(transport)
 
         async def get_client():
