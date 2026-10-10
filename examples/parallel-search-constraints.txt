@@ -1,0 +1,2 @@
+# Aser 0.1.9 imports a2a.server.apps, which is available in this SDK version.
+a2a-sdk==0.3.6
