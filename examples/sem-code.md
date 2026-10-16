@@ -7,8 +7,9 @@ needed; a local server bearer token is required.
 
 **Prerequisite:** the Sem Streamable HTTP preview source build. The published
 Sem 0.27.0 release does not support this transport. Follow the source build and
-startup instructions in [Sem's HTTP guide](https://github.com/Ataraxy-Labs/sem/blob/feat/mcp-http/docs/mcp-http.md).
-The transport is pending in [Sem PR #518](https://github.com/Ataraxy-Labs/sem/pull/518).
+startup instructions in [Sem's HTTP guide](https://github.com/Ataraxy-Labs/sem/blob/2e6a47fcd35ce269eec702dd3532341dba52902b/docs/mcp-http.md).
+The transport landed in [Sem PR #518](https://github.com/Ataraxy-Labs/sem/pull/518).
+Build Sem commit `2e6a47fcd35ce269eec702dd3532341dba52902b` or a later compatible version.
 Start it on `127.0.0.1:8765` with `SEM_REPO` explicitly set to a trusted Git
 checkout and `SEM_MCP_HTTP_TOKEN` set to a random secret. Run the client on the
 same host. This is not a hosted service, and localhost is not your laptop when
