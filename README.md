@@ -34,6 +34,37 @@ MODEL_BASE_URL=<your model base url>
 MODEL_KEY=<your model key>
 ```
 
+## Supported LLM Providers
+
+Aser works with any OpenAI-compatible API. Use the built-in `providers` module for quick setup:
+
+| Provider | Models | Context |
+|----------|--------|---------|
+| OpenAI | gpt-4o, gpt-4.1-mini, … | up to 128K |
+| [MiniMax](https://platform.minimax.io) | MiniMax-M2.7, MiniMax-M2.7-highspeed, MiniMax-M2.5, MiniMax-M2.5-highspeed | **204K** |
+| Any OpenAI-compat API | set `MODEL_BASE_URL` + `MODEL_KEY` | depends on model |
+
+### Using MiniMax
+
+```bash
+export MINIMAX_API_KEY=your_api_key_here
+```
+
+```python
+from aser.agent import Agent
+from aser.providers import MINIMAX, MINIMAX_MODELS
+
+agent = Agent(
+    name="minimax_agent",
+    model=MINIMAX_MODELS["standard"],   # "MiniMax-M2.7"
+    model_config=MINIMAX,
+)
+response = agent.chat("What is MiniMax AI?")
+print(response)
+```
+
+See the full example at [examples/agent_minimax.py](./examples/agent_minimax.py).
+
 ## Usage
 
 ```python
@@ -66,6 +97,7 @@ If you clone the project source code, before running the examples, please run `p
 
 - [Aser Agent](./examples/agent.py): Your First AI Agent
 - [Model Config](./examples/agent_model.py): Customize the LLM configuration
+- [MiniMax](./examples/agent_minimax.py): Use MiniMax M2.7 / M2.5 models (204K context)
 - [Character](./examples/agent_character.py): Build an agent with character
 - [Memory](./examples/agent_memory.py): Build an agent with memory storage
 - [RAG](./examples/agent_knowledge.py): Build an agent with knowledge retrieval
