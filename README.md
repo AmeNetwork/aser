@@ -83,6 +83,7 @@ If you clone the project source code, before running the examples, please run `p
 - [CoT](./examples/agent_cot.py): Chain of Thought
 - [MCP](./examples/agent_mcp.py): Model Context Protocol 
 - [Parallel Search MCP](./examples/parallel-search.md): Free web search and page fetching
+- [deed.page MCP](./examples/deed-page.md): Publish HTML pages to public URLs without an account
 - [Local code MCP](./examples/sem-code.md): Read-only entity lookup through a self-hosted Sem HTTP preview
 - [Text2SQL](./examples/agent_text2sql.py): Build an agent with Text2SQL
 - [Workflow](./examples/agent_workflow.py): Custom Agent Workflows
